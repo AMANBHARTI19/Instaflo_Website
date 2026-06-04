@@ -214,6 +214,7 @@
                 <i class="ph-bold ph-user"></i>
                 <input id="wl-name" type="text" placeholder="Priya Sharma" autocomplete="name">
               </div>
+              <span class="wl-error" id="err-name">Please enter your name.</span>
             </div>
             <div class="wl-field">
               <label for="wl-email">Email address</label>
@@ -221,7 +222,7 @@
                 <i class="ph-bold ph-envelope-simple"></i>
                 <input id="wl-email" type="email" placeholder="priya@gmail.com" autocomplete="email">
               </div>
-              <span class="wl-error" id="err1">Please enter a valid email address.</span>
+              <span class="wl-error" id="err-email">Please enter a valid email address.</span>
             </div>
           </div>
           <div class="wl-nav">
@@ -240,6 +241,7 @@
                 <i class="ph-bold ph-instagram-logo"></i>
                 <input id="wl-handle" type="text" placeholder="@yourhandle">
               </div>
+              <span class="wl-error" id="err-handle">Please enter your Instagram handle.</span>
             </div>
           </div>
           <div class="wl-nav">
@@ -349,11 +351,12 @@
   document.getElementById("next1").addEventListener("click", function () {
     var name  = document.getElementById("wl-name").value.trim();
     var email = document.getElementById("wl-email").value.trim();
-    var err   = document.getElementById("err1");
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      err.classList.add("show"); return;
-    }
-    err.classList.remove("show");
+    var errName  = document.getElementById("err-name");
+    var errEmail = document.getElementById("err-email");
+    var valid = true;
+    if (!name) { errName.classList.add("show"); valid = false; } else { errName.classList.remove("show"); }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEmail.classList.add("show"); valid = false; } else { errEmail.classList.remove("show"); }
+    if (!valid) return;
     data.name  = name;
     data.email = email;
     goTo(2);
@@ -362,7 +365,11 @@
   // Step 2 → 3
   document.getElementById("back2").addEventListener("click", function () { goTo(1); });
   document.getElementById("next2").addEventListener("click", function () {
-    data.handle = document.getElementById("wl-handle").value.trim();
+    var handle   = document.getElementById("wl-handle").value.trim();
+    var errHandle = document.getElementById("err-handle");
+    if (!handle) { errHandle.classList.add("show"); return; }
+    errHandle.classList.remove("show");
+    data.handle = handle;
     goTo(3);
   });
 
