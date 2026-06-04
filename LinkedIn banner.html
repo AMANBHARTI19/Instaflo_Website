@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stealth LinkedIn Banners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: oklch(0.93 0.006 95);
+    font-family: var(--font-sans);
+    color: var(--ink);
+    padding: 48px 24px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1200px; margin: 0 auto; }
+  .page-head { margin-bottom: 40px; max-width: 760px; }
+  .page-head .lab { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); }
+  .page-head h1 { font: var(--text-h2); letter-spacing: var(--track-tight); margin: 10px 0 12px; }
+  .page-head p { font: var(--text-body); color: var(--ink-2); max-width: 60ch; }
+  .page-head .dims { font: var(--text-mono); color: var(--ink-3); margin-top: 14px; }
+
+  .group { margin-top: 44px; }
+  .group-bar { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+  .group-bar .v { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink); background: var(--lime); border: 1.5px solid var(--ink); padding: 5px 11px 4px; border-radius: var(--radius-pill); }
+  .group-bar .name { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: var(--track-tight); }
+  .group-bar .desc { font: var(--text-small); color: var(--ink-3); }
+
+  /* Responsive scaler: native 1584x396 scaled to container width */
+  .frame { width: 100%; aspect-ratio: 1584 / 396; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1.5px solid var(--line); position: relative; }
+  .banner {
+    position: absolute; top: 0; left: 0;
+    width: 1584px; height: 396px;
+    transform-origin: top left;
+    overflow: hidden;
+  }
+
+  /* shared banner bits */
+  .dg { position: absolute; inset: 0; background-image: radial-gradient(var(--line) 1.6px, transparent 1.6px); background-size: 30px 30px; }
+  .mono-tag { font: var(--text-mono); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+  .mark { display: block; }
+  .safe-note { font: var(--text-mono); color: var(--ink-4); font-size: 11px; margin-top: 8px; }
+
+  /* ---------- V1 : paper, dot grid, quiet statement ---------- */
+  .b1 { background: var(--paper); display: flex; align-items: center; padding: 0 110px; }
+  .b1 .dg { -webkit-mask-image: radial-gradient(ellipse 70% 120% at 88% 50%, #000 30%, transparent 76%); mask-image: radial-gradient(ellipse 70% 120% at 88% 50%, #000 30%, transparent 76%); }
+  .b1 .copy { position: relative; z-index: 1; max-width: 900px; }
+  .b1 .eyebrow { display: inline-flex; align-items: center; gap: 9px; font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-2); border: 1.5px solid var(--ink); background: var(--surface); padding: 8px 15px; border-radius: var(--radius-pill); }
+  .b1 .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); border: 1.5px solid var(--ink); }
+  .b1 h2 { font-family: var(--font-display); font-weight: 700; font-size: 58px; line-height: 1.0; letter-spacing: -0.025em; margin: 20px 0 0; white-space: nowrap; }
+  .b1 h2 .mk { background: var(--lime); color: var(--on-lime); padding: 0 12px; border-radius: 8px; box-decoration-break: clone; }
+  .b1 .sub { font: var(--text-body-lg); color: var(--ink-2); margin-top: 18px; max-width: 46ch; }
+  .b1 .mark-wrap { position: absolute; right: 96px; top: 50%; transform: translateY(-50%) rotate(8deg); z-index: 0; }
+
+  /* ---------- V2 : dark feature surface, lime accent ---------- */
+  .b2 { background: var(--feature); display: flex; align-items: center; padding: 0 110px; position: relative; }
+  .b2 .dg { background-image: radial-gradient(oklch(1 0 0 / 0.10) 1.6px, transparent 1.6px); -webkit-mask-image: radial-gradient(ellipse 80% 130% at 18% 50%, #000 28%, transparent 72%); mask-image: radial-gradient(ellipse 80% 130% at 18% 50%, #000 28%, transparent 72%); }
+  .b2 .copy { position: relative; z-index: 1; }
+  .b2 .mono-tag { color: oklch(0.88 0.20 124); }
+  .b2 h2 { font-family: var(--font-display); font-weight: 700; font-size: 62px; line-height: 0.98; letter-spacing: -0.025em; color: var(--on-dark); margin: 16px 0 0; }
+  .b2 h2 em { font-style: normal; color: oklch(0.88 0.20 124); }
+  .b2 .sub { font: var(--text-body-lg); color: var(--on-dark-dim); margin-top: 16px; max-width: 44ch; }
+  .b2 .badge { position: absolute; right: 120px; top: 50%; transform: translateY(-50%) rotate(-4deg); z-index: 2;
+    display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+    background: var(--lime); color: var(--on-lime); border: 2.5px solid var(--ink);
+    border-radius: 22px; padding: 26px 34px; box-shadow: 6px 6px 0 oklch(0 0 0 / 0.55); }
+  .b2 .badge .big { font-family: var(--font-display); font-weight: 800; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
+  .b2 .badge .small { font: var(--text-mono); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ---------- V3 : lime full-bleed, playful ---------- */
+  .b3 { background: var(--lime); display: flex; align-items: center; padding: 0 110px; position: relative; overflow: hidden; }
+  .b3 .dg { background-image: radial-gradient(var(--on-lime) 1.5px, transparent 1.5px); background-size: 34px 34px; opacity: 0.14; -webkit-mask-image: none; mask-image: none; }
+  .b3 .copy { position: relative; z-index: 1; max-width: 880px; }
+  .b3 .mono-tag { color: var(--on-lime); opacity: 0.8; }
+  .b3 h2 { font-family: var(--font-display); font-weight: 800; font-size: 60px; line-height: 1.0; letter-spacing: -0.03em; color: var(--on-lime); margin: 14px 0 0; white-space: nowrap; }
+  .b3 .sub { font: var(--text-body-lg); color: var(--on-lime); opacity: 0.78; margin-top: 16px; max-width: 48ch; }
+  .b3 .sticker { position: absolute; z-index: 2; right: 150px; top: 64px; transform: rotate(7deg);
+    font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--paper); background: var(--violet);
+    border: 2.5px solid var(--ink); border-radius: 999px; padding: 9px 18px; box-shadow: 4px 4px 0 var(--ink); }
+  .b3 .sticker.b { right: 96px; top: auto; bottom: 60px; transform: rotate(-5deg); background: var(--paper); color: var(--ink); }
+  .b3 .mark-wrap { position: absolute; right: 130px; top: 50%; transform: translateY(-50%) rotate(-6deg); z-index: 0; opacity: 0.9; }
+
+  .foot { margin-top: 56px; font: var(--text-mono); color: var(--ink-3); font-size: 12px; line-height: 1.7; border-top: 1.5px solid var(--line); padding-top: 18px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-head">
+    <div class="lab">Stealth · Profile cover</div>
+    <h1>LinkedIn banners — building quietly</h1>
+    <p>Three directions in your house style. No name, no product tells — just the vibe and a “we’re building” signal. Pick one, screenshot the frame, and upload.</p>
+    <div class="dims">1584 × 396 px · LinkedIn profile cover size</div>
+  </div>
+
+  <!-- ============ V1 ============ -->
+  <div class="group">
+    <div class="group-bar">
+      <span class="v">01</span>
+      <span class="name">Quiet statement</span>
+      <span class="desc">Paper + dot grid · lime highlight · most understated</span>
+    </div>
+    <div class="frame" data-banner>
+      <div class="banner b1">
+        <div class="dg"></div>
+        <div class="copy">
+          <span class="eyebrow"><span class="dot"></span>Stealth mode · Est. 2026</span>
+          <h2>Heads down.<br>Building <span class="mk">quietly</span>.</h2>
+          <p class="sub">Good things take a little quiet. More soon.</p>
+        </div>
+        <div class="mark-wrap">
+          <svg class="mark" width="150" height="150" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2.75" y="2.75" width="114.5" height="114.5" rx="28" fill="#D6F84A" stroke="#211F1C" stroke-width="5.5"></rect>
+            <circle cx="60" cy="60" r="34" stroke="#211F1C" stroke-width="6"></circle>
+            <circle cx="60" cy="60" r="17" stroke="#211F1C" stroke-width="6"></circle>
+            <circle cx="60" cy="60" r="5.5" fill="#211F1C"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="safe-note">↳ Heads-up: on desktop LinkedIn crops the lower-left under your profile photo — key text sits center-left and clear of it.</div>
+  </div>
+
+  <!-- ============ V2 ============ -->
+  <div class="group">
+    <div class="group-bar">
+      <span class="v">02</span>
+      <span class="name">Dark + badge</span>
+      <span class="desc">Ink surface · lime accent · sticker badge · most “coming soon”</span>
+    </div>
+    <div class="frame" data-banner>
+      <div class="banner b2">
+        <div class="dg"></div>
+        <div class="copy">
+          <span class="mono-tag">/// currently in stealth</span>
+          <h2>Something new is<br><em>in the works.</em></h2>
+          <p class="sub">Small team, big plans. Watch this space.</p>
+        </div>
+        <div class="badge">
+          <span class="big">Soon™</span>
+          <span class="small">2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="safe-note">↳ Badge and headline are kept right-of-center so nothing important hides behind the avatar.</div>
+  </div>
+
+  <!-- ============ V3 ============ -->
+  <div class="group">
+    <div class="group-bar">
+      <span class="v">03</span>
+      <span class="name">Lime + playful</span>
+      <span class="desc">Full-bleed lime · violet stickers · boldest, most “us”</span>
+    </div>
+    <div class="frame" data-banner>
+      <div class="banner b3">
+        <div class="dg"></div>
+        <div class="mark-wrap">
+          <svg class="mark" width="170" height="170" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="60" cy="60" r="40" stroke="#211F1C" stroke-width="6"></circle>
+            <circle cx="60" cy="60" r="20" stroke="#211F1C" stroke-width="6"></circle>
+            <circle cx="60" cy="60" r="6.5" fill="#211F1C"></circle>
+          </svg>
+        </div>
+        <div class="copy">
+          <span class="mono-tag">No name yet. On purpose.</span>
+          <h2>We’re building<br>something fun.</h2>
+          <p class="sub">In stealth for now — the reveal’s worth the wait.</p>
+        </div>
+        <span class="sticker">stealth ⚡</span>
+        <span class="sticker b">coming soon</span>
+      </div>
+    </div>
+    <div class="safe-note">↳ Stickers float top-right / bottom-right, away from the avatar crop zone.</div>
+  </div>
+
+  <div class="foot">
+    EXPORT — each frame is the exact LinkedIn cover ratio (1584×396). Right-click → screenshot the frame, or ask me to render PNGs.<br>
+    STEALTH CHECK — no brand name, no product category, no Instagram/automation language anywhere. Safe to post publicly.
+  </div>
+</div>
+
+<script>
+  // Scale each native 1584x396 banner down to fit its responsive frame.
+  function fit() {
+    document.querySelectorAll('[data-banner]').forEach(function (frame) {
+      var banner = frame.querySelector('.banner');
+      var scale = frame.clientWidth / 1584;
+      banner.style.transform = 'scale(' + scale + ')';
+    });
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+</script>
+</body>
+</html>

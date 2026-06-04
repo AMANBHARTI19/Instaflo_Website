@@ -1,0 +1,159 @@
+/* =========================================================================
+   INSTAFLO — Colors & Type
+   The single source of truth for the design system's foundations.
+   Funky-minimal: warm paper/ink neutrals, electric lime hero, violet pop.
+   Light-first with a full dark theme via [data-theme="dark"] (or .dark).
+   ========================================================================= */
+
+/* ----- Fonts (Google Fonts) -----------------------------------------------
+   Display : Bricolage Grotesque  — funky-but-readable headlines
+   UI/Body : Schibsted Grotesk     — clean neutral grotesque
+   Mono    : Space Mono            — techy data + "system" annotation labels
+   Load once per HTML file:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+--------------------------------------------------------------------------- */
+
+:root {
+  /* --- Brand accents --------------------------------------------------- */
+  --lime:        oklch(0.88 0.20 124);   /* hero punch — fills w/ ink text */
+  --lime-hover:  oklch(0.84 0.20 124);
+  --lime-press:  oklch(0.79 0.19 124);
+  --lime-soft:   oklch(0.95 0.08 124);   /* tinted backgrounds */
+
+  --violet:      oklch(0.53 0.23 286);   /* secondary pop — fills w/ paper text */
+  --violet-hover:oklch(0.48 0.23 286);
+  --violet-soft: oklch(0.95 0.04 286);
+
+  /* --- Theme-independent pairs ----------------------------------------- */
+  /* Lime stays bright in BOTH themes, so text/icons on it must always be
+     dark. "Feature" panels are intentionally-dark surfaces in both themes.
+     These do NOT get overridden under [data-theme="dark"]. */
+  --on-lime:     oklch(0.21 0.012 65);   /* text/icons on lime/light accents */
+  --feature:     oklch(0.21 0.012 65);   /* always-dark feature surface bg   */
+  --on-dark:     oklch(0.975 0.006 95);  /* text on a feature surface        */
+  --on-dark-dim: oklch(0.66 0.010 70);   /* muted text on a feature surface  */
+
+  /* --- Neutrals (warm) ------------------------------------------------- */
+  --paper:   oklch(0.975 0.006 95);      /* app background */
+  --surface: oklch(1 0 0);               /* cards / panels */
+  --raised:  oklch(0.992 0.004 95);      /* slightly raised surfaces */
+  --sunken:  oklch(0.955 0.006 95);      /* wells / inputs bg */
+
+  --ink:     oklch(0.21 0.012 65);       /* primary text + borders */
+  --ink-2:   oklch(0.44 0.010 65);       /* secondary text */
+  --ink-3:   oklch(0.60 0.008 65);       /* muted / placeholder */
+  --ink-4:   oklch(0.74 0.006 70);       /* faint / disabled */
+
+  --line:        oklch(0.90 0.006 80);   /* hairline dividers */
+  --line-strong: oklch(0.21 0.012 65);   /* chunky ink borders */
+
+  /* --- Semantic signals ------------------------------------------------ */
+  --success:      oklch(0.72 0.17 150);
+  --success-soft: oklch(0.95 0.06 150);
+  --warning:      oklch(0.80 0.16 78);
+  --warning-soft: oklch(0.96 0.07 78);
+  --danger:       oklch(0.62 0.21 25);
+  --danger-soft:  oklch(0.95 0.05 25);
+  --info:         var(--violet);
+  --info-soft:    var(--violet-soft);
+
+  /* --- Borders & radii ------------------------------------------------- */
+  --border-w:      1.5px;                /* default chunky ink border */
+  --border-w-bold: 2.5px;               /* hero / sticker elements */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* --- Shadows --------------------------------------------------------- */
+  /* soft elevation for app surfaces */
+  --shadow-sm: 0 1px 2px oklch(0.21 0.012 65 / 0.06), 0 1px 3px oklch(0.21 0.012 65 / 0.05);
+  --shadow-md: 0 4px 10px oklch(0.21 0.012 65 / 0.08), 0 2px 4px oklch(0.21 0.012 65 / 0.05);
+  --shadow-lg: 0 12px 30px oklch(0.21 0.012 65 / 0.12), 0 4px 10px oklch(0.21 0.012 65 / 0.06);
+  /* signature HARD shadow — funky sticker offset, no blur */
+  --shadow-hard:    3px 3px 0 var(--ink);
+  --shadow-hard-lg: 5px 5px 0 var(--ink);
+  --shadow-hard-lime: 4px 4px 0 var(--lime);
+
+  /* --- Spacing scale (4px base) --------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* --- Type families --------------------------------------------------- */
+  --font-display: "Bricolage Grotesque", "Schibsted Grotesk", system-ui, sans-serif;
+  --font-sans:    "Schibsted Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono:    "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* --- Type scale (semantic) ------------------------------------------ */
+  /* display + headings use the display family + tight tracking */
+  --text-display:  700 clamp(44px, 6vw, 84px)/0.96 var(--font-display);
+  --text-h1:       700 clamp(32px, 3.4vw, 48px)/1.02 var(--font-display);
+  --text-h2:       700 clamp(24px, 2.4vw, 34px)/1.06 var(--font-display);
+  --text-h3:       600 22px/1.18 var(--font-display);
+  --text-body-lg:  400 18px/1.55 var(--font-sans);
+  --text-body:     400 16px/1.55 var(--font-sans);
+  --text-small:    400 14px/1.5 var(--font-sans);
+  --text-mono:     400 13px/1.4 var(--font-mono);
+  --text-label:    700 12px/1 var(--font-mono);   /* UPPERCASE system labels */
+
+  --track-tight:  -0.02em;
+  --track-label:  0.08em;
+}
+
+/* ========================== DARK THEME ================================= */
+[data-theme="dark"], .dark {
+  --lime:        oklch(0.88 0.20 124);
+  --lime-hover:  oklch(0.92 0.18 124);
+  --lime-press:  oklch(0.82 0.20 124);
+  --lime-soft:   oklch(0.34 0.10 124);
+
+  --violet:      oklch(0.68 0.19 286);
+  --violet-hover:oklch(0.74 0.18 286);
+  --violet-soft: oklch(0.33 0.09 286);
+
+  --paper:   oklch(0.19 0.008 70);
+  --surface: oklch(0.235 0.009 70);
+  --raised:  oklch(0.275 0.010 70);
+  --sunken:  oklch(0.165 0.008 70);
+
+  --ink:     oklch(0.96 0.006 90);
+  --ink-2:   oklch(0.76 0.007 90);
+  --ink-3:   oklch(0.60 0.008 80);
+  --ink-4:   oklch(0.46 0.008 75);
+
+  --line:        oklch(0.32 0.009 75);
+  --line-strong: oklch(0.96 0.006 90);
+
+  --success-soft: oklch(0.33 0.07 150);
+  --warning-soft: oklch(0.34 0.07 78);
+  --danger-soft:  oklch(0.33 0.07 25);
+
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.4);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 0.45);
+  --shadow-lg: 0 14px 34px oklch(0 0 0 / 0.55);
+  --shadow-hard:    3px 3px 0 var(--ink);
+  --shadow-hard-lg: 5px 5px 0 var(--ink);
+}
+
+/* ===================== SEMANTIC HELPER CLASSES ========================= */
+/* Optional convenience classes — tokens above are the source of truth. */
+.t-display { font: var(--text-display); letter-spacing: var(--track-tight); color: var(--ink); }
+.t-h1      { font: var(--text-h1); letter-spacing: var(--track-tight); color: var(--ink); }
+.t-h2      { font: var(--text-h2); letter-spacing: var(--track-tight); color: var(--ink); }
+.t-h3      { font: var(--text-h3); letter-spacing: var(--track-tight); color: var(--ink); }
+.t-body-lg { font: var(--text-body-lg); color: var(--ink); }
+.t-body    { font: var(--text-body); color: var(--ink); }
+.t-small   { font: var(--text-small); color: var(--ink-2); }
+.t-mono    { font: var(--text-mono); color: var(--ink-2); }
+.t-label   { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); }

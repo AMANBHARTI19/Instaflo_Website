@@ -1,0 +1,14 @@
+{
+  "name": "instaflo-website",
+  "version": "1.0.0",
+  "description": "Instaflo marketing site + waitlist server",
+  "main": "waitlist-server.js",
+  "scripts": {
+    "start": "node waitlist-server.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

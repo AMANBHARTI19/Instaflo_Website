@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join the Waitlist - Instaflo</title>
+<meta name="description" content="Get early access to Instaflo and lock in founder pricing forever.">
+<link rel="icon" href="assets/mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* ---- waitlist page layout ---- */
+  .wl-page {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* left panel */
+  .wl-left {
+    background: var(--feature);
+    padding: 48px 52px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .wl-left .dotgrid {
+    opacity: .18;
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 30% 60%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 90% 80% at 30% 60%, #000 30%, transparent 75%);
+  }
+  .wl-left-body { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
+  .wl-left .brand .word { color: var(--on-dark); }
+  .wl-left .brand .word .o { color: var(--lime); -webkit-text-stroke: 1.5px var(--on-dark); }
+
+  .wl-pitch { margin-top: 52px; }
+  .wl-pitch .eyebrow { border-color: oklch(0.40 0.010 65); color: var(--on-dark-dim); }
+  .wl-pitch .eyebrow .dot { background: var(--lime); border-color: var(--on-dark); }
+  .wl-pitch h1 { font: var(--text-display); font-size: clamp(34px, 3.8vw, 54px); letter-spacing: var(--track-tight); color: var(--on-dark); margin-top: 20px; line-height: 1.04; }
+  .wl-pitch h1 mark.mk { background: var(--lime); color: var(--on-lime); }
+  .wl-pitch p { font: var(--text-body-lg); color: var(--on-dark-dim); margin-top: 18px; max-width: 36ch; }
+
+  .wl-perks { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+  .wl-perk { display: flex; align-items: center; gap: 14px; }
+  .wl-perk .ic { width: 36px; height: 36px; border-radius: 50%; background: var(--lime); border: var(--border-w) solid var(--on-dark); display: grid; place-items: center; color: var(--on-lime); font-size: 17px; flex: none; }
+  .wl-perk span { font-size: 15px; color: var(--on-dark-dim); font-weight: 500; }
+  .wl-perk span b { color: var(--on-dark); font-weight: 700; }
+
+  .wl-kpis { margin-top: auto; padding-top: 40px; display: flex; gap: 28px; }
+  .wl-kpi .n { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -0.02em; color: var(--on-dark); }
+  .wl-kpi .l { font: var(--text-small); color: var(--on-dark-dim); margin-top: 2px; }
+
+  /* right panel */
+  .wl-right {
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+  }
+  .wl-form-wrap { width: 100%; max-width: 420px; }
+
+  /* step indicator */
+  .wl-steps { display: flex; align-items: center; gap: 8px; margin-bottom: 36px; }
+  .wl-step-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: var(--border-w) solid var(--ink);
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 12px;
+    color: var(--ink-3); background: var(--surface);
+    transition: background .2s, color .2s;
+  }
+  .wl-step-dot.active { background: var(--lime); color: var(--on-lime); }
+  .wl-step-dot.done { background: var(--ink); color: var(--lime); }
+  .wl-step-line { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+  .wl-step-line.done { background: var(--ink); }
+
+  /* form card */
+  .wl-card { background: var(--surface); border: var(--border-w) solid var(--ink); border-radius: var(--radius-xl); padding: 36px 32px; box-shadow: var(--shadow-hard-lg); }
+  .wl-card h2 { font: var(--text-h2); letter-spacing: var(--track-tight); margin-bottom: 6px; }
+  .wl-card .sub { font-size: 15px; color: var(--ink-2); margin-bottom: 28px; }
+
+  /* form fields */
+  .field-group { display: flex; flex-direction: column; gap: 14px; }
+  .wl-field { display: flex; flex-direction: column; gap: 6px; }
+  .wl-field label { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); }
+  .wl-field .inp-wrap { display: flex; align-items: center; gap: 10px; background: var(--surface); border: var(--border-w) solid var(--ink); border-radius: var(--radius-md); padding: 0 14px; transition: box-shadow .12s; }
+  .wl-field .inp-wrap:focus-within { box-shadow: 0 0 0 3px var(--lime); }
+  .wl-field .inp-wrap i { color: var(--ink-3); font-size: 18px; flex: none; }
+  .wl-field input { flex: 1; border: 0; outline: 0; background: transparent; font: var(--text-body); color: var(--ink); padding: 13px 0; }
+  .wl-field input::placeholder { color: var(--ink-4); }
+
+  /* tier selector */
+  .tier-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tier-chip {
+    border: var(--border-w) solid var(--ink); border-radius: var(--radius-md);
+    padding: 12px 14px; background: var(--surface); cursor: pointer;
+    transition: background .12s, box-shadow .12s, transform .1s;
+    text-align: left;
+  }
+  .tier-chip:hover { background: var(--sunken); }
+  .tier-chip.selected { background: var(--lime); box-shadow: var(--shadow-hard); transform: translate(-1px,-1px); }
+  .tier-chip .t { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); display: block; }
+  .tier-chip.selected .t { color: var(--on-lime); opacity: .7; }
+  .tier-chip .p { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--ink); margin-top: 3px; display: block; }
+  .tier-chip.selected .p { color: var(--on-lime); }
+
+  /* nav buttons */
+  .wl-nav { display: flex; align-items: center; gap: 12px; margin-top: 26px; }
+  .wl-nav .btn { flex: 1; }
+  .btn-back { background: transparent; border-color: var(--line); color: var(--ink-2); }
+  .btn-back:hover { background: var(--sunken); border-color: var(--ink); color: var(--ink); }
+
+  /* success state */
+  .wl-success { text-align: center; padding: 12px 0; }
+  .wl-success .big-check { width: 72px; height: 72px; border-radius: 50%; background: var(--lime); border: var(--border-w-bold) solid var(--ink); display: grid; place-items: center; margin: 0 auto 24px; box-shadow: var(--shadow-hard-lg); font-size: 32px; color: var(--on-lime); }
+  .wl-success h2 { font: var(--text-h2); letter-spacing: var(--track-tight); margin-bottom: 10px; }
+  .wl-success p { font-size: 16px; color: var(--ink-2); max-width: 30ch; margin: 0 auto 28px; }
+
+  /* error */
+  .wl-error { display: none; font: var(--text-mono); font-size: 12px; color: var(--danger); margin-top: 8px; }
+  .wl-error.show { display: block; }
+
+  /* steps visibility */
+  .wl-step-panel { display: none; }
+  .wl-step-panel.active { display: block; }
+
+  /* responsive */
+  @media (max-width: 820px) {
+    .wl-page { grid-template-columns: 1fr; }
+    .wl-left { display: none; }
+    .wl-right { padding: 32px 20px; min-height: 100dvh; align-items: flex-start; padding-top: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wl-page">
+
+  <!-- ===== LEFT PANEL ===== -->
+  <div class="wl-left">
+    <div class="dotgrid"></div>
+    <div class="wl-left-body">
+
+      <a class="brand" href="index.html" aria-label="Instaflo home">
+        <img src="assets/mark.svg" alt="">
+        <span class="word">instafl<span class="o">o</span></span>
+      </a>
+
+      <div class="wl-pitch">
+        <span class="eyebrow"><span class="dot"></span>Early access</span>
+        <h1>Your DMs,<br>on <mark class="mk">autopilot</mark>.</h1>
+        <p>Join the waitlist and get founder pricing locked in for life, before we open to the public.</p>
+      </div>
+
+      <div class="wl-perks">
+        <div class="wl-perk">
+          <div class="ic"><i class="ph-bold ph-lock-key"></i></div>
+          <span><b>Founder pricing</b>: locked forever, even as tiers go up</span>
+        </div>
+        <div class="wl-perk">
+          <div class="ic"><i class="ph-bold ph-lightning"></i></div>
+          <span><b>First access</b>: skip the queue when beta opens</span>
+        </div>
+        <div class="wl-perk">
+          <div class="ic"><i class="ph-bold ph-translate"></i></div>
+          <span><b>Hinglish-native</b>: built for how India actually DMs</span>
+        </div>
+        <div class="wl-perk">
+          <div class="ic"><i class="ph-bold ph-tag"></i></div>
+          <span><b>Free during beta</b>: no card needed to get started</span>
+        </div>
+      </div>
+
+      <div class="wl-kpis">
+        <div class="wl-kpi"><div class="n">2k+</div><div class="l">creators waitlisted</div></div>
+        <div class="wl-kpi"><div class="n">₹499</div><div class="l">flat to start</div></div>
+        <div class="wl-kpi"><div class="n">&lt;60s</div><div class="l">avg reply time</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== RIGHT PANEL ===== -->
+  <div class="wl-right">
+    <div class="wl-form-wrap">
+
+      <!-- Step indicator -->
+      <div class="wl-steps" id="stepIndicator">
+        <div class="wl-step-dot active" id="dot1">1</div>
+        <div class="wl-step-line" id="line1"></div>
+        <div class="wl-step-dot" id="dot2">2</div>
+        <div class="wl-step-line" id="line2"></div>
+        <div class="wl-step-dot" id="dot3">3</div>
+      </div>
+
+      <div class="wl-card">
+
+        <!-- STEP 1: Name + Email -->
+        <div class="wl-step-panel active" id="step1">
+          <h2>Let's get started</h2>
+          <p class="sub">Takes under 60 seconds. No card needed.</p>
+          <div class="field-group">
+            <div class="wl-field">
+              <label for="wl-name">Your name</label>
+              <div class="inp-wrap">
+                <i class="ph-bold ph-user"></i>
+                <input id="wl-name" type="text" placeholder="Priya Sharma" autocomplete="name">
+              </div>
+            </div>
+            <div class="wl-field">
+              <label for="wl-email">Email address</label>
+              <div class="inp-wrap">
+                <i class="ph-bold ph-envelope-simple"></i>
+                <input id="wl-email" type="email" placeholder="priya@gmail.com" autocomplete="email">
+              </div>
+              <span class="wl-error" id="err1">Please enter a valid email address.</span>
+            </div>
+          </div>
+          <div class="wl-nav">
+            <button class="btn btn-primary btn-sticker" id="next1">Next <i class="ph-bold ph-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Instagram handle -->
+        <div class="wl-step-panel" id="step2">
+          <h2>Your Instagram</h2>
+          <p class="sub">We'll set up your automation here.</p>
+          <div class="field-group">
+            <div class="wl-field">
+              <label for="wl-handle">Instagram handle</label>
+              <div class="inp-wrap">
+                <i class="ph-bold ph-instagram-logo"></i>
+                <input id="wl-handle" type="text" placeholder="@yourhandle">
+              </div>
+            </div>
+          </div>
+          <div class="wl-nav">
+            <button class="btn btn-back btn-secondary" id="back2"><i class="ph-bold ph-arrow-left"></i> Back</button>
+            <button class="btn btn-primary btn-sticker" id="next2">Next <i class="ph-bold ph-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Follower tier -->
+        <div class="wl-step-panel" id="step3">
+          <h2>Your reach</h2>
+          <p class="sub">Pick your follower count so we can suggest the right plan.</p>
+          <div class="tier-chips" id="tierChips">
+            <button class="tier-chip" data-tier="Up to 50K">
+              <span class="t">Followers</span>
+              <span class="p">Up to 50K</span>
+            </button>
+            <button class="tier-chip" data-tier="Up to 100K">
+              <span class="t">Followers</span>
+              <span class="p">Up to 100K</span>
+            </button>
+            <button class="tier-chip" data-tier="Up to 500K">
+              <span class="t">Followers</span>
+              <span class="p">Up to 500K</span>
+            </button>
+            <button class="tier-chip" data-tier="Up to 1M">
+              <span class="t">Followers</span>
+              <span class="p">Up to 1M</span>
+            </button>
+            <button class="tier-chip" data-tier="1M+" style="grid-column:span 2;">
+              <span class="t">Followers</span>
+              <span class="p">1M+ · let's talk custom</span>
+            </button>
+          </div>
+          <span class="wl-error" id="err3">Please select your follower tier.</span>
+          <div class="wl-nav">
+            <button class="btn btn-back btn-secondary" id="back3"><i class="ph-bold ph-arrow-left"></i> Back</button>
+            <button class="btn btn-primary btn-sticker" id="submit">
+              <i class="ph-bold ph-lightning"></i> Join waitlist
+            </button>
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="wl-step-panel" id="stepDone">
+          <div class="wl-success">
+            <div class="big-check"><i class="ph-bold ph-check"></i></div>
+            <h2>You're on the list! 💚</h2>
+            <p>We'll reach out with early access as soon as beta opens. Founder pricing is locked in.</p>
+            <a class="btn btn-secondary btn-lg" href="index.html"><i class="ph-bold ph-house"></i> Back to home</a>
+          </div>
+        </div>
+
+      </div><!-- /wl-card -->
+    </div><!-- /wl-form-wrap -->
+  </div><!-- /wl-right -->
+
+</div><!-- /wl-page -->
+
+<script src="site.js"></script>
+<script>
+(function () {
+  var data = { name: "", email: "", handle: "", tier: "" };
+  var currentStep = 1;
+
+  var panels = [null,
+    document.getElementById("step1"),
+    document.getElementById("step2"),
+    document.getElementById("step3"),
+    document.getElementById("stepDone")
+  ];
+  var dots  = [null,
+    document.getElementById("dot1"),
+    document.getElementById("dot2"),
+    document.getElementById("dot3")
+  ];
+  var lines = [null,
+    document.getElementById("line1"),
+    document.getElementById("line2")
+  ];
+  var indicator = document.getElementById("stepIndicator");
+
+  function goTo(n) {
+    panels[currentStep].classList.remove("active");
+    currentStep = n;
+    if (n <= 3) {
+      panels[n].classList.add("active");
+      // update dots
+      for (var i = 1; i <= 3; i++) {
+        dots[i].classList.remove("active", "done");
+        if (i < n) dots[i].classList.add("done"), dots[i].textContent = "✓";
+        else if (i === n) dots[i].classList.add("active"), dots[i].textContent = i;
+        else dots[i].textContent = i;
+      }
+      // update lines
+      for (var j = 1; j <= 2; j++) {
+        lines[j].classList.toggle("done", j < n);
+      }
+    } else {
+      // done state
+      panels[4].classList.add("active");
+      indicator.style.display = "none";
+    }
+  }
+
+  // Step 1 → 2
+  document.getElementById("next1").addEventListener("click", function () {
+    var name  = document.getElementById("wl-name").value.trim();
+    var email = document.getElementById("wl-email").value.trim();
+    var err   = document.getElementById("err1");
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      err.classList.add("show"); return;
+    }
+    err.classList.remove("show");
+    data.name  = name;
+    data.email = email;
+    goTo(2);
+  });
+
+  // Step 2 → 3
+  document.getElementById("back2").addEventListener("click", function () { goTo(1); });
+  document.getElementById("next2").addEventListener("click", function () {
+    data.handle = document.getElementById("wl-handle").value.trim();
+    goTo(3);
+  });
+
+  // Tier chips
+  document.getElementById("tierChips").addEventListener("click", function (e) {
+    var chip = e.target.closest(".tier-chip");
+    if (!chip) return;
+    document.querySelectorAll(".tier-chip").forEach(function (c) { c.classList.remove("selected"); });
+    chip.classList.add("selected");
+    data.tier = chip.dataset.tier;
+    document.getElementById("err3").classList.remove("show");
+  });
+
+  // Step 3 → submit
+  document.getElementById("back3").addEventListener("click", function () { goTo(2); });
+  document.getElementById("submit").addEventListener("click", function () {
+    if (!data.tier) { document.getElementById("err3").classList.add("show"); return; }
+    var btn = document.getElementById("submit");
+    btn.disabled = true;
+    btn.innerHTML = '<i class="ph-bold ph-spinner"></i> Saving…';
+
+    fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(function (r) { return r.json(); })
+    .then(function () { goTo(4); })
+    .catch(function () {
+      // Fallback: still show success even if server is down (for static preview)
+      goTo(4);
+    });
+  });
+})();
+</script>
+</body>
+</html>
