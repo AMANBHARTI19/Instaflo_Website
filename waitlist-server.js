@@ -26,40 +26,29 @@ app.use(express.static(path.join(__dirname, "Instaflo Website")));
 
 // ---- POST /api/waitlist ----
 app.post("/api/waitlist", async (req, res) => {
-  const { name, email, handle, tier } = req.body || {};
+  const { name, email, handle, tier, accountType } = req.body || {};
 
   if (!email) return res.status(400).json({ error: "Email is required." });
 
-  // Clean handle — strip leading @ if present
-  const cleanHandle = handle ? handle.replace(/^@/, "") : "";
-
-  // Validate tier is one of the allowed Notion select options
-  const validTiers = ["Up to 50K", "Up to 100K", "Up to 500K", "Up to 1M", "1M+"];
-  const safeTier   = validTiers.includes(tier) ? tier : null;
+  const cleanHandle     = handle ? handle.replace(/^@/, "") : "";
+  const validTiers      = ["Up to 50K", "Up to 100K", "Up to 500K", "Up to 1M", "1M+"];
+  const safeTier        = validTiers.includes(tier) ? tier : null;
+  const validTypes      = ["Creator", "Brand", "Agency"];
+  const safeAccountType = validTypes.includes(accountType) ? accountType : null;
 
   try {
     await notion.pages.create({
       parent: { database_id: DB_ID },
       properties: {
-        // Title (Name column)
-        Name: {
-          title: [{ text: { content: name || email } }]
-        },
-        Email: {
-          email: email
-        },
-        "Instagram Handle": {
-          rich_text: [{ text: { content: cleanHandle } }]
-        },
-        ...(safeTier && {
-          "Follower Tier": {
-            select: { name: safeTier }
-          }
-        })
+        Name: { title: [{ text: { content: name || email } }] },
+        Email: { email: email },
+        "Instagram Handle": { rich_text: [{ text: { content: cleanHandle } }] },
+        ...(safeTier        && { "Follower Tier": { select: { name: safeTier } } }),
+        ...(safeAccountType && { "Account Type": { select: { name: safeAccountType } } })
       }
     });
 
-    console.log(`[waitlist] New signup: ${email} (${safeTier || "no tier"})`);
+    console.log(`[waitlist] New signup: ${email} (${safeAccountType || "no type"}, ${safeTier || "no tier"})`);
     res.json({ ok: true });
   } catch (err) {
     console.error("[waitlist] Notion error:", err.message);
