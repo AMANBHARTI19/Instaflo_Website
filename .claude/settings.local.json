@@ -6,7 +6,14 @@
       "Bash(xargs kill -9)",
       "Bash(node waitlist-server.js)",
       "Bash(curl -s -X POST http://localhost:3000/api/waitlist -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"test@test.com\",\"handle\":\"@testhandle\",\"tier\":\"Up to 50K\"}')",
-      "Bash(mkdir -p \"/Users/aman/Documents/Instaflo Website/api\")"
+      "Bash(mkdir -p \"/Users/aman/Documents/Instaflo Website/api\")",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git filter-branch *)",
+      "Bash(git stash *)",
+      "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch .env \"Instaflo Website/.env\"' --prune-empty --tag-name-filter cat -- --all)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": [
       "/Users/aman/Documents/Instaflo Website"
