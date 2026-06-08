@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 render_banners.py)"
+      "Bash(python3 render_banners.py)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill -9)",
+      "Bash(node waitlist-server.js)",
+      "Bash(curl -s -X POST http://localhost:3000/api/waitlist -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"test@test.com\",\"handle\":\"@testhandle\",\"tier\":\"Up to 50K\"}')",
+      "Bash(mkdir -p \"/Users/aman/Documents/Instaflo Website/api\")"
+    ],
+    "additionalDirectories": [
+      "/Users/aman/Documents/Instaflo Website"
     ]
   }
 }
