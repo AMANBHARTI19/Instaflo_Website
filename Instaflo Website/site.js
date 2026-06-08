@@ -6,7 +6,7 @@
   try {
     var saved = localStorage.getItem(KEY);
     if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
-    else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) root.setAttribute("data-theme", "dark");
+    else root.setAttribute("data-theme", "light");
   } catch (e) {}
 
   function bind() {
