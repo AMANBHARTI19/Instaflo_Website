@@ -1,4 +1,4 @@
-/* Instaflo — phone demo: a Hinglish comment getting auto-replied, on loop */
+/* DMflo — phone demo: a Hinglish comment getting auto-replied, on loop */
 (function () {
   var feeds = Array.prototype.slice.call(document.querySelectorAll(".demo-feed"));
   if (!feeds.length) return;

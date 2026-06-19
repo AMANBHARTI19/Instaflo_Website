@@ -1,5 +1,5 @@
 /**
- * Instaflo Waitlist Server
+ * DMflo Waitlist Server
  * Serves the static site and handles POST /api/waitlist → Notion DB
  *
  * Setup:
@@ -22,7 +22,7 @@ const DB_ID  = process.env.NOTION_DB_ID || "c271e2bf2f7c455e9587d8c599d16fb2";
 const PORT   = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "Instaflo Website")));
+app.use(express.static(path.join(__dirname, "DMflo Website")));
 
 // ---- POST /api/waitlist ----
 app.post("/api/waitlist", async (req, res) => {
@@ -57,5 +57,5 @@ app.post("/api/waitlist", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n  Instaflo running at http://localhost:${PORT}\n`);
+  console.log(`\n  DMflo running at http://localhost:${PORT}\n`);
 });

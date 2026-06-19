@@ -1,7 +1,7 @@
-/* Instaflo site — shared behavior: theme, mobile nav, waitlist, year, active nav, scroll-reveal */
+/* DMflo site — shared behavior: theme, mobile nav, waitlist, year, active nav, scroll-reveal */
 (function () {
   // ---- theme (persisted, shared across pages) ----
-  var KEY = "instaflo-theme";
+  var KEY = "dmflo-theme";
   var root = document.documentElement;
   try {
     var saved = localStorage.getItem(KEY);

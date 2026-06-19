@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Join the Waitlist - Instaflo</title>
-<meta name="description" content="Get early access to Instaflo and lock in founder pricing forever.">
+<title>Join the Waitlist - DMflo</title>
+<meta name="description" content="Get early access to DMflo and lock in founder pricing forever.">
 <link rel="icon" href="assets/mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +42,7 @@
   }
   .wl-left-body { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
   .wl-left .brand .word { color: var(--on-dark); }
-  .wl-left .brand .word .o { color: var(--lime); -webkit-text-stroke: 1.5px var(--on-dark); }
+  .wl-left .brand .word .o { color: var(--on-dark); -webkit-text-stroke: 0; }
 
   .wl-pitch { margin-top: 52px; }
   .wl-pitch .eyebrow { border-color: oklch(0.40 0.010 65); color: var(--on-dark-dim); }
@@ -117,21 +117,6 @@
   .wl-field input { flex: 1; border: 0; outline: 0; background: transparent; font: var(--text-body); color: var(--ink); padding: 13px 0; }
   .wl-field input::placeholder { color: var(--ink-4); }
 
-  /* tier selector */
-  .tier-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .tier-chip {
-    border: var(--border-w) solid var(--ink); border-radius: var(--radius-md);
-    padding: 12px 14px; background: var(--surface); cursor: pointer;
-    transition: background .12s, box-shadow .12s, transform .1s;
-    text-align: left;
-  }
-  .tier-chip:hover { background: var(--sunken); }
-  .tier-chip.selected { background: var(--lime); box-shadow: var(--shadow-hard); transform: translate(-1px,-1px); }
-  .tier-chip .t { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); display: block; }
-  .tier-chip.selected .t { color: var(--on-lime); opacity: .7; }
-  .tier-chip .p { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--ink); margin-top: 3px; display: block; }
-  .tier-chip.selected .p { color: var(--on-lime); }
-
   /* nav buttons */
   .wl-nav { display: flex; align-items: center; gap: 12px; margin-top: 26px; }
   .wl-nav .btn { flex: 1; }
@@ -169,9 +154,9 @@
     <div class="dotgrid"></div>
     <div class="wl-left-body">
 
-      <a class="brand" href="index.html" aria-label="Instaflo home">
+      <a class="brand" href="index.html" aria-label="DMflo home">
         <img src="assets/mark.svg" alt="">
-        <span class="word">instafl<span class="o">o</span></span>
+        <span class="word">DMfl<span class="o">o</span></span>
       </a>
 
       <div class="wl-pitch">
@@ -219,8 +204,6 @@
         <div class="wl-step-dot" id="dot2">2</div>
         <div class="wl-step-line" id="line2"></div>
         <div class="wl-step-dot" id="dot3">3</div>
-        <div class="wl-step-line" id="line3"></div>
-        <div class="wl-step-dot" id="dot4">4</div>
       </div>
 
       <div class="wl-card">
@@ -296,39 +279,6 @@
           </div>
           <div class="wl-nav">
             <button class="btn btn-back btn-secondary" id="back3"><i class="ph-bold ph-arrow-left"></i> Back</button>
-            <button class="btn btn-primary btn-sticker" id="next3">Next <i class="ph-bold ph-arrow-right"></i></button>
-          </div>
-        </div>
-
-        <!-- STEP 4: Follower tier -->
-        <div class="wl-step-panel" id="step4">
-          <h2>Your reach</h2>
-          <p class="sub">Pick your follower count so we can suggest the right plan.</p>
-          <div class="tier-chips" id="tierChips">
-            <button class="tier-chip" data-tier="Up to 50K">
-              <span class="t">Followers</span>
-              <span class="p">Up to 50K</span>
-            </button>
-            <button class="tier-chip" data-tier="Up to 100K">
-              <span class="t">Followers</span>
-              <span class="p">Up to 100K</span>
-            </button>
-            <button class="tier-chip" data-tier="Up to 500K">
-              <span class="t">Followers</span>
-              <span class="p">Up to 500K</span>
-            </button>
-            <button class="tier-chip" data-tier="Up to 1M">
-              <span class="t">Followers</span>
-              <span class="p">Up to 1M</span>
-            </button>
-            <button class="tier-chip" data-tier="1M+" style="grid-column:span 2;">
-              <span class="t">Followers</span>
-              <span class="p">1M+ · let's talk custom</span>
-            </button>
-          </div>
-          <span class="wl-error" id="err4">Please select your follower tier.</span>
-          <div class="wl-nav">
-            <button class="btn btn-back btn-secondary" id="back4"><i class="ph-bold ph-arrow-left"></i> Back</button>
             <button class="btn btn-primary btn-sticker" id="submit">
               <i class="ph-bold ph-lightning"></i> Join waitlist
             </button>
@@ -354,45 +304,42 @@
 <script src="site.js"></script>
 <script>
 (function () {
-  var data = { name: "", email: "", handle: "", tier: "", accountType: "" };
+  var data = { name: "", email: "", handle: "", accountType: "" };
   var currentStep = 1;
 
   var panels = [null,
     document.getElementById("step1"),
     document.getElementById("step2"),
     document.getElementById("step3"),
-    document.getElementById("step4"),
     document.getElementById("stepDone")
   ];
   var dots  = [null,
     document.getElementById("dot1"),
     document.getElementById("dot2"),
-    document.getElementById("dot3"),
-    document.getElementById("dot4")
+    document.getElementById("dot3")
   ];
   var lines = [null,
     document.getElementById("line1"),
-    document.getElementById("line2"),
-    document.getElementById("line3")
+    document.getElementById("line2")
   ];
   var indicator = document.getElementById("stepIndicator");
 
   function goTo(n) {
     panels[currentStep].classList.remove("active");
     currentStep = n;
-    if (n <= 4) {
+    if (n <= 3) {
       panels[n].classList.add("active");
-      for (var i = 1; i <= 4; i++) {
+      for (var i = 1; i <= 3; i++) {
         dots[i].classList.remove("active", "done");
         if (i < n) dots[i].classList.add("done"), dots[i].textContent = "✓";
         else if (i === n) dots[i].classList.add("active"), dots[i].textContent = i;
         else dots[i].textContent = i;
       }
-      for (var j = 1; j <= 3; j++) {
+      for (var j = 1; j <= 2; j++) {
         lines[j].classList.toggle("done", j < n);
       }
     } else {
-      panels[5].classList.add("active");
+      panels[4].classList.add("active");
       indicator.style.display = "none";
     }
   }
@@ -428,30 +375,15 @@
     goTo(3);
   });
 
-  // Step 3: Instagram handle → step 4
+  // Step 3: Instagram handle → submit
   document.getElementById("back3").addEventListener("click", function () { goTo(2); });
-  document.getElementById("next3").addEventListener("click", function () {
+  document.getElementById("submit").addEventListener("click", function () {
     var handle    = document.getElementById("wl-handle").value.trim();
     var errHandle = document.getElementById("err-handle");
     if (!handle) { errHandle.classList.add("show"); return; }
     errHandle.classList.remove("show");
     data.handle = handle;
-    goTo(4);
-  });
 
-  // Step 4: tier chips → submit
-  document.getElementById("tierChips").addEventListener("click", function (e) {
-    var chip = e.target.closest(".tier-chip");
-    if (!chip) return;
-    document.querySelectorAll(".tier-chip").forEach(function (c) { c.classList.remove("selected"); });
-    chip.classList.add("selected");
-    data.tier = chip.dataset.tier;
-    document.getElementById("err4").classList.remove("show");
-  });
-
-  document.getElementById("back4").addEventListener("click", function () { goTo(3); });
-  document.getElementById("submit").addEventListener("click", function () {
-    if (!data.tier) { document.getElementById("err4").classList.add("show"); return; }
     var btn = document.getElementById("submit");
     btn.disabled = true;
     btn.innerHTML = '<i class="ph-bold ph-spinner"></i> Saving…';
@@ -462,10 +394,8 @@
       body: JSON.stringify(data)
     })
     .then(function (r) { return r.json(); })
-    .then(function () { goTo(5); })
-    .catch(function () {
-      goTo(5);
-    });
+    .then(function () { goTo(4); })
+    .catch(function () { goTo(4); });
   });
 })();
 </script>
