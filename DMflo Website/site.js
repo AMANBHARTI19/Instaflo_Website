@@ -1,23 +1,6 @@
-/* DMflo site — shared behavior: theme, mobile nav, waitlist, year, active nav, scroll-reveal */
+/* DMflo site — shared behavior: mobile nav, waitlist, year, active nav, scroll-reveal */
 (function () {
-  // ---- theme (persisted, shared across pages) ----
-  var KEY = "dmflo-theme";
-  var root = document.documentElement;
-  try {
-    var saved = localStorage.getItem(KEY);
-    if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
-    else root.setAttribute("data-theme", "light");
-  } catch (e) {}
-
   function bind() {
-    // ---- theme toggle ----
-    var btn = document.querySelector("[data-theme-toggle]");
-    if (btn) btn.addEventListener("click", function () {
-      var cur = root.getAttribute("data-theme");
-      var next = cur === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try { localStorage.setItem(KEY, next); } catch (e) {}
-    });
 
     // ---- mobile nav ----
     var burger = document.querySelector("[data-burger]");

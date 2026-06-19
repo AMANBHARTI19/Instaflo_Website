@@ -94,7 +94,6 @@ mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; bord
   backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: var(--border-w) solid var(--line);
 }
-[data-theme="dark"] .nav { background: oklch(0.19 0.008 70 / 0.82); }
 .nav-in { display: flex; align-items: center; gap: 18px; height: 70px; }
 .brand { display: inline-flex; align-items: center; gap: 8px; }
 .brand img { width: 34px; height: 34px; }
@@ -108,17 +107,7 @@ mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; bord
 .nav-links a:hover { color: var(--ink); background: var(--sunken); }
 .nav-links a.active { color: var(--ink); }
 .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-.theme-btn {
-  width: 42px; height: 42px; border-radius: var(--radius-pill);
-  border: var(--border-w) solid var(--ink); background: var(--surface);
-  color: var(--ink); display: inline-flex; align-items: center; justify-content: center;
-  font-size: 19px; transition: background .12s, transform .12s;
-}
-.theme-btn:hover { background: var(--sunken); }
-.theme-btn:active { transform: scale(.94); }
-.theme-btn .ph-moon-stars { display: none; }
-[data-theme="dark"] .theme-btn .ph-sun { display: none; }
-[data-theme="dark"] .theme-btn .ph-moon-stars { display: inline; }
+.theme-btn { display: none; }
 .nav-burger { display: none; }
 
 /* mobile nav open state */
@@ -141,7 +130,6 @@ mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; bord
   border-radius: var(--radius-md);
   font-size: 16px;
 }
-[data-theme="dark"] .nav-links.open { background: var(--surface); }
 
 /* =======================================================================
    HERO (shared) + variants
@@ -326,7 +314,6 @@ html[data-hero="b"] .heroB { display: block; }
 .cmp tbody td { font-size: 15.5px; color: var(--ink-2); }
 .cmp tbody td:first-child { font-weight: 700; color: var(--ink); }
 .cmp td.us { background: var(--lime-soft); color: var(--ink); font-weight: 600; }
-[data-theme="dark"] .cmp td.us { background: var(--lime-soft); }
 .cmp tr:last-child td { border-bottom: 0; }
 .cmp .yes { color: var(--success); font-weight: 800; }
 .cmp .no { color: var(--ink-4); }
