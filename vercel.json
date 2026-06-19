@@ -2,13 +2,13 @@
   "version": 2,
   "builds": [
     { "src": "api/waitlist.js", "use": "@vercel/node" },
-    { "src": "Instaflo Website/**", "use": "@vercel/static" }
+    { "src": "DMflo Website/**", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/waitlist", "dest": "/api/waitlist.js" },
-    { "src": "/assets/(.*)", "dest": "/Instaflo Website/assets/$1" },
-    { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx))", "dest": "/Instaflo Website/$1" },
-    { "src": "/([a-z-]*)\\.html", "dest": "/Instaflo Website/$1.html" },
-    { "src": "/", "dest": "/Instaflo Website/index.html" }
+    { "src": "/assets/(.*)", "dest": "/DMflo Website/assets/$1" },
+    { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx))", "dest": "/DMflo Website/$1" },
+    { "src": "/([a-z-]*)\\.html", "dest": "/DMflo Website/$1.html" },
+    { "src": "/", "dest": "/DMflo Website/index.html" }
   ]
 }
