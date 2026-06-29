@@ -1,0 +1,145 @@
+/* =========================================================================
+   DMFLO — Interior / legal / info page styles
+   Built on colors_and_type.css + site.css. Document-style reading layout
+   with a sticky table of contents. Matches the funky-minimal house style.
+   ========================================================================= */
+
+/* ---- page hero (compact, left-aligned for docs) ----------------------- */
+.doc-hero { padding: 56px 0 28px; border-bottom: var(--border-w) solid var(--line); }
+.doc-hero .wrap { position: relative; }
+.doc-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--on-lime); background: var(--lime);
+  border: var(--border-w) solid var(--ink); padding: 6px 13px; border-radius: var(--radius-pill);
+}
+.doc-hero h1 { font: var(--text-h1); letter-spacing: var(--track-tight); margin: 18px 0 12px; }
+.doc-hero .sub { font: var(--text-body-lg); color: var(--ink-2); max-width: 62ch; }
+.doc-meta {
+  display: flex; gap: 10px 22px; flex-wrap: wrap; margin-top: 22px;
+  font: var(--text-mono); font-size: 12px; color: var(--ink-3);
+}
+.doc-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.doc-meta i { color: var(--violet); font-size: 14px; }
+
+/* ---- two-column doc layout -------------------------------------------- */
+.doc-layout {
+  display: grid; grid-template-columns: 232px 1fr; gap: 56px;
+  padding: 48px 0 80px; align-items: start;
+}
+.doc-toc { position: sticky; top: 92px; }
+.doc-toc .toc-lab { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+.doc-toc ol { list-style: none; counter-reset: toc; display: flex; flex-direction: column; gap: 2px; }
+.doc-toc li { counter-increment: toc; }
+.doc-toc a {
+  display: flex; gap: 10px; align-items: baseline;
+  font-size: 14px; color: var(--ink-2); padding: 7px 11px; border-radius: var(--radius-sm);
+  border-left: 2px solid transparent; transition: background .12s, color .12s;
+}
+.doc-toc a::before { content: counter(toc, decimal-leading-zero); font: var(--text-mono); font-size: 11px; color: var(--ink-4); }
+.doc-toc a:hover { background: var(--sunken); color: var(--ink); }
+.doc-toc a.active { background: var(--lime-soft); color: var(--ink); border-left-color: var(--ink); font-weight: 600; }
+
+/* ---- document body ----------------------------------------------------- */
+.doc-body { max-width: 760px; }
+.doc-body section { scroll-margin-top: 92px; padding-bottom: 14px; }
+.doc-body section + section { margin-top: 40px; padding-top: 36px; border-top: 1px solid var(--line); }
+.doc-body h2 {
+  font: var(--text-h2); letter-spacing: var(--track-tight);
+  display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px;
+}
+.doc-body h2 .ix { font: var(--text-mono); font-size: 14px; color: var(--violet); font-weight: 700; flex: none; }
+.doc-body h3 { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: var(--track-tight); margin: 26px 0 10px; }
+.doc-body p { font-size: 16px; line-height: 1.68; color: var(--ink-2); margin-bottom: 14px; }
+.doc-body p strong, .doc-body li strong { color: var(--ink); font-weight: 700; }
+.doc-body a:not(.btn) { color: var(--violet); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px; }
+.doc-body a:not(.btn):hover { color: var(--violet-hover); }
+.doc-body ul, .doc-body ol { margin: 4px 0 18px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.doc-body ul li { display: flex; gap: 11px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+.doc-body ul li::before { content: ""; flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 2px; background: var(--lime); border: 1px solid var(--ink); }
+.doc-body ol { counter-reset: oli; }
+.doc-body ol li { counter-increment: oli; display: flex; gap: 12px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+.doc-body ol li::before { content: counter(oli); flex: none; font: var(--text-mono); font-weight: 700; font-size: 12px; color: var(--on-lime); background: var(--lime); border: var(--border-w) solid var(--ink); width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; margin-top: 1px; }
+
+/* callout box for important notices */
+.callout {
+  display: flex; gap: 14px; background: var(--lime-soft); border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius-md); padding: 18px 20px; margin: 8px 0 22px; box-shadow: var(--shadow-hard);
+}
+.callout i { font-size: 22px; color: var(--on-lime); flex: none; margin-top: 1px; }
+.callout p { margin: 0; color: var(--ink); font-size: 15px; }
+.callout.violet { background: var(--violet-soft); }
+.callout.violet i { color: var(--violet); }
+
+/* a "plain-English" inline aside */
+.plain { font: var(--text-mono); font-size: 12.5px; color: var(--ink-3); background: var(--sunken); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 14px; margin: -4px 0 18px; }
+.plain b { color: var(--violet); }
+
+/* definition table */
+.deftable { width: 100%; border-collapse: collapse; border: var(--border-w) solid var(--ink); border-radius: var(--radius-md); overflow: hidden; margin: 8px 0 22px; }
+.deftable th, .deftable td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); font-size: 15px; vertical-align: top; }
+.deftable th { background: var(--sunken); font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+.deftable td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+.deftable td { color: var(--ink-2); }
+.deftable tr:last-child td { border-bottom: 0; }
+
+/* placeholder token the founder swaps later */
+.fill { background: var(--warning-soft); border: 1px dashed var(--warning); border-radius: 5px; padding: 1px 6px; font: var(--text-mono); font-size: 12px; color: oklch(0.45 0.12 70); }
+[data-theme="dark"] .fill { color: var(--warning); }
+
+/* ---- ABOUT page bits --------------------------------------------------- */
+.about-hero { padding: 64px 0 10px; }
+.about-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+.about-grid .lead { margin-top: 20px; }
+.about-card {
+  background: var(--feature); color: var(--on-dark); border: var(--border-w-bold) solid var(--ink);
+  border-radius: var(--radius-xl); padding: 36px; box-shadow: var(--shadow-hard-lg); position: relative;
+}
+.about-card .who { display: flex; align-items: center; gap: 16px; }
+.about-card .pfp { width: 64px; height: 64px; border-radius: 50%; background: var(--lime); color: var(--on-lime); border: var(--border-w-bold) solid var(--ink); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 26px; }
+.about-card .who b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--on-dark); }
+.about-card .who span { font: var(--text-mono); font-size: 12px; color: var(--lime); }
+.about-card p { color: var(--on-dark-dim); font-size: 15px; line-height: 1.6; margin-top: 18px; }
+.about-card .links { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.about-card .links a { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--on-dark); border: var(--border-w) solid var(--on-dark-dim); border-radius: var(--radius-pill); padding: 8px 13px; display: inline-flex; gap: 7px; align-items: center; transition: background .12s, color .12s; text-decoration: none; }
+.about-card .links a:hover { background: var(--lime); color: var(--on-lime); border-color: var(--ink); }
+
+.story { max-width: 720px; margin: 0 auto; }
+.story h2 { font: var(--text-h2); letter-spacing: var(--track-tight); margin: 40px 0 14px; }
+.story p { font-size: 17px; line-height: 1.7; color: var(--ink-2); margin-bottom: 16px; }
+.story p strong { color: var(--ink); }
+
+.values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.value { border: var(--border-w) solid var(--line-strong); border-radius: var(--radius-lg); padding: 26px 24px; background: var(--surface); }
+.value .ico { width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--lime-soft); border: var(--border-w) solid var(--ink); display: grid; place-items: center; margin-bottom: 16px; }
+.value .ico i { font-size: 23px; color: var(--ink); }
+.value h3 { font: var(--text-h3); letter-spacing: var(--track-tight); margin-bottom: 8px; }
+.value p { font-size: 15px; color: var(--ink-2); line-height: 1.55; }
+
+/* ---- CONTACT page bits ------------------------------------------------- */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cc {
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius-lg); padding: 28px 26px;
+  background: var(--surface); display: flex; flex-direction: column; gap: 6px; transition: transform .16s, box-shadow .16s;
+}
+.cc:hover { transform: translateY(-3px); box-shadow: var(--shadow-hard); }
+.cc .ico { width: 50px; height: 50px; border-radius: var(--radius-md); background: var(--lime); color: var(--on-lime); border: var(--border-w) solid var(--ink); display: grid; place-items: center; font-size: 24px; margin-bottom: 12px; }
+.cc.v .ico { background: var(--violet); color: var(--paper); }
+.cc h3 { font: var(--text-h3); letter-spacing: var(--track-tight); }
+.cc p { font-size: 15px; color: var(--ink-2); }
+.cc a { font-weight: 700; color: var(--violet); font-size: 16px; text-decoration: none; margin-top: 4px; word-break: break-word; }
+.cc a:hover { text-decoration: underline; }
+.cc .meta { font: var(--text-mono); font-size: 11px; color: var(--ink-3); margin-top: auto; padding-top: 10px; }
+
+/* ---- responsive -------------------------------------------------------- */
+@media (max-width: 960px) {
+  .doc-layout { grid-template-columns: 1fr; gap: 28px; }
+  .doc-toc { position: static; border: var(--border-w) solid var(--line); border-radius: var(--radius-md); padding: 18px; background: var(--surface); }
+  .doc-toc ol { gap: 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .values { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .doc-body h2 { font-size: 24px; }
+}
