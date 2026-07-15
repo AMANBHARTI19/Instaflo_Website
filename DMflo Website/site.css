@@ -55,7 +55,7 @@ h1, h2, h3 { font-family: var(--font-display); letter-spacing: var(--track-tight
 .lead { font: var(--text-body-lg); color: var(--ink-2); }
 em.hi { font-style: normal; color: var(--violet); }
 .lime-text { color: var(--lime); }
-mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; position: relative; z-index: -1; }
 
 /* ---- buttons ----------------------------------------------------------- */
 .btn {
@@ -151,6 +151,7 @@ mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; bord
 
 /* ---- Variant B: centered statement, pricing-forward ---- */
 .heroB { display: none; text-align: center; padding-top: 8px; }
+.heroB .eyebrow { margin-bottom: 16px; }
 .heroB .display { font-size: clamp(52px, 8vw, 116px); max-width: 16ch; margin: 22px auto 0; }
 .heroB .lead { margin: 26px auto 32px; max-width: 52ch; }
 .heroB .cta-row { justify-content: center; margin-bottom: 46px; }
