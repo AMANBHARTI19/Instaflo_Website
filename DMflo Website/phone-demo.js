@@ -1,4 +1,4 @@
-/* DMflo — phone demo: a Hinglish comment getting auto-replied, on loop */
+/* DMflo — phone demo: the agent team selling + capturing a lead, on loop */
 (function () {
   var feeds = Array.prototype.slice.call(document.querySelectorAll(".demo-feed"));
   if (!feeds.length) return;
@@ -6,16 +6,13 @@
 
   // each step: {t: type, html, delay before showing}
   var script = [
-    { t: "them", who: "R", delay: 500, html: "Omggg this jacket 🔥🔥 <b>price kitna hai?</b> DM me pls 🙏" },
-    { t: "detect", delay: 1100, html: 'Keyword matched · <span class="k">PRICE</span> <i class="ph-fill ph-circle"></i> Hinglish + English' },
+    { t: "them", who: "R", delay: 500, html: "Omggg this kurta 🔥🔥 <b>how much is it?</b> do you have COD? 🙏" },
+    { t: "detect", delay: 1100, html: 'Sales agent · intent <span class="k">BUYING</span>' },
     { t: "typing", delay: 800 },
-    { t: "us", who: "if", delay: 1400, html: "Heyy Riya! 🧡 Yeh jacket hai <b>₹2,199</b> — limited stock mein hai abhi!" },
-    { t: "us", who: "if", delay: 1000, html: "Konsa size chahiye? 🙌" },
-    { t: "cta", delay: 700, options: ["S", "M", "L", "XL"] },
-    { t: "them", who: "R", delay: 1400, html: "M please!! aur COD available hai kya? 👀", selectCta: "M" },
-    { t: "typing", delay: 700 },
-    { t: "us", who: "if", delay: 1300, html: "Yes COD available hai! ✅ Link bhej rahi hoon — <b>sirf 3 left</b> hain M mein 🔥" },
-    { t: "detect", delay: 900, html: 'New lead saved <i class="ph-fill ph-check-circle"></i> auto-tagged <span class="k">hot</span>' },
+    { t: "us", who: "if", delay: 1400, html: "Heyy! 💚 This kurta is <b>₹1,299</b> and COD is available. Tell me your size and I'll send the link 👇" },
+    { t: "them", who: "R", delay: 1300, html: "Size M!! please send the link 🥺" },
+    { t: "us", who: "if", delay: 1300, html: "Done ✨ riya.style/kurta-m — order it and tag us in your story 😉" },
+    { t: "detect", delay: 1100, html: 'Lead captured <i class="ph-fill ph-check-circle"></i> · Moderation agent hid <span class="k">2 spam</span> comments' },
   ];
 
   function bubble(step) {
@@ -35,17 +32,6 @@
     d.className = "tag-detect";
     d.innerHTML = step.html;
     return d;
-  }
-  function cta(step) {
-    var wrap = document.createElement("div");
-    wrap.className = "cta-chips";
-    step.options.forEach(function (label) {
-      var chip = document.createElement("span");
-      chip.className = "cta-chip";
-      chip.textContent = label;
-      wrap.appendChild(chip);
-    });
-    return wrap;
   }
   function typing() {
     var row = document.createElement("div");
@@ -73,16 +59,7 @@
           var node;
           if (step.t === "detect") node = detect(step);
           else if (step.t === "typing") { node = typing(); lastTyping = node; }
-          else if (step.t === "cta") node = cta(step);
-          else {
-            node = bubble(step);
-            if (step.selectCta) {
-              var chips = feed.querySelectorAll(".cta-chip");
-              chips.forEach(function (c) {
-                c.classList.toggle("selected", c.textContent === step.selectCta);
-              });
-            }
-          }
+          else node = bubble(step);
           feed.appendChild(node);
           feed.scrollTop = feed.scrollHeight;
         }, acc));

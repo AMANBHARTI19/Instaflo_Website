@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DMflo · Account & billing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="calm.css">
+<style>
+  /* Account page owns its own scroll — override the app shell's locked body */
+  html, body { overflow: auto; height: auto; min-height: 100%; }
+  #root { height: auto; }
+  a { color: var(--accent-press); }
+  a:hover { color: var(--accent-hover); }
+
+  .acct-page { min-height: 100vh; background: var(--paper); display: flex; flex-direction: column; }
+
+  /* Top bar ---------------------------------------------------------------- */
+  .acct-top {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    background: color-mix(in oklch, var(--paper) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .acct-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 14px; color: var(--ink);
+    padding: 8px 14px 8px 10px; border-radius: var(--r-pill);
+    border: 1px solid var(--line); background: var(--surface);
+    box-shadow: var(--shadow-xs); transition: background .14s, border-color .14s;
+  }
+  .acct-back:hover { background: var(--sunken); border-color: var(--ink-4); color: var(--ink); }
+  .acct-back i { font-size: 15px; }
+  .acct-brand { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* Main column ------------------------------------------------------------ */
+  .acct-main {
+    width: 100%; max-width: 460px; margin: 0 auto;
+    padding: 28px 20px 56px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .acct-intro { display: flex; flex-direction: column; gap: 6px; }
+  .acct-h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(28px, 7vw, 36px); letter-spacing: -.025em; line-height: 1.02;
+    margin-top: 2px;
+  }
+  .acct-lede { font-size: 15px; color: var(--ink-2); max-width: 42ch; }
+  .acct-section-label { display: block; margin-bottom: 10px; }
+
+  /* Upgrade card (the star) ------------------------------------------------ */
+  .acct-upgrade {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r-xl); padding: 24px; box-shadow: var(--shadow-md);
+  }
+  .au-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .au-badge {
+    font-family: var(--font-display); font-weight: 800; font-size: 13px; letter-spacing: -.01em;
+    color: var(--on-accent); background: var(--accent);
+    padding: 3px 12px; border-radius: var(--r-pill); align-self: center;
+  }
+  .au-price { display: flex; align-items: baseline; gap: 3px; margin-left: auto; }
+  .au-price b { font-family: var(--font-display); font-weight: 800; font-size: 32px; letter-spacing: -.03em; }
+  .au-price span { font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); }
+  .au-flat { align-self: center; }
+  .au-title { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -.025em; margin-top: 16px; }
+  .au-sub { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+
+  .au-perks { list-style: none; padding: 0; margin: 20px 0 22px; display: flex; flex-direction: column; gap: 15px; }
+  .au-perk { display: flex; align-items: flex-start; gap: 12px; }
+  .au-pi {
+    width: 34px; height: 34px; flex: none; border-radius: var(--r-md);
+    display: flex; align-items: center; justify-content: center; font-size: 17px;
+    background: var(--accent-soft); color: var(--accent-press);
+  }
+  .au-pt { display: flex; flex-direction: column; }
+  .au-pt .h { font-weight: 700; font-size: 14.5px; }
+  .au-pt .s { font-size: 13px; color: var(--ink-3); margin-top: 1px; }
+
+  .acct-cta { width: 100%; justify-content: center; font-size: 15.5px; padding: 14px 22px; gap: 9px; }
+  .acct-cta:disabled { opacity: 1; cursor: progress; }
+  .acct-spin {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid color-mix(in oklch, var(--on-accent) 35%, transparent);
+    border-top-color: var(--on-accent); display: inline-block;
+    animation: acct-spin .6s linear infinite;
+  }
+  @keyframes acct-spin { to { transform: rotate(360deg); } }
+  .acct-trust {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    margin-top: 14px; font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .02em; color: var(--ink-3); text-align: center;
+  }
+
+  .acct-foot { text-align: center; }
+
+  /* Pro / success state ---------------------------------------------------- */
+  .acct-pro-active { display: flex; flex-direction: column; gap: 20px; }
+  .acct-celebrate {
+    display: flex; align-items: flex-start; gap: 13px;
+    background: var(--accent-soft); border: 1px solid color-mix(in oklch, var(--accent) 30%, transparent);
+    border-radius: var(--r-lg); padding: 16px 18px;
+    animation: acct-pop .4s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes acct-pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+  .acct-check {
+    width: 30px; height: 30px; flex: none; border-radius: 50%;
+    background: var(--accent); color: var(--on-accent);
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .acct-cel-txt .h { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+  .acct-cel-txt .s { font-size: 13.5px; color: var(--ink-2); margin-top: 2px; }
+
+  .plan-card.acct-pro {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--accent); border: 1px solid var(--accent-press); color: var(--on-accent);
+    border-radius: var(--r-lg); padding: 20px;
+  }
+  .acct-pro .pc-badge {
+    font-family: var(--font-display); font-weight: 800; font-size: 13px;
+    background: var(--on-accent); color: var(--accent);
+    padding: 3px 12px; border-radius: var(--r-pill); flex: none;
+  }
+  .acct-pro-info .t { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+  .acct-pro-info .s { font-size: 13px; opacity: .82; margin-top: 1px; }
+
+  .acct-pro-rows {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r-lg); overflow: hidden;
+  }
+  .acct-pro-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; font-size: 14px;
+  }
+  .acct-pro-row + .acct-pro-row { border-top: 1px solid var(--line-2); }
+  .acct-pro-row .l { color: var(--ink-3); }
+  .acct-pro-row .r { font-weight: 600; display: inline-flex; align-items: center; gap: 7px; }
+  .acct-pro-actions { display: flex; gap: 10px; }
+  .acct-pro-actions .btn { flex: 1; justify-content: center; }
+
+  @media (max-width: 420px) {
+    .acct-pro-actions { flex-direction: column; }
+    .au-price { margin-left: 0; width: 100%; }
+    .au-flat { margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="AccountScreen.jsx"></script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.getElementById("root")).render(<AccountScreen />);
+</script>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="oklch(0.982 0.004 95)"/>
+    <rect x="24" y="26" width="52" height="48" rx="8" fill="none" stroke="oklch(0.86 0.16 126)" stroke-width="4"/>
+    <rect x="33" y="37" width="20" height="5" rx="2.5" fill="oklch(0.86 0.16 126)"/>
+    <rect x="33" y="49" width="34" height="4" rx="2" fill="oklch(0.78 0.004 80)"/>
+    <rect x="33" y="60" width="34" height="7" rx="3.5" fill="oklch(0.86 0.16 126)"/>
+  </svg>
+</template>
+</body>
+</html>

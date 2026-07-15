@@ -1,0 +1,93 @@
+/* =========================================================================
+   DMFLO — product tour pane (live app in an iframe, scripted camera+cursor)
+   Namespaced dv-. Tokens come from colors_and_type.css.
+   ========================================================================= */
+
+.demo-pane { padding: 18px 0 10px; }
+.dv-outer { position: relative; max-width: 1140px; margin: 0 auto; }
+
+.dv-shell {
+  border: var(--border-w-bold) solid var(--ink);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-hard-lg);
+  overflow: hidden;
+}
+
+/* ---- browser chrome ---- */
+.dv-chrome { display: none; }
+.dv-dots { display: flex; gap: 6px; }
+.dv-dots span { width: 11px; height: 11px; border-radius: 50%; border: var(--border-w) solid var(--ink); background: var(--sunken); }
+.dv-dots span:nth-child(1) { background: var(--lime); }
+.dv-dots span:nth-child(2) { background: var(--violet-soft); }
+.dv-url { flex: 0 1 300px; margin: 0 auto; text-align: center; font: var(--text-mono); font-size: 12px; color: var(--ink-3); background: var(--sunken); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dv-live { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; background: var(--lime); color: var(--on-lime); border: var(--border-w) solid var(--ink); padding: 4px 10px; border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.dv-live .d { width: 6px; height: 6px; border-radius: 50%; background: var(--on-lime); animation: pulse 1.4s infinite; }
+
+/* ---- scaled stage ---- */
+.dv-viewport { position: relative; overflow: hidden; background: var(--paper); }
+.dv-stage { position: relative; width: 1140px; height: 680px; transform-origin: top left; overflow: hidden; background: var(--paper); }
+
+/* camera: pans/zooms the live app */
+.dv-cam { position: absolute; top: 0; left: 0; width: 1440px; height: 860px; transform-origin: 0 0; transition: transform 1.7s cubic-bezier(.45, 0, .18, 1); will-change: transform; }
+.dv-cam iframe { width: 1440px; height: 860px; border: 0; display: block; pointer-events: none; background: var(--paper); }
+
+/* scripted cursor (lives in cam space so it zooms with the app) */
+.dv-cursor { position: absolute; top: 0; left: 0; z-index: 4; width: 26px; height: 26px; margin: -4px 0 0 -4px; transition: transform 1.05s cubic-bezier(.5, 0, .2, 1), opacity .4s; opacity: 0; pointer-events: none; }
+.dv-cursor.show { opacity: 1; }
+.dv-cursor .arrow { width: 22px; height: 22px; background: var(--ink); border: 2px solid var(--paper); border-radius: 50% 50% 50% 4px; transform: rotate(-90deg); box-shadow: 0 2px 8px oklch(0 0 0 / .25); }
+.dv-cursor .ring { position: absolute; inset: -12px; border: 3px solid var(--violet); border-radius: 50%; opacity: 0; transform: scale(.4); }
+.dv-cursor.click .ring { animation: dvring .55s ease-out; }
+@keyframes dvring { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.5); } }
+
+/* headline callouts (stage space — stay put while camera moves) */
+.dv-callout {
+  position: absolute; left: 28px; bottom: 26px; z-index: 6;
+  max-width: 480px;
+  background: var(--lime); color: var(--on-lime);
+  border: var(--border-w-bold) solid var(--ink); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard-lg);
+  padding: 16px 22px 17px;
+  opacity: 0; transform: translateY(16px) rotate(-.5deg);
+  transition: opacity .5s, transform .5s cubic-bezier(.2, .8, .2, 1);
+  pointer-events: none;
+}
+.dv-callout.on { opacity: 1; transform: translateY(0) rotate(-.5deg); }
+.dv-callout .k { font: var(--text-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .07em; opacity: .75; display: block; margin-bottom: 5px; }
+.dv-callout .h { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: -0.02em; line-height: 1.1; }
+
+/* intro / outro title cards */
+.dv-title {
+  position: absolute; inset: 0; z-index: 8;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  text-align: center; padding: 40px;
+  background: var(--paper);
+  opacity: 0; visibility: hidden;
+  transition: opacity .7s, visibility .7s;
+}
+.dv-title.on { opacity: 1; visibility: visible; }
+.dv-title .dotgrid { opacity: .5; }
+.dv-title .kick { position: relative; font: var(--text-mono); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+.dv-title .big { position: relative; font-family: var(--font-display); font-weight: 800; font-size: 76px; letter-spacing: -0.03em; line-height: 1.02; color: var(--ink); max-width: 16ch; }
+.dv-title .big mark { background: var(--lime); color: var(--on-lime); padding: 0 .12em; border-radius: 6px; }
+.dv-title .sub { position: relative; font: var(--text-body-lg); color: var(--ink-2); }
+.dv-title .big, .dv-title .kick, .dv-title .sub { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s cubic-bezier(.2, .8, .2, 1); }
+.dv-title.on .kick { opacity: 1; transform: none; transition-delay: .1s; }
+.dv-title.on .big { opacity: 1; transform: none; transition-delay: .25s; }
+.dv-title.on .sub { opacity: 1; transform: none; transition-delay: .45s; }
+
+/* ---- caption steps ---- */
+.dv-caption { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.dv-step { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-weight: 700; font-size: 13.5px; color: var(--ink-3); border: var(--border-w) solid var(--line-strong); background: var(--surface); border-radius: var(--radius-pill); padding: 8px 15px; cursor: pointer; transition: background .15s, color .15s, box-shadow .15s, border-color .15s; }
+.dv-step .k { font: var(--text-mono); font-size: 10px; opacity: .8; }
+.dv-step:hover { color: var(--ink); }
+.dv-step.on { background: var(--lime); color: var(--on-lime); border-color: var(--ink); box-shadow: var(--shadow-hard); }
+
+@media (max-width: 720px) {
+  .dv-caption { gap: 7px; }
+  .dv-step { font-size: 12px; padding: 6px 11px; }
+  .dv-url { display: none; }
+  .dv-live { margin-left: auto; }
+  .dv-callout { left: 14px; bottom: 14px; max-width: 75%; padding: 10px 14px; }
+  .dv-callout .h { font-size: 17px; }
+}

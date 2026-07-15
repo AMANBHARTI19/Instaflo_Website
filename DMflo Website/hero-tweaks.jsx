@@ -1,10 +1,10 @@
-// Instaflo — Tweaks bridge for the home page.
+// DMflo — Tweaks bridge for the home page.
 // Mounts ONLY the Tweaks panel; writes choices to <html> data-attributes that
 // the static page's CSS reacts to. Keeps the marketing site plain HTML.
 const { useEffect } = React;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "hero": "a",
+  "hero": "b",
   "accent": "lime",
   "dotgrid": true,
   "stickers": true
@@ -25,7 +25,7 @@ function HeroTweaks() {
       <TweakRadio
         label="Layout"
         value={t.hero}
-        options={[{ value: "a", label: "Split demo" }, { value: "b", label: "Big statement" }]}
+        options={[{ value: "a", label: "Autopilot" }, { value: "b", label: "Agents sell" }, { value: "c", label: "India edge" }]}
         onChange={(v) => setTweak("hero", v)}
       />
       <TweakColor

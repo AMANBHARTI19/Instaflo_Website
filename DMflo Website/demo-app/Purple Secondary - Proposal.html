@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Purple as a limited accent — exploration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="calm.css">
+<style>
+  :root {
+    --tertiary:      oklch(0.58 0.19 286);
+    --tertiary-soft: oklch(0.95 0.04 286);
+    --on-tertiary:   oklch(0.99 0 0);
+  }
+  body.px-body { background: oklch(0.955 0.004 95); overflow: auto; }
+  .px-wrap { max-width: 1060px; margin: 0 auto; padding: 46px 32px 80px; }
+
+  .px-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tertiary); }
+  .px-head h1 { font-family: var(--font-display); font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.12; margin: 10px 0 0; max-width: 22ch; }
+  .px-lede { font-size: 15.5px; color: var(--ink-2); line-height: 1.58; max-width: 66ch; margin: 13px 0 0; }
+  .px-lede b { color: var(--ink); }
+
+  /* palette strip */
+  .px-palette { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .px-chip { display: flex; align-items: center; gap: 11px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 11px 15px 11px 12px; box-shadow: var(--shadow-xs); }
+  .px-chip .dot { width: 30px; height: 30px; border-radius: 8px; flex: none; }
+  .px-chip .role { font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+  .px-chip .val { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-top: 1px; }
+  .px-chip .val small { font-family: var(--font-mono); font-weight: 400; color: var(--ink-3); font-size: 10.5px; }
+
+  .px-sec-h { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); margin: 44px 0 4px; }
+  .px-sec-s { font-size: 13.5px; color: var(--ink-2); margin: 0 0 20px; max-width: 60ch; }
+
+  .px-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .px-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .px-demo { padding: 26px 24px; display: flex; align-items: center; justify-content: center; min-height: 120px; background: var(--paper); border-bottom: 1px solid var(--line-2); }
+  .px-cap { padding: 13px 18px 15px; }
+  .px-cap .t { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .px-cap .s { font-size: 12.5px; color: var(--ink-3); line-height: 1.45; margin-top: 3px; }
+
+  /* specimen elements */
+  .ai-tag { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--tertiary); background: var(--tertiary-soft); border-radius: var(--r-xs); padding: 3px 8px; }
+  .ai-tag i { font-size: 11px; }
+
+  .spec-row { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 11px 14px; box-shadow: var(--shadow-xs); min-width: 260px; }
+  .spec-row .av { width: 34px; height: 34px; border-radius: 50%; background: var(--sunken); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--ink-2); flex: none; }
+  .spec-row .nm { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .spec-row .sn { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
+
+  /* nav item with dot */
+  .spec-nav { display: flex; flex-direction: column; gap: 3px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 8px; box-shadow: var(--shadow-xs); width: 210px; }
+  .nav-i { display: flex; align-items: center; gap: 11px; padding: 9px 11px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
+  .nav-i.on { background: var(--accent-soft); color: var(--ink); }
+  .nav-i i { font-size: 17px; }
+  .nav-i .nd { margin-left: auto; width: 7px; height: 7px; border-radius: 50%; background: var(--tertiary); }
+  .nav-i .cnt { margin-left: auto; font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--ink-3); }
+
+  /* insight banner */
+  .spec-insight { display: flex; align-items: flex-start; gap: 11px; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--tertiary); border-radius: var(--r-md); padding: 13px 15px; box-shadow: var(--shadow-xs); max-width: 320px; }
+  .spec-insight .ic { color: var(--tertiary); font-size: 17px; margin-top: 1px; flex: none; }
+  .spec-insight .it { font-size: 13px; color: var(--ink); line-height: 1.45; }
+  .spec-insight .it b { font-weight: 700; }
+  .spec-insight .il { display: block; font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tertiary); margin-bottom: 4px; }
+
+  /* mini chart */
+  .spec-chart { display: flex; align-items: flex-end; gap: 7px; height: 78px; }
+  .spec-chart .bar { width: 16px; border-radius: 3px 3px 0 0; background: var(--accent); }
+  .spec-chart .bar.peak { background: var(--tertiary); position: relative; }
+  .spec-chart .bar.peak::after { content: "peak"; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 5px; font-family: var(--font-mono); font-size: 8.5px; font-weight: 700; color: var(--tertiary); }
+
+  /* avoid list */
+  .px-avoid { margin-top: 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 26px; }
+  .px-avoid div { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--ink-2); }
+  .px-avoid i { color: var(--dn); font-size: 15px; flex: none; }
+
+  .px-rule { margin-top: 40px; padding: 18px 20px; border-radius: var(--r-md); background: var(--tertiary-soft); border: 1px solid oklch(0.58 0.19 286 / .22); }
+  .px-rule .rh { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--tertiary); }
+  .px-rule p { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; margin: 8px 0 0; }
+  .px-rule b { color: var(--ink); }
+
+  @media (max-width: 780px) { .px-grid, .px-avoid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="px-body">
+<div class="px-wrap">
+  <div class="px-eyebrow">Design system · exploration</div>
+  <h1>Purple as a limited tertiary accent</h1>
+  <p class="px-lede">
+    Agreed — purple as a full secondary was too loud. So here it’s demoted to a <b>tertiary accent</b>: lime stays
+    the one primary color, warm white and off-white carry everything else, and purple only appears in a handful of
+    tiny, semantic moments. Its single job is to mark <b>AI &amp; smart intelligence</b> — the one thing lime
+    (which means “automation / action”) shouldn’t also stand for. Never a surface, button, or message bubble.
+  </p>
+
+  <div class="px-palette">
+    <div class="px-chip"><div class="dot" style="background:var(--accent)"></div><div><div class="role">Primary</div><div class="val">Lime <small>action &amp; automation</small></div></div></div>
+    <div class="px-chip"><div class="dot" style="background:var(--paper);border:1px solid var(--line)"></div><div><div class="role">Base</div><div class="val">Paper <small>warm white / off-white</small></div></div></div>
+    <div class="px-chip"><div class="dot" style="background:var(--ink)"></div><div><div class="role">Ink</div><div class="val">Text <small>warm near-black</small></div></div></div>
+    <div class="px-chip"><div class="dot" style="background:var(--tertiary)"></div><div><div class="role">Tertiary</div><div class="val">Purple <small>AI · used sparingly</small></div></div></div>
+  </div>
+
+  <div class="px-sec-h">Where it earns a place</div>
+  <p class="px-sec-s">Four candidate uses, all small. Each marks something as AI-driven or worth a glance — and each keeps lime as the loudest thing on the screen.</p>
+
+  <div class="px-grid">
+    <div class="px-card">
+      <div class="px-demo">
+        <div class="spec-row">
+          <div class="av">LC</div>
+          <div>
+            <div class="nm">Lead Catcher <span class="ai-tag"><i class="ph-fill ph-sparkle"></i> AI</span></div>
+            <div class="sn">Replies &amp; qualifies in your voice</div>
+          </div>
+        </div>
+      </div>
+      <div class="px-cap"><div class="t">AI agent badge</div><div class="s">A small purple “AI” tag distinguishes smart agents from rule-based automations (which stay lime).</div></div>
+    </div>
+
+    <div class="px-card">
+      <div class="px-demo">
+        <div class="spec-nav">
+          <div class="nav-i on"><i class="ph-bold ph-house"></i> Home</div>
+          <div class="nav-i"><i class="ph-bold ph-robot"></i> Agents <span class="nd"></span></div>
+          <div class="nav-i"><i class="ph-bold ph-chat-circle"></i> Inbox <span class="cnt">12</span></div>
+        </div>
+      </div>
+      <div class="px-cap"><div class="t">“New from AI” dot</div><div class="s">A single purple dot flags an agent suggestion waiting for you — distinct from lime’s active/live meaning.</div></div>
+    </div>
+
+    <div class="px-card">
+      <div class="px-demo">
+        <div class="spec-insight">
+          <i class="ph-fill ph-sparkle ic"></i>
+          <div class="it"><span class="il">AI insight</span><b>Tuesday 6pm</b> drives 2× replies. Want a flow scheduled for it?</div>
+        </div>
+      </div>
+      <div class="px-cap"><div class="t">AI insight marker</div><div class="s">Purple edge + icon signals “this suggestion came from AI,” only on genuinely generated tips.</div></div>
+    </div>
+
+    <div class="px-card">
+      <div class="px-demo">
+        <div class="spec-chart">
+          <div class="bar" style="height:38%"></div>
+          <div class="bar" style="height:54%"></div>
+          <div class="bar" style="height:46%"></div>
+          <div class="bar" style="height:70%"></div>
+          <div class="bar peak" style="height:96%"></div>
+          <div class="bar" style="height:60%"></div>
+          <div class="bar" style="height:44%"></div>
+        </div>
+      </div>
+      <div class="px-cap"><div class="t">Single data highlight</div><div class="s">In charts, lime is the series and purple marks the one point worth noticing — never more than one.</div></div>
+    </div>
+  </div>
+
+  <div class="px-sec-h">Keep it off</div>
+  <div class="px-avoid">
+    <div><i class="ph-bold ph-x"></i> Buttons &amp; primary actions</div>
+    <div><i class="ph-bold ph-x"></i> Message bubbles</div>
+    <div><i class="ph-bold ph-x"></i> Avatars &amp; large surfaces</div>
+    <div><i class="ph-bold ph-x"></i> Selection &amp; active states</div>
+    <div><i class="ph-bold ph-x"></i> Backgrounds &amp; cards</div>
+    <div><i class="ph-bold ph-x"></i> Body links, en masse</div>
+  </div>
+
+  <div class="px-rule">
+    <div class="rh">The rule</div>
+    <p><b>Lime = action &amp; automation</b> and stays the loudest color on every screen. <b>Purple = AI intelligence,</b> appearing only as tiny tags, dots, one insight marker, or a single chart highlight. If a screen has more than one or two purple marks, it’s too much.</p>
+  </div>
+</div>
+</body>
+</html>

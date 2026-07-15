@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pricing - DMflo</title>
-<meta name="description" content="Two plans. Free forever, or Pro at one flat ₹499/month — however many DMs you send. No per-message billing.">
+<title>Pricing: DMflo</title>
+<meta name="description" content="Three flat plans: Free to start, Pro at ₹499/month, Agentic at ₹1,500/month. No per-contact or per-message billing. However much you grow, the price doesn't move.">
 <link rel="icon" href="assets/mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,172 +18,6 @@
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
-<style>
-  /* Two-plan card layout */
-  .plan-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 880px;
-    margin: 0 auto;
-  }
-  @media (max-width: 640px) {
-    .plan-cards { grid-template-columns: 1fr; }
-  }
-  .plan-card {
-    border: 1.5px solid var(--rule);
-    border-radius: 20px;
-    padding: 36px 32px 32px;
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .plan-card.plan-pro {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--on-dark);
-    position: relative;
-  }
-  .plan-badge {
-    position: absolute;
-    top: -14px;
-    right: 24px;
-    background: var(--lime);
-    color: var(--on-lime);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    padding: 4px 14px;
-    border-radius: 100px;
-    text-transform: uppercase;
-  }
-  .plan-name {
-    font-family: var(--font-sans);
-    font-size: 22px;
-    font-weight: 700;
-    color: inherit;
-  }
-  .plan-for {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    margin-top: 4px;
-    opacity: .6;
-  }
-  .plan-price-row {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-top: 24px;
-  }
-  .plan-price {
-    font-family: var(--font-display);
-    font-size: 56px;
-    font-weight: 800;
-    line-height: 1;
-    color: inherit;
-  }
-  .plan-price-meta {
-    font-size: 14px;
-    opacity: .65;
-    color: inherit;
-  }
-  .plan-tagline {
-    font-size: 14px;
-    opacity: .7;
-    margin-top: 10px;
-    line-height: 1.5;
-    color: inherit;
-  }
-  .plan-divider {
-    height: 1px;
-    background: var(--rule);
-    margin: 24px 0;
-    opacity: .3;
-  }
-  .plan-pro .plan-divider { background: oklch(1 0 0 / .15); opacity: 1; }
-  .plan-feats {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-  }
-  .plan-feats li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 15px;
-    color: inherit;
-    opacity: .9;
-  }
-  .plan-feats li .ph-bold {
-    color: var(--lime);
-    font-size: 17px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .plan-feats li strong { font-weight: 700; opacity: 1; }
-  .plan-cta { margin-top: 32px; }
-
-  /* Feature comparison table */
-  .feat-cmp-wrap { max-width: 720px; margin: 0 auto; }
-  .feat-cmp-head {
-    display: grid;
-    grid-template-columns: 1fr 120px 120px;
-    gap: 0;
-    padding: 12px 16px;
-    background: var(--surface-2);
-    border-radius: 12px 12px 0 0;
-    border: 1px solid var(--rule);
-    border-bottom: none;
-  }
-  .feat-cmp-tier { font-weight: 700; font-size: 14px; display: block; }
-  .feat-cmp-price { font-family: var(--font-display); font-size: 20px; font-weight: 800; display: block; }
-  .feat-cmp-sub { font-size: 11px; opacity: .6; display: block; font-family: var(--font-mono); }
-  .feat-cmp-col { text-align: center; }
-  .feat-cmp-col.paid { background: var(--ink); border-radius: 8px; padding: 10px 8px; color: var(--on-dark); }
-  .feat-cmp-col.free { padding: 10px 8px; }
-  .feat-cmp-group { border: 1px solid var(--rule); border-top: none; }
-  .feat-cmp-group-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    opacity: .5;
-    padding: 10px 16px 6px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .feat-cmp-row {
-    display: grid;
-    grid-template-columns: 1fr 120px 120px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--rule);
-    align-items: center;
-  }
-  .feat-cmp-row:last-child { border-bottom: none; }
-  .feat-cmp-label { font-size: 14px; }
-  .feat-yes { color: var(--lime) !important; font-size: 18px; }
-  .feat-no { color: var(--ink-3) !important; font-size: 18px; }
-  .feat-note { font-size: 13px; font-family: var(--font-mono); opacity: .7; }
-  .paid-note { color: var(--lime); opacity: 1 !important; font-weight: 700; }
-  .feat-cmp-footer {
-    display: grid;
-    grid-template-columns: 1fr 120px 120px;
-    padding: 16px;
-    border: 1px solid var(--rule);
-    border-top: none;
-    border-radius: 0 0 12px 12px;
-    background: var(--surface-2);
-    align-items: center;
-    gap: 8px;
-  }
-</style>
 </head>
 <body>
 
@@ -209,194 +43,89 @@
 
 <!-- PAGE HEAD -->
 <section class="phead wrap" data-screen-label="Pricing header">
-  <span class="bill-note"><i class="ph-bold ph-tag"></i>No per-message billing. Ever.</span>
-  <h1 class="display">Two plans. That's it.</h1>
-  <p class="lead">Start free and get the basics working today. Upgrade to Pro when you want everything unlocked — one flat ₹499 a month, however many DMs you get.</p>
+  <span class="bill-note"><i class="ph-bold ph-tag"></i>No per-contact or per-message billing. Ever.</span>
+  <h1 class="display">Three plans. All flat. <mark class="mk">No success tax.</mark></h1>
+  <p class="lead">However much you send or grow, the price doesn&rsquo;t move. Other tools bill per active contact, so your bill climbs as your audience does. Ours doesn&rsquo;t.</p>
 </section>
 
-<!-- PLAN CARDS -->
-<section class="sec wrap" style="padding-top:36px;" data-screen-label="Plan cards">
-  <div class="plan-cards">
+<!-- TIERS -->
+<section class="sec wrap" style="padding-top:36px;" data-screen-label="Plans">
+  <div class="tier-grid">
 
-    <!-- Free -->
-    <div class="plan-card">
-      <div class="plan-name">Free</div>
-      <div class="plan-for">To get started</div>
-      <div class="plan-price-row">
-        <span class="plan-price">₹0</span>
-        <span class="plan-price-meta">forever</span>
-      </div>
-      <p class="plan-tagline">The core toolkit, free for as long as you want it.</p>
-      <div class="plan-divider"></div>
-      <ul class="plan-feats">
-        <li><i class="ph-bold ph-check"></i><span>Up to <strong>1,000 DMs</strong> per month</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Hinglish + English keyword detection</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Comment → DM automation</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Auto-reply to incoming DMs</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Story reply flows</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Basic chatbot (1 flow)</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Lead capture &amp; tagging</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Basic analytics</span></li>
+    <article class="tier">
+      <div class="name">Free</div>
+      <div class="reach-l">Get your first results</div>
+      <div class="price-row"><span class="price">₹0</span><span class="per">to start</span></div>
+      <div class="usd">free everywhere</div>
+      <p style="color:var(--ink-2); font-size:15px; margin-top:10px;">Start automating your DMs and comments, and see the agents work before you pay a rupee.</p>
+      <ul>
+        <li><i class="ph-fill ph-check-circle"></i>Up to <strong>1,000 automated replies</strong> / month</li>
+        <li><i class="ph-fill ph-check-circle"></i>1 Instagram account</li>
+        <li><i class="ph-fill ph-check-circle"></i>Hinglish + English understanding</li>
+        <li><i class="ph-fill ph-check-circle"></i>Comment → DM &amp; story replies</li>
+        <li><i class="ph-fill ph-check-circle"></i>Auto-reply to incoming DMs</li>
+        <li><i class="ph-fill ph-check-circle"></i>Lead capture &amp; export</li>
+        <li><i class="ph-fill ph-check-circle"></i>Mobile app</li>
+        <li><i class="ph-fill ph-check-circle"></i>Basic analytics</li>
       </ul>
-      <div class="plan-cta">
-        <a class="btn btn-secondary btn-block" href="waitlist.html">Start free</a>
-      </div>
-    </div>
+      <a class="btn btn-secondary btn-lg" href="waitlist.html">Start free</a>
+    </article>
 
-    <!-- Pro -->
-    <div class="plan-card plan-pro">
-      <span class="plan-badge">Everything unlocked</span>
-      <div class="plan-name">Pro</div>
-      <div class="plan-for">For creators, brands and agency</div>
-      <div class="plan-price-row">
-        <span class="plan-price">₹499</span>
-        <span class="plan-price-meta">/month, flat</span>
-      </div>
-      <p class="plan-tagline">Every feature. No caps. No per-message charges.</p>
-      <div class="plan-divider"></div>
-      <ul class="plan-feats">
-        <li><i class="ph-bold ph-check"></i><span><strong>Unlimited DMs</strong> sent</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Everything in Free</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Unlimited automations &amp; keywords</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Auto-reply to every incoming DM</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Follow-gate to unlock links</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Capture lead emails &amp; tag them</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Advanced multi-step chatbots</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Broadcasts &amp; campaigns</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Full analytics &amp; CSV exports</span></li>
-        <li><i class="ph-bold ph-check"></i><span>Priority support</span></li>
+    <article class="tier">
+      <div class="name">Pro</div>
+      <div class="reach-l">Creators &amp; small brands</div>
+      <div class="price-row"><span class="price">₹499</span><span class="per">/ month, flat</span></div>
+      <div class="usd">$15/mo in US &amp; Canada</div>
+      <p style="color:var(--ink-2); font-size:15px; margin-top:10px;">Unlimited automation plus power features to boost engagement and growth.</p>
+      <ul>
+        <li><i class="ph-fill ph-check-circle"></i><strong>Unlimited</strong> comment &amp; DM automation</li>
+        <li><i class="ph-fill ph-check-circle"></i>Everything in Free</li>
+        <li><i class="ph-fill ph-check-circle"></i>1 Instagram account</li>
+        <li><i class="ph-fill ph-check-circle"></i>Email + SMS opt-in lead capture</li>
+        <li><i class="ph-fill ph-check-circle"></i>Follow-gate to unlock links</li>
+        <li><i class="ph-fill ph-check-circle"></i>Full analytics &amp; CSV exports</li>
+        <li><i class="ph-fill ph-check-circle"></i>Priority support</li>
       </ul>
-      <div class="plan-cta">
-        <a class="btn btn-primary btn-block btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join waitlist</a>
-      </div>
-    </div>
+      <a class="btn btn-secondary btn-lg" href="waitlist.html">Join waitlist</a>
+    </article>
+
+    <article class="tier feat">
+      <span class="flag">Full autopilot</span>
+      <div class="name">Agentic</div>
+      <div class="reach-l">Bigger creators, brands &amp; agencies</div>
+      <div class="price-row"><span class="price">₹1,500</span><span class="per">/ month, flat</span></div>
+      <div class="usd">$29/mo in US &amp; Canada</div>
+      <p style="color:var(--on-dark-dim); font-size:15px; margin-top:10px;">The full agentic platform for selling more to a highly engaged audience.</p>
+      <ul>
+        <li><i class="ph-fill ph-check-circle"></i>Everything in Pro</li>
+        <li><i class="ph-fill ph-check-circle"></i>Up to 5 Instagram accounts</li>
+        <li><i class="ph-fill ph-check-circle"></i>Agents reply in your voice</li>
+        <li><i class="ph-fill ph-check-circle"></i>CRM &amp; marketing-automation integrations</li>
+        <li><i class="ph-fill ph-check-circle"></i>Agents that understand your goals and work toward them autonomously</li>
+        <li><i class="ph-fill ph-check-circle"></i>Captures &amp; converts while you sleep</li>
+        <li><i class="ph-fill ph-check-circle"></i>Web console for teams</li>
+      </ul>
+      <a class="btn btn-primary btn-lg btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join waitlist</a>
+    </article>
 
   </div>
-  <p class="center cta-note mt-m">Prices in INR, billed monthly. Cancel anytime — no "are you sure" maze.</p>
+  <p class="center cta-note mt-m">Every plan is flat. However much you send, the price doesn&rsquo;t move. Prices in INR; USD shown for US &amp; Canada. Cancel anytime.</p>
 </section>
 
-<!-- WHAT'S INCLUDED -->
-<section class="sec wrap" data-screen-label="Included">
+<!-- AGENTS ON EVERY PLAN -->
+<section class="sec wrap" data-screen-label="Agents on every plan">
   <div class="sec-head center">
-    <span class="sys">What you get on Pro</span>
-    <h2 class="h2">The full toolkit, all unlocked.</h2>
-    <p class="lead">Pro ships every feature with no caps. Free covers the essentials so you can try the magic first.</p>
+    <span class="sys">One team, three levels of autonomy</span>
+    <h2 class="h2">The agents run on every plan.</h2>
+    <p class="lead">Free gets them working. Pro removes the caps. Agentic gives them full autonomy, lead capture and your CRM.</p>
   </div>
-
-  <div class="feat-cmp-wrap">
-    <!-- Column headers -->
-    <div class="feat-cmp-head">
-      <div class="feat-cmp-label">Feature</div>
-      <div class="feat-cmp-col free">
-        <span class="feat-cmp-tier">Free</span>
-        <span class="feat-cmp-price">₹0</span>
-        <span class="feat-cmp-sub">1,000 DMs / mo</span>
-      </div>
-      <div class="feat-cmp-col paid">
-        <span class="feat-cmp-tier">Pro</span>
-        <span class="feat-cmp-price">₹499<span style="font-family:var(--font-sans);font-weight:400;font-size:14px;color:var(--on-lime);opacity:.8;">/mo</span></span>
-        <span class="feat-cmp-sub">Unlimited DMs</span>
-      </div>
-    </div>
-
-    <!-- Rows -->
-    <div class="feat-cmp-group">
-      <div class="feat-cmp-group-label">Core automation</div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Comment → DM</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Hinglish + English keywords</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Story reply flows</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Auto-reply to incoming DMs</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Basic chatbot (1 flow)</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Lead capture &amp; tagging</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Basic analytics</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-check feat-yes"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Monthly DM limit</div>
-        <div class="feat-cmp-col free feat-note">1,000</div>
-        <div class="feat-cmp-col paid feat-note paid-note">Unlimited</div>
-      </div>
-    </div>
-
-    <div class="feat-cmp-group">
-      <div class="feat-cmp-group-label">Advanced triggers</div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Unlimited automations &amp; keywords</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Follow-gate to unlock links</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Capture lead emails &amp; tag them</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Advanced multi-step chatbots</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-    </div>
-
-    <div class="feat-cmp-group">
-      <div class="feat-cmp-group-label">Growth tools</div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Broadcasts &amp; campaigns</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Full analytics &amp; CSV exports</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-      <div class="feat-cmp-row">
-        <div class="feat-cmp-label">Priority support</div>
-        <div class="feat-cmp-col free"><i class="ph-bold ph-x feat-no"></i></div>
-        <div class="feat-cmp-col paid"><i class="ph-bold ph-check feat-yes"></i></div>
-      </div>
-    </div>
-
-    <!-- CTA footer row -->
-    <div class="feat-cmp-footer">
-      <div class="feat-cmp-label"></div>
-      <div class="feat-cmp-col free">
-        <a class="btn btn-secondary btn-sm" href="waitlist.html">Start free</a>
-      </div>
-      <div class="feat-cmp-col paid">
-        <a class="btn btn-primary btn-sm btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join waitlist</a>
-      </div>
-    </div>
+  <div class="feat-grid">
+    <article class="fcard"><div class="ico"><i class="ph-bold ph-chat-circle-text"></i></div><h3>Engagement agent</h3><p>Replies in your tone, in your audience&rsquo;s language.</p></article>
+    <article class="fcard"><div class="ico"><i class="ph-bold ph-storefront"></i></div><h3>Sales agent</h3><p>Reads buying intent and steers the chat to a sale.</p></article>
+    <article class="fcard"><div class="ico"><i class="ph-bold ph-shield-check"></i></div><h3>Moderation agent</h3><p>Hides spam and negativity before your audience sees it.</p></article>
+    <article class="fcard"><div class="ico"><i class="ph-bold ph-user-plus"></i></div><h3>Lead-capture agent</h3><p>Email + SMS opt-in on Agentic. A list you own.</p></article>
+    <article class="fcard"><div class="ico"><i class="ph-bold ph-translate"></i></div><h3>Hinglish + English</h3><p>Understands how your audience actually types. More languages coming.</p></article>
+    <article class="fcard sticker"><div class="ico"><i class="ph-bold ph-tag"></i></div><h3>Flat, forever</h3><p>No per-contact meter. Growing your audience never raises your bill.</p></article>
   </div>
 </section>
 
@@ -408,24 +137,28 @@
   </div>
   <div class="faq">
     <details open>
-      <summary>What's the difference between Free and Pro?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
-      <div class="ans">Free gives you the core automation toolkit — up to 1,000 DMs a month, Hinglish detection, comment-to-DM, story flows, a basic chatbot, lead capture and basic analytics. Pro unlocks everything with no caps: unlimited DMs, unlimited automations, follow-gating, advanced chatbots, broadcasts, full analytics, CSV exports and priority support. One flat price, no surprises.</div>
+      <summary>What&rsquo;s the difference between the three plans?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <div class="ans">Free gets the agents automating your DMs and comments, enough to see real results. Pro removes every cap: unlimited automation plus power features for engagement and growth. Agentic is the full platform: email + SMS lead capture, CRM and marketing-automation integrations, and agents that work toward your goals autonomously.</div>
     </details>
     <details>
-      <summary>Is there really no per-message charge?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
-      <div class="ans">Correct. Send 100 DMs or 100,000, your monthly price doesn't move. That's the whole point. You pay a flat ₹499 on Pro and that's it — no per-contact, no per-message billing.</div>
+      <summary>Are the Free and Pro plans still &ldquo;agentic&rdquo;?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <div class="ans">Yes, the same team of agents runs on every plan, understanding intent and replying in your voice. Higher tiers give them more autonomy, more reach, and integrations with the rest of your stack.</div>
     </details>
     <details>
-      <summary>What happens when I hit 1,000 DMs on Free?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
-      <div class="ans">Your automations pause for the rest of that calendar month. Your data and flows stay intact. Upgrade to Pro anytime and they'll resume immediately with no cap in sight.</div>
+      <summary>Is there really no per-message or per-contact charge?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <div class="ans">Correct. Handle 100 conversations or 100,000, your price stays flat either way. Tools that bill per active contact quietly raise your bill as your audience grows. We think that&rsquo;s a success tax, so we don&rsquo;t charge it.</div>
+    </details>
+    <details>
+      <summary>Who is the Agentic plan for?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <div class="ans">Bigger creators, D2C brands and agencies who want to sell more to a highly engaged audience. Capture qualified leads with email + SMS opt-in, export intent to a CRM, and let the agents capture and convert while the team sleeps.</div>
+    </details>
+    <details>
+      <summary>Can I start on Free and upgrade later?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <div class="ans">That&rsquo;s the recommended path. Get your first results on Free, flip to Pro when you want the caps gone, and move to Agentic when you&rsquo;re ready for full autopilot. Everything carries over.</div>
     </details>
     <details>
       <summary>Can I cancel anytime?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
-      <div class="ans">Anytime, in one tap, no "are you sure" maze. Your automations pause and your data stays exportable for 30 days. Drop back to Free and your core flows still work.</div>
-    </details>
-    <details>
-      <summary>Do you offer team or agency plans?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
-      <div class="ans">Pro already covers creators, brands and agencies. If you're managing a large portfolio of accounts or need custom onboarding, reach out via the waitlist and we'll sort you out.</div>
+      <div class="ans">Anytime, in one tap, no &ldquo;are you sure&rdquo; maze. Your automations pause and your data stays exportable for 30 days.</div>
     </details>
   </div>
 </section>
@@ -436,8 +169,8 @@
     <div class="dotgrid" style="opacity:.25;"></div>
     <div style="position:relative; z-index:1;">
       <span class="sys" style="color:var(--on-lime); opacity:.7;">Beta opening soon</span>
-      <h2 class="display">Start free. Go Pro when you're ready.</h2>
-      <p class="lead">Join the waitlist and lock in early access — free while in beta.</p>
+      <h2 class="display">Lock in founder pricing.</h2>
+      <p class="lead">Join the waitlist and your plan price is frozen at launch rates for as long as you stay.</p>
       <div class="cta-row">
         <a class="btn btn-secondary btn-lg btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join the waitlist</a>
       </div>
@@ -452,7 +185,7 @@
     <div class="footer-grid">
       <div>
         <a class="brand" href="index.html"><img src="assets/mark.svg" alt=""><span class="word">DMfl<span class="o">o</span></span></a>
-        <p class="blurb">Instagram automation that actually speaks your audience's language. Made in India, for creators everywhere.</p>
+        <p class="blurb">An agentic automation platform for your Instagram. More engagement, more sales, more leads, in your brand&rsquo;s voice. Made in India, for creators everywhere.</p>
         <div class="socials">
           <a href="#" aria-label="Instagram"><i class="ph-bold ph-instagram-logo"></i></a>
           <a href="#" aria-label="X"><i class="ph-bold ph-x-logo"></i></a>
@@ -493,6 +226,5 @@
 </footer>
 
 <script src="site.js"></script>
-  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

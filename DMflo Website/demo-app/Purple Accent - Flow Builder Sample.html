@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Purple accent — flow builder sample</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="calm.css">
+<style>
+  :root {
+    --tertiary:      oklch(0.58 0.19 286);
+    --tertiary-soft: oklch(0.95 0.04 286);
+    --on-tertiary:   oklch(0.99 0 0);
+  }
+  body.px-body { background: oklch(0.955 0.004 95); overflow: auto; }
+  .px-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 30px 70px; }
+
+  .px-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tertiary); }
+  .px-head h1 { font-family: var(--font-display); font-size: 27px; font-weight: 700; letter-spacing: -.02em; line-height: 1.14; margin: 9px 0 0; }
+  .px-lede { font-size: 15px; color: var(--ink-2); line-height: 1.56; max-width: 70ch; margin: 12px 0 0; }
+  .px-lede b { color: var(--ink); }
+
+  /* frame */
+  .pv-frame { border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-lg); margin-top: 26px; }
+  .pv-chrome { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line-2); background: var(--raised); }
+  .pv-dots { display: flex; gap: 6px; }
+  .pv-dots span { width: 11px; height: 11px; border-radius: 50%; background: var(--line); }
+  .pv-url { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); background: var(--sunken); border-radius: var(--r-pill); padding: 5px 12px; max-width: 340px; margin: 0 auto; }
+  .demo-app { height: 660px; display: flex; flex-direction: column; background: var(--surface); }
+
+  /* the two purple accents */
+  .ai-tag { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--tertiary); background: var(--tertiary-soft); border-radius: var(--r-xs); padding: 3px 8px; white-space: nowrap; }
+  .ai-tag i { font-size: 11px; }
+
+  .insp-label-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .insp-label-row .insp-label { margin-bottom: 0; }
+  .ai-assist { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--tertiary); background: var(--tertiary-soft); border: 1px solid transparent; border-radius: var(--r-pill); padding: 4px 11px; transition: border-color .14s; }
+  .ai-assist:hover { border-color: oklch(0.58 0.19 286 / .4); }
+  .ai-assist i { font-size: 13px; }
+
+  /* legend */
+  .px-legend { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 22px; }
+  .px-leg-item { display: flex; gap: 10px; align-items: flex-start; max-width: 340px; }
+  .px-num { width: 20px; height: 20px; border-radius: 50%; background: var(--tertiary); color: var(--on-tertiary); font-family: var(--font-mono); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
+  .px-leg-item .t { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .px-leg-item .s { font-size: 12.5px; color: var(--ink-3); line-height: 1.45; margin-top: 2px; }
+
+  .px-rule { margin-top: 28px; padding: 16px 18px; border-radius: var(--r-md); background: var(--tertiary-soft); border: 1px solid oklch(0.58 0.19 286 / .22); max-width: 760px; }
+  .px-rule .rh { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--tertiary); }
+  .px-rule p { font-size: 13px; color: var(--ink-2); line-height: 1.55; margin: 7px 0 0; }
+  .px-rule b { color: var(--ink); }
+
+  @media (max-width: 900px) { .demo-app { height: auto; } .builder-shell { grid-template-columns: 1fr !important; } }
+</style>
+</head>
+<body class="px-body">
+<div class="px-wrap">
+  <div class="px-eyebrow">Design system · sample</div>
+  <h1>Purple accent, sampled on the flow builder</h1>
+  <p class="px-lede">
+    Same “Comment → DM” builder you already have — lime still runs the show (the selected node, the link button,
+    the <b>Publish</b> action). Purple appears in exactly <b>two</b> spots, and only because they’re AI: a tag noting the
+    copy was AI-drafted, and the <b>Improve with AI</b> control. This is a mock-up only — nothing in the app has changed.
+  </p>
+
+  <div class="pv-frame">
+    <div class="pv-chrome">
+      <div class="pv-dots"><span></span><span></span><span></span></div>
+      <div class="pv-url">app.dmflo.co / automations / new</div>
+    </div>
+
+    <div class="demo-app">
+      <div class="builder-shell">
+        <!-- canvas -->
+        <div class="canvas-area">
+          <div class="builder-flow" style="max-width:440px;margin:0 auto;padding:26px 20px;">
+            <div class="sys" style="margin-bottom:18px;">Flow · Comment → DM the link</div>
+
+            <div class="bnode source">
+              <div class="nhead">
+                <span class="ni"><i class="ph-bold ph-image-square"></i></span>
+                <span class="nt">Choose a post or reel</span>
+                <span class="sys">Source</span>
+              </div>
+              <div class="nbody">
+                <div class="post-chosen" style="display:flex;align-items:center;gap:11px;">
+                  <span class="pc-thumb" style="font-size:22px;">🚀</span>
+                  <span style="min-width:0;">
+                    <b>5 tips for faster launches</b>
+                    <span class="pc-meta" style="display:block;font-size:12px;color:var(--ink-3);">Reel · 12.4k likes</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="connector"></div>
+
+            <div class="bnode trigger">
+              <div class="nhead">
+                <span class="ni"><i class="ph-bold ph-chat-teardrop-text"></i></span>
+                <span class="nt">When someone comments</span>
+                <span class="sys">Trigger</span>
+              </div>
+              <div class="nbody">
+                On <b>the selected post</b>, if the comment contains:
+                <div style="margin-top:8px;">
+                  <span class="chip-kw">PRICE</span>
+                  <span class="chip-kw">COST</span>
+                  <span class="chip-kw">LINK</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="connector"></div>
+
+            <div class="bnode action sel">
+              <div class="nhead">
+                <span class="ni"><i class="ph-bold ph-paper-plane-tilt"></i></span>
+                <span class="nt">Send a DM</span>
+                <span class="ai-tag" title="This message was drafted by AI"><i class="ph-fill ph-sparkle"></i> AI drafted</span>
+              </div>
+              <div class="nbody">
+                <div class="dm-preview">
+                  <div class="dm-text">hey! 👋 here's the link you asked for, plus a lil welcome gift inside 💚</div>
+                  <div class="dm-links">
+                    <div class="dm-linkbtn"><span>Get the link</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="connector"></div>
+          </div>
+        </div>
+
+        <!-- inspector -->
+        <aside class="inspector">
+          <div class="insp-body">
+            <div class="sys">Action settings</div>
+            <div class="insp-h3">The DM</div>
+
+            <div style="margin-top:18px;">
+              <div class="insp-label-row">
+                <span class="insp-label">Message</span>
+                <button class="ai-assist"><i class="ph-fill ph-sparkle"></i> Improve with AI</button>
+              </div>
+              <div class="input input-surface" style="align-items:flex-start;">
+                <textarea rows="6" style="width:100%;">hey! 👋 here's the link you asked for, plus a lil welcome gift inside 💚</textarea>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <button class="btn btn-secondary btn-sm"><i class="ph-bold ph-link-simple"></i> Add link</button>
+              </div>
+
+              <div style="margin-top:14px;">
+                <div class="insp-label">Link buttons · 1/2</div>
+                <div style="border:1px solid var(--line);border-radius:var(--r-md);padding:11px;background:var(--surface);">
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+                    <span class="sys" style="font-size:10px;">Link 1</span>
+                  </div>
+                  <div class="input input-surface" style="padding:8px 11px;margin-bottom:7px;">
+                    <i class="ph-bold ph-text-aa"></i>
+                    <input value="Get the link" />
+                  </div>
+                  <div class="input input-surface" style="padding:8px 11px;">
+                    <i class="ph-bold ph-link-simple"></i>
+                    <input value="https://shop.dmflo.co/maya" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="insp-done-bar">
+            <button class="btn btn-primary"><i class="ph-fill ph-lightning"></i> Publish now</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-legend">
+    <div class="px-leg-item">
+      <div class="px-num">1</div>
+      <div>
+        <div class="t">“AI drafted” tag</div>
+        <div class="s">A small purple mark on the DM node — a glanceable note that this copy came from AI, not a rule you typed.</div>
+      </div>
+    </div>
+    <div class="px-leg-item">
+      <div class="px-num">2</div>
+      <div>
+        <div class="t">“Improve with AI” control</div>
+        <div class="s">The one AI entry point in the composer. Tapping it would surface a purple insight suggestion (the marker from the earlier exploration).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-rule">
+    <div class="rh">Notice</div>
+    <p>Everything that means <b>“action”</b> is still lime — the selected node ring, the <b>Get the link</b> button, the <b>Publish now</b> button. Purple never touches those; it only ever labels the AI moments, and there are just two on the whole screen.</p>
+  </div>
+</div>
+</body>
+</html>
