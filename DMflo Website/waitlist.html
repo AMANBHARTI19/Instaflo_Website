@@ -388,14 +388,15 @@
     btn.disabled = true;
     btn.innerHTML = '<i class="ph-bold ph-spinner"></i> Saving…';
 
+    goTo(4);
+
     fetch("/api/waitlist", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
-    })
-    .then(function (r) { return r.json(); })
-    .then(function () { goTo(4); })
-    .catch(function () { goTo(4); });
+    }).catch(function (err) {
+      console.error("[waitlist] Background save failed:", err);
+    });
   });
 })();
 </script>
