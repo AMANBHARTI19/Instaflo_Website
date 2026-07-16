@@ -47,6 +47,9 @@
   function nav(r) {
     try { if (frame.contentWindow && frame.contentWindow.__nav) frame.contentWindow.__nav(r); } catch (e) {}
   }
+  function demo(fn) {
+    try { if (frame.contentWindow && frame.contentWindow.__demo) frame.contentWindow.__demo[fn](); } catch (e) {}
+  }
   function prepFrame() {
     try {
       var doc = frame.contentDocument;
@@ -74,7 +77,7 @@
 
   /* ---------- timeline ---------- */
   // Sidebar nav coords (app space) and content focus points.
-  var NAV = { agents: [126, 261], inbox: [126, 302], analytics: [126, 344] };
+  var NAV = { automations: [126, 179], agents: [126, 261], inbox: [126, 302], analytics: [126, 344] };
 
   var events = [
     // scene 0 · intro card
@@ -82,24 +85,32 @@
     [2500,  function () { title("dvT1", false); cursor.classList.add("show"); prepFrame(); }],
     // scene 1 · home
     [3100,  function () { say("Every morning", "Wake up to work already done."); curTo(640, 330); camTo(700, 300, 1.45); }],
-    [6300,  function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.agents[0], NAV.agents[1]); }],
-    // scene 2 · agents
-    [7400,  function () { click(); nav("agents"); setStep(1); }],
-    [7900,  function () { say("Meet the team", "Brief your agents in plain English."); camTo(760, 300, 1.4); curTo(820, 330); }],
-    [11100, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.inbox[0], NAV.inbox[1]); }],
-    // scene 3 · inbox
-    [12200, function () { click(); nav("inbox"); setStep(2); }],
-    [12700, function () { say("Replies that sell", "Your voice. Their language. 24/7."); camTo(1080, 400, 1.5); curTo(1120, 430); }],
-    [15900, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.analytics[0], NAV.analytics[1]); }],
-    // scene 4 · analytics
-    [17000, function () { click(); nav("analytics"); setStep(3); }],
-    [17500, function () { say("The receipts", "See what the team got done."); camTo(720, 300, 1.35); curTo(500, 260); }],
-    [20700, function () { hush(); camTo(AW / 2, AH / 2, 1); }],
+    [6300,  function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.automations[0], NAV.automations[1]); }],
+    // scene 2 · comment → DM journey: new automation → template → flow builder
+    [7400,  function () { click(); nav("automations"); setStep(1); }],
+    [7900,  function () { say("Comment → DM", "\u201CPrice?\u201D under a reel becomes a DM, instantly."); curTo(1351, 38); camTo(1000, 200, 1.2); }],
+    [9800,  function () { click(); demo("newFlow"); }],
+    [10300, function () { say("Start a new automation", "Pick the Comment to DM template."); camTo(720, 430, 1.15); curTo(402, 474); }],
+    [12600, function () { click(); demo("pickComment"); }],
+    [13100, function () { say("Your flow, ready-made", "Keyword → reply → DM with your link. Publish."); camTo(760, 340, 1.25); curTo(780, 380); }],
+    [16300, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.agents[0], NAV.agents[1]); }],
+    // scene 3 · agents
+    [17400, function () { click(); nav("agents"); setStep(2); }],
+    [17900, function () { say("Meet the team", "Brief your agents in plain English."); camTo(760, 300, 1.4); curTo(820, 330); }],
+    [21100, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.inbox[0], NAV.inbox[1]); }],
+    // scene 4 · inbox
+    [22200, function () { click(); nav("inbox"); setStep(3); }],
+    [22700, function () { say("Replies that sell", "Your voice. Their language. 24/7."); camTo(1080, 400, 1.5); curTo(1120, 430); }],
+    [25900, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.analytics[0], NAV.analytics[1]); }],
+    // scene 5 · analytics
+    [27000, function () { click(); nav("analytics"); setStep(4); }],
+    [27500, function () { say("The receipts", "See what the team got done."); camTo(720, 300, 1.35); curTo(500, 260); }],
+    [30700, function () { hush(); camTo(AW / 2, AH / 2, 1); }],
     // outro
-    [21500, function () { title("dvT2", true); cursor.classList.remove("show"); }]
+    [31500, function () { title("dvT2", true); cursor.classList.remove("show"); }]
   ];
-  var TOTAL = 24500;
-  var SCENES = [0, 6300, 11100, 15900];
+  var TOTAL = 34500;
+  var SCENES = [0, 6300, 16300, 21100, 25900];
 
   var timers = [];
   function clearTimers() { timers.forEach(clearTimeout); timers = []; }

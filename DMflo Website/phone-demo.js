@@ -1,4 +1,4 @@
-/* DMflo — phone demo: the agent team selling + capturing a lead, on loop */
+/* DMflo — phone demo: comment-to-DM → the agent team selling + capturing a lead, on loop */
 (function () {
   var feeds = Array.prototype.slice.call(document.querySelectorAll(".demo-feed"));
   if (!feeds.length) return;
@@ -6,12 +6,12 @@
 
   // each step: {t: type, html, delay before showing}
   var script = [
-    { t: "them", who: "R", delay: 500, html: "Omggg this kurta 🔥🔥 <b>how much is it?</b> do you have COD? 🙏" },
-    { t: "detect", delay: 1100, html: 'Sales agent · intent <span class="k">BUYING</span>' },
+    { t: "comment", delay: 500, html: '<span class="c-label"><i class="ph-fill ph-chat-circle"></i> Comment on your reel</span><b>@riya.jsx</b> Omggg this kurta 🔥 price?? Is COD available? 🙏' },
+    { t: "detect", delay: 1100, html: 'Comment-to-DM · keyword <span class="k">PRICE</span> <i class="ph-fill ph-circle"></i> DM sent' },
     { t: "typing", delay: 800 },
-    { t: "us", who: "if", delay: 1400, html: "Heyy! 💚 This kurta is <b>₹1,299</b> and COD is available. Tell me your size and I'll send the link 👇" },
-    { t: "them", who: "R", delay: 1300, html: "Size M!! please send the link 🥺" },
-    { t: "us", who: "if", delay: 1300, html: "Done ✨ riya.style/kurta-m — order it and tag us in your story 😉" },
+    { t: "us", who: "if", delay: 1400, html: "Heyy! 💚 Saw your comment — this kurta is <b>₹1,299</b> and COD is available. Tell me your size and I'll send the link 👇" },
+    { t: "them", who: "R", delay: 1300, html: "M size!! send the link pls 🥺" },
+    { t: "us", who: "if", delay: 1300, html: "Done ✨ riya.style/kurta-m — tag us in your story when it arrives 😉" },
     { t: "detect", delay: 1100, html: 'Lead captured <i class="ph-fill ph-check-circle"></i> · Moderation agent hid <span class="k">2 spam</span> comments' },
   ];
 
@@ -26,6 +26,12 @@
     b.innerHTML = step.html;
     row.appendChild(ava); row.appendChild(b);
     return row;
+  }
+  function comment(step) {
+    var d = document.createElement("div");
+    d.className = "demo-comment";
+    d.innerHTML = step.html;
+    return d;
   }
   function detect(step) {
     var d = document.createElement("div");
@@ -58,6 +64,7 @@
           if (lastTyping) { lastTyping.remove(); lastTyping = null; }
           var node;
           if (step.t === "detect") node = detect(step);
+          else if (step.t === "comment") node = comment(step);
           else if (step.t === "typing") { node = typing(); lastTyping = node; }
           else node = bubble(step);
           feed.appendChild(node);

@@ -303,6 +303,10 @@ function App() {
 
   useAppEffect(() => {
     window.__nav = (r) => { setView("app"); setEditing(null); setRoute(r); };
+    window.__demo = {
+      newFlow: () => { setView("app"); setEditing(null); setRoute("automations"); setCreating(true); },
+      pickComment: () => { setCreating(false); setEditing("a1"); setNewKind(null); setRoute("builder"); },
+    };
   }, []);
 
   useAppEffect(() => {
