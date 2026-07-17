@@ -26,7 +26,7 @@ img, svg { display: block; }
 button { font-family: inherit; cursor: pointer; }
 
 /* ---- layout helpers ---------------------------------------------------- */
-.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 28px; }
 .wrap-narrow { max-width: 880px; }
 section { position: relative; }
 
@@ -541,12 +541,13 @@ html[data-stickers="off"] .demo-sticker { display: none; }
   .feat-grid { grid-template-columns: 1fr; }
   .fcard.span2 { grid-column: span 1; }
   .band-grid { grid-template-columns: 1fr 1fr; }
-  .band { padding: 40px 24px; }
+  .band { padding: 40px 28px; }
   .tiertable .trow { grid-template-columns: 1fr 1fr; gap: 10px; }
   .tiertable .trow .tact { grid-column: span 2; }
   .tiertable .trow.head { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .cta-card { padding: 44px 24px; }
+  .cta-card { padding: 44px 28px; }
   .cmp { font-size: 13px; }
   .cmp th, .cmp td { padding: 13px 12px; }
+  .demo-sticker { display: none; }
 }
