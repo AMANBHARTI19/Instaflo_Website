@@ -35,7 +35,7 @@
 /* scripted cursor (lives in cam space so it zooms with the app) */
 .dv-cursor { position: absolute; top: 0; left: 0; z-index: 4; width: 26px; height: 26px; margin: -4px 0 0 -4px; transition: transform 1.05s cubic-bezier(.5, 0, .2, 1), opacity .4s; opacity: 0; pointer-events: none; }
 .dv-cursor.show { opacity: 1; }
-.dv-cursor .arrow { width: 22px; height: 22px; background: var(--ink); border: 2px solid var(--paper); border-radius: 50% 50% 50% 4px; transform: rotate(-90deg); box-shadow: 0 2px 8px oklch(0 0 0 / .25); }
+.dv-cursor .arrow { display: block; filter: drop-shadow(0 2px 6px oklch(0 0 0 / .3)); }
 .dv-cursor .ring { position: absolute; inset: -12px; border: 3px solid var(--violet); border-radius: 50%; opacity: 0; transform: scale(.4); }
 .dv-cursor.click .ring { animation: dvring .55s ease-out; }
 @keyframes dvring { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.5); } }
