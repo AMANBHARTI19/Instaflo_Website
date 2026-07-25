@@ -56,8 +56,23 @@ function Stat({ icon, value, label, accent }) {
   );
 }
 
-function StatusPill({ status }) {
-  if (status === "live") return <span className="st-pill live"><span className="st-dot" /> Live</span>;
+/* ---- agent-specific stat set ------------------------------------------ */
+function AgentStats({ auto }) {
+  const caps = auto.caps || [];
+  const isComment = caps.includes("moderate") || caps.includes("engage");
+  const first = isComment
+    ? { icon: "chat-text", value: auto.sent, label: "Replies sent" }
+    : { icon: "paper-plane-tilt", value: auto.sent, label: "DMs sent" };
+  return (
+    <>
+      <Stat icon={first.icon} value={first.value} label={first.label} accent={auto.status === "live"} />
+      <Stat icon="user-plus" value={auto.contacts} label="Contacts" />
+      <Stat icon="clock" value={auto.lastTriggered} label="Last run" />
+    </>
+  );
+}
+
+function StatusPill({ status }) {  if (status === "live") return <span className="st-pill live"><span className="st-dot" /> Live</span>;
   if (status === "paused") return <span className="st-pill paused"><span className="st-dot" /> Paused</span>;
   return <span className="st-pill draft"><span className="st-dot" /> Draft</span>;
 }
@@ -130,7 +145,7 @@ function FlowMenu({ open, onToggle, onClose, onEdit, onDelete, onArchive, onRest
 function FlowRow(p) {
   const { auto, checked, highlight, showStats, menuOpen, onMenuToggle, onMenuClose, onToggleCheck, onToggleStatus, onOpen, openBuilder, askDelete, archived, onArchive, onRestore } = p;
   return (
-    <div className={`auto-row${auto.status === "live" ? " live" : ""}${highlight ? " just-published" : ""}${checked ? " checked" : ""}${archived ? " archived" : ""}`}>
+    <div className={`auto-row${auto.status === "live" ? " live" : ""}${auto.kind === "agent" ? " is-agent" : ""}${highlight ? " just-published" : ""}${checked ? " checked" : ""}${archived ? " archived" : ""}`}>
       <div className="ar-main" onClick={archived ? undefined : onOpen} title={archived ? undefined : "Open in builder"} style={archived ? { cursor: "default" } : undefined}>
         <div className="ar-select">
           <div className="a-ico"><Icon name={auto.icon} /></div>
@@ -142,14 +157,21 @@ function FlowRow(p) {
           <div className="h">
             <span className="a-name">{auto.name}</span>
             {archived ? <span className="st-pill arch"><Icon name="archive" weight="bold" className="st-arch-i" /> Archived</span> : <StatusPill status={auto.status} />}
+            {auto.kind === "agent" && <span className="a-agent-tag"><Icon name="sparkle" weight="fill" /> Agent</span>}
           </div>
-          <div className="s"><TriggerLine auto={auto} /></div>
+          {auto.kind === "agent"
+            ? <div className="s a-instr" title={auto.prompt}>{auto.prompt || "No instructions yet."}</div>
+            : <div className="s"><TriggerLine auto={auto} /></div>}
         </div>
         {showStats && (hasActivity(auto) ? (
           <div className="a-stats">
-            <Stat icon="paper-plane-tilt" value={auto.sent} label="DMs sent" accent={auto.status === "live"} />
-            <Stat icon="user-plus" value={auto.contacts} label="Contacts" />
-            <Stat icon="clock" value={auto.lastTriggered} label="Last run" />
+            {auto.kind === "agent"
+              ? <AgentStats auto={auto} />
+              : <>
+                  <Stat icon="paper-plane-tilt" value={auto.sent} label="DMs sent" accent={auto.status === "live"} />
+                  <Stat icon="user-plus" value={auto.contacts} label="Contacts" />
+                  <Stat icon="clock" value={auto.lastTriggered} label="Last run" />
+                </>}
           </div>
         ) : (
           <FlowZero auto={auto} variant="row" />
@@ -170,7 +192,7 @@ function FlowRow(p) {
 function FlowCard(p) {
   const { auto, checked, highlight, menuOpen, onMenuToggle, onMenuClose, onToggleCheck, onToggleStatus, onOpen, openBuilder, askDelete, archived, onArchive, onRestore } = p;
   return (
-    <div className={`auto-card${auto.status === "live" ? " live" : ""}${highlight ? " just-published" : ""}${checked ? " checked" : ""}${archived ? " archived" : ""}`} onClick={archived ? undefined : onOpen} title={archived ? undefined : "Open in builder"}>
+    <div className={`auto-card${auto.status === "live" ? " live" : ""}${auto.kind === "agent" ? " is-agent" : ""}${highlight ? " just-published" : ""}${checked ? " checked" : ""}${archived ? " archived" : ""}`} onClick={archived ? undefined : onOpen} title={archived ? undefined : "Open in builder"}>
       <div className="ac-top">
         <div className="a-ico"><Icon name={auto.icon} /></div>
         <label className="ct-check ac-check" onClick={e => e.stopPropagation()}>
@@ -188,13 +210,19 @@ function FlowCard(p) {
       </div>
       <div className="ac-body">
         <div className="ac-name"><span className="a-name">{auto.name}</span></div>
-        <div className="ac-desc"><TriggerLine auto={auto} /></div>
+        {auto.kind === "agent"
+          ? <div className="ac-desc a-instr" title={auto.prompt}>{auto.prompt || "No instructions yet."}</div>
+          : <div className="ac-desc"><TriggerLine auto={auto} /></div>}
       </div>
       {hasActivity(auto) ? (
         <div className="ac-stats">
-          <Stat icon="paper-plane-tilt" value={auto.sent} label="DMs sent" accent={auto.status === "live"} />
-          <Stat icon="user-plus" value={auto.contacts} label="Contacts" />
-          <Stat icon="clock" value={auto.lastTriggered} label="Last run" />
+          {auto.kind === "agent"
+            ? <AgentStats auto={auto} />
+            : <>
+                <Stat icon="paper-plane-tilt" value={auto.sent} label="DMs sent" accent={auto.status === "live"} />
+                <Stat icon="user-plus" value={auto.contacts} label="Contacts" />
+                <Stat icon="clock" value={auto.lastTriggered} label="Last run" />
+              </>}
         </div>
       ) : (
         <FlowZero auto={auto} variant="card" />
@@ -203,7 +231,7 @@ function FlowCard(p) {
   );
 }
 
-function AutomationsScreen({ autos, toggleAuto, openBuilder, deleteAuto, duplicateAuto, renameAuto, bulkStatus, bulkDelete, onNew, highlightId, layout, setLayout, density, setArchived }) {
+function AutomationsScreen({ autos, toggleAuto, openBuilder, openAgent, deleteAuto, duplicateAuto, renameAuto, bulkStatus, bulkDelete, onNew, highlightId, layout, setLayout, density, setArchived }) {
   layout = "rows"; // list view only (grid toggle removed)
   const { useState, useMemo, useEffect, useRef } = React;
   const [query, setQuery] = useState("");
@@ -299,8 +327,8 @@ function AutomationsScreen({ autos, toggleAuto, openBuilder, deleteAuto, duplica
     onMenuClose: () => setRowMenuId(null),
     onToggleCheck: () => toggleOne(a.id),
     onToggleStatus: () => toggleAuto(a.id),
-    onOpen: () => openBuilder(a.id),
-    openBuilder,
+    onOpen: () => (a.kind === "agent" && openAgent ? openAgent(a.agentId) : openBuilder(a.id)),
+    openBuilder: a.kind === "agent" && openAgent ? () => openAgent(a.agentId) : openBuilder,
     askDelete: id => setConfirm({ ids: [id] }),
     archived: isArchivedView,
     onArchive: () => doArchive([a.id], a.name),

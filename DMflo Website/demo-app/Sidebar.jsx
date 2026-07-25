@@ -26,11 +26,12 @@ function Sidebar({ route, setRoute, dark, setDark, onExit, comingTabs = [], comi
     { id: "home",        icon: "house",           label: "Home" },
     { id: "automations", icon: "lightning",        label: "Automations", count: 5 },
     { id: "contacts",    icon: "address-book",     label: "Contacts",     count: "4.2k" },
-    { id: "agents",      icon: "robot",            label: "Agents",       count: 3 },
     { id: "inbox",       icon: "chat-circle-dots", label: "Inbox",        count: 12 },
     { id: "analytics",   icon: "chart-bar",        label: "Analytics" },
+    { id: "integrations", icon: "puzzle-piece",   label: "Integrations", neu: true },
   ];
   const acctItems = [
+    { id: "brand",    icon: "palette",     label: "Brand Kit" },
     { id: "billing",  icon: "credit-card", label: "Plans & billing" },
     { id: "settings", icon: "gear-six",    label: "Settings" },
   ];
@@ -55,7 +56,9 @@ function Sidebar({ route, setRoute, dark, setDark, onExit, comingTabs = [], comi
             {it.label}
             {isComing
               ? <span className="soon-tag">Coming soon</span>
-              : it.count != null && <span className="count">{it.count}</span>}
+              : it.neu
+                ? <span className="nav-new">New</span>
+                : it.count != null && <span className="count">{it.count}</span>}
           </a>
         );
       })}

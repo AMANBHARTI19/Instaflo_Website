@@ -130,6 +130,87 @@ function LineChart({ series, mounted }) {
   );
 }
 
+// ---- link-click geography ------------------------------------------------
+// jsVectorMap (world) with click-share markers scaled by the `series` API.
+const GEO_CITIES = [
+  { city: "Mumbai",    cc: "IN", lat: 19.08, lon: 72.88, share: 24 },
+  { city: "Delhi",     cc: "IN", lat: 28.61, lon: 77.21, share: 18 },
+  { city: "Bengaluru", cc: "IN", lat: 12.97, lon: 77.59, share: 14 },
+  { city: "Pune",      cc: "IN", lat: 18.52, lon: 73.86, share: 8 },
+  { city: "Dubai",     cc: "AE", lat: 25.20, lon: 55.27, share: 9 },
+  { city: "London",    cc: "GB", lat: 51.51, lon: -0.13, share: 7 },
+  { city: "New York",  cc: "US", lat: 40.71, lon: -74.01, share: 6 },
+  { city: "Toronto",   cc: "CA", lat: 43.65, lon: -79.38, share: 5 },
+  { city: "Singapore", cc: "SG", lat: 1.35,  lon: 103.82, share: 5 },
+  { city: "Sydney",    cc: "AU", lat: -33.87, lon: 151.21, share: 4 },
+];
+
+function ClickMap({ mounted, total }) {
+  const { useRef, useEffect, useState } = React;
+  const mapRef = useRef(null);
+  const instRef = useRef(null);
+  const [hover, setHover] = useState(null);
+  const maxShare = Math.max(...GEO_CITIES.map(c => c.share));
+  const sorted = GEO_CITIES.slice().sort((a, b) => b.share - a.share);
+
+  useEffect(() => {
+    const JVM = window.jsVectorMap || window.JsVectorMap;
+    if (!mapRef.current || !JVM) return;
+    const cs = getComputedStyle(document.documentElement);
+    const v = n => cs.getPropertyValue(n).trim();
+    const accent = v("--accent") || "#8ac926";
+    mapRef.current.innerHTML = "";
+    const map = new JVM({
+      selector: mapRef.current,
+      map: "world",
+      zoomButtons: false,
+      zoomOnScroll: false,
+      backgroundColor: "transparent",
+      regionStyle: {
+        initial: { fill: v("--tertiary-mellow") || "#a89bd6", stroke: v("--surface") || "#fff", strokeWidth: 0.6 },
+        hover: { fill: v("--tertiary") || "#7856c9", fillOpacity: 1 },
+      },
+      markers: sorted.map(c => ({ name: `${c.city} \u00b7 ${c.share}%`, coords: [c.lat, c.lon] })),
+      markerStyle: {
+        initial: { fill: accent, stroke: "#fff", strokeWidth: 1.4, fillOpacity: 0.8, r: 6 },
+        hover: { fillOpacity: 1, stroke: accent, strokeWidth: 2 },
+      },
+      markersSelectable: false,
+    });
+    // size each marker by click share (the series API is unreliable in this build)
+    sorted.forEach((c, i) => {
+      const el = mapRef.current.querySelector(`circle[data-index="${i}"]`);
+      if (el) el.setAttribute("r", (7 + (c.share / maxShare) * 15).toFixed(1));
+    });
+    instRef.current = map;
+    return () => { try { map.destroy(); } catch (e) {} instRef.current = null; };
+  }, []);
+
+  return (
+    <div className="card an-card an-geo">
+      <div className="section-head">
+        <h3>Where the clicks come from</h3>
+        <div className="spacer" />
+        <span className="an-hint">{fmtK(total)} link clicks · {GEO_CITIES.length} cities</span>
+      </div>
+      <div className="an-geo-body">
+        <div className="an-geo-map" ref={mapRef} />
+        <div className="an-geo-list">
+          {sorted.map((c, i) => (
+            <div key={c.city} className={`an-geo-row${hover === c.city ? " on" : ""}`} onMouseEnter={() => setHover(c.city)} onMouseLeave={() => setHover(null)}>
+              <span className="an-geo-rank">{i + 1}</span>
+              <span className="an-geo-flag">{c.cc}</span>
+              <span className="an-geo-city">{c.city}</span>
+              <div className="an-geo-bar"><div className="an-geo-fill" style={{ width: mounted ? (c.share / maxShare * 100) + "%" : "0%", transitionDelay: (0.2 + i * 0.04) + "s" }} /></div>
+              <span className="an-geo-pct">{c.share}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AnalyticsScreen({ autos, plan = {}, onUpgrade, period = "7d" }) {
   const { useState } = React;
   const mounted = useMounted();
@@ -297,6 +378,9 @@ function AnalyticsScreen({ autos, plan = {}, onUpgrade, period = "7d" }) {
           </div>
         </div>
       </div>
+
+      {/* link-click geography */}
+      <ClickMap mounted={mounted} total={4410 * mult} />
 
       {/* top posts — leaderboard */}
       <div className="card an-card">

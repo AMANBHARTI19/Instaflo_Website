@@ -41,7 +41,7 @@ function PeriodPicker({ period, setPeriod }) {
   );
 }
 
-function BuilderTopbar({ auto, builderKind, onBack, onRename, onPublish }) {
+function BuilderTopbar({ auto, onBack, onRename, onPublish }) {
   const { useState, useRef, useEffect } = React;
   const name = auto ? auto.name : "New automation";
   const [editing, setEditing] = useState(false);
@@ -85,28 +85,30 @@ function BuilderTopbar({ auto, builderKind, onBack, onRename, onPublish }) {
         <div className="sub">Autosaved just now</div>
       </div>
       <div className="spacer" />
-      <button className="btn btn-primary" onClick={() => onPublish(auto ? auto.id : null, name, builderKind)}>
+      <button className="btn btn-primary" onClick={() => onPublish(auto ? auto.id : null, name)}>
         <Icon name="lightning" weight="fill" /> Publish flow
       </button>
     </div>
   );
 }
 
-function Topbar({ route, editing, autos, builderKind, onBack, onNew, onRename, onPublish, period, setPeriod }) {
+function Topbar({ route, editing, autos, onBack, onNew, onRename, onPublish, period, setPeriod }) {
   const { useState, useRef, useEffect } = React;
   if (route === "builder") {
     const auto = editing ? autos.find(a => a.id === editing) : null;
-    return <BuilderTopbar auto={auto} builderKind={builderKind} onBack={onBack} onRename={onRename} onPublish={onPublish} />;
+    return <BuilderTopbar auto={auto} onBack={onBack} onRename={onRename} onPublish={onPublish} />;
   }
 
   const periodLabel = (PERIOD_OPTS.find(o => o[0] === period) || PERIOD_OPTS[1])[1];
   const infoMap = {
     home:        { title: "Home",        sub: "Tuesday, 24 June" },
     automations: { title: "Automations", sub: autos ? `${autos.length} total \u00b7 ${autos.filter(a => a.status === "live").length} live` : "" },
-    agents:      { title: "Agents",      sub: "AI teammates for your DMs & comments" },
     inbox:       { title: "Inbox",       sub: "12 unread conversations" },
     contacts:    { title: "Contacts",    sub: "Everyone your automations have reached" },
     analytics:   { title: "Analytics",   sub: periodLabel },
+    connect:     { title: "Connect AI",  sub: "Run DMflo from Claude or ChatGPT" },
+    integrations:{ title: "Integrations", sub: "Connect apps & AI to DMflo" },
+    brand:       { title: "Brand Kit",   sub: "Voice, guidelines & products every agent uses" },
     billing:     { title: "Plans & billing", sub: "Manage your subscription & payments" },
     settings:    { title: "Settings",    sub: "Account preferences" },
   };
@@ -132,9 +134,6 @@ function Topbar({ route, editing, autos, builderKind, onBack, onNew, onRename, o
       {route === "inbox" && (
         <button className="btn btn-secondary btn-sm"><Icon name="checks" /> Mark all read</button>
       )}
-      {route === "agents" && (
-        <button className="btn btn-primary" onClick={() => window.dispatchEvent(new CustomEvent("new-agent"))}><Icon name="plus" /> New agent</button>
-      )}
       {route === "analytics" && (
         <PeriodPicker period={period} setPeriod={setPeriod} />
       )}
@@ -142,91 +141,118 @@ function Topbar({ route, editing, autos, builderKind, onBack, onNew, onRename, o
   );
 }
 
-const FLOW_TEMPLATES = [
-  { id: "t1", seed: "a1", tone: "comments", cat: "Comments", t: "Comment to DM",   s: "Auto-send your link when someone comments a keyword on your posts/reels.", art: "comment" },
-  { id: "t3", seed: null, kind: "story", tone: "stories", fresh: true, cat: "Stories", t: "Story Reply", s: "Respond when someone reacts or replies to your stories", art: "story" },
-  { id: "t2", seed: null, tone: "dms", soon: true, cat: "DMs", t: "Auto reply to DMs", s: "When someone DMs a keyword", art: "dm" },
+const FLOW_CARDS = [
+  { id: "link",  tone: "lime", cat: "Comments", art: "comment", t: "Comment to DM", s: "When someone comments a keyword" },
+  { id: "story", tone: "blue", cat: "Stories",  art: "story",   t: "Story Reply",   s: "When someone reacts or replies" },
+  { id: "faq",   tone: "pink", cat: "DMs",      art: "keyword", t: "Auto reply to DMs", s: "When someone DMs a keyword" },
 ];
 
-function FlowArt({ kind }) {
-  if (kind === "comment") {
+function CardArt({ kind }) {
+  const plane = <span className="a-plane"><Icon name="paper-plane-tilt" weight="fill" /></span>;
+  if (kind === "story") {
     return (
-      <span className="fa-art fa-comment">
-        <span className="fa-card">
-          <span className="fa-img" />
-          <span className="fa-icons">
-            <span className="fa-heart"><Icon name="heart" weight="fill" /></span>
-            <Icon name="chat-circle" />
-            <Icon name="paper-plane-tilt" />
+      <span className="art">
+        <span className="a-story">
+          <span className="as-ring" />
+          <span className="as-reply">
+            <span className="as-heart"><Icon name="heart" weight="fill" /></span>
+            <span className="as-rl" />
           </span>
-          <span className="fa-row"><span className="fa-dot" /><span className="fa-bar" /></span>
+          {plane}
         </span>
-        <span className="fa-send"><Icon name="paper-plane-tilt" weight="fill" /></span>
       </span>
     );
   }
-  if (kind === "story") {
+  if (kind === "keyword") {
     return (
-      <span className="fa-art fa-story">
-        <span className="fa-story-tile">
-          <span className="fa-ring" />
-          <span className="fa-reply"><span className="fa-heart"><Icon name="heart" weight="fill" /></span><span className="fa-reply-bar" /></span>
+      <span className="art">
+        <span className="a-chat">
+          <span className="ac-head"><span className="ac-av" /><span className="ac-nm" /></span>
+          <span className="ac-in"><span className="l a" /><span className="l b" /></span>
+          <span className="ac-out"><span className="l a" /><span className="l b" /></span>
         </span>
-        <span className="fa-send"><Icon name="paper-plane-tilt" weight="fill" /></span>
       </span>
     );
   }
   return (
-    <span className="fa-art fa-dm">
-      <span className="fa-card">
-        <span className="fa-dm-head"><span className="fa-dot" /><span className="fa-lines"><span className="fa-bar" /><span className="fa-bar short" /></span></span>
-        <span className="fa-bubble"><span className="fa-bar" /></span>
+    <span className="art">
+      <span className="a-post">
+        <span className="ap-media" />
+        <span className="ap-acts">
+          <Icon name="heart" weight="fill" />
+          <Icon name="chat-circle" weight="fill" />
+          <Icon name="paper-plane-tilt" weight="fill" />
+        </span>
+        <span className="ap-cmt"><span className="ap-av" /><span className="ap-line" /></span>
+        {plane}
       </span>
     </span>
   );
 }
 
-function NewFlowModal({ onClose, onPick }) {
+function NewFlowModal({ onClose, onPick, onAI, onPickAgent, comingSoon = false }) {
   useAppEffect(() => {
     const onKey = e => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const goStudio = params => { location.href = "studio/Flow Studio.html" + params; };
+  const pickAgent = (tplId, blank) => { onClose(); onPickAgent(tplId, blank); };
   return (
     <Portal>
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal modal-wide" onClick={e => e.stopPropagation()}>
+      <div className="modal nf-modal" onClick={e => e.stopPropagation()}>
         <div className="modal-head">
           <div className="mh-txt">
             <h2>Start a new automation</h2>
-            <div className="mh-sub">Choose a flow template to build the automation</div>
+            <div className="mh-sub">Choose what triggers it, or pick a ready-made template.</div>
           </div>
           <button className="mh-close" onClick={onClose} aria-label="Close"><Icon name="x" /></button>
         </div>
-        <div className="modal-body">
-          <div className="flow-grid">
-            {FLOW_TEMPLATES.map(t => (
-              <button
-                key={t.id}
-                className={`flow-card tone-${t.tone}${t.soon ? " soon" : ""}`}
-                onClick={() => t.soon ? null : onPick(t.seed, t.kind)}
-                disabled={t.soon}
-              >
-                <span className="fc-hero">
-                  <FlowArt kind={t.art} />
-                  {t.fresh && <span className="fc-badge">New</span>}
-                  {t.soon && <span className="fc-badge ghost">Coming soon</span>}
-                </span>
-                <span className="fc-cat">{t.cat}</span>
-                <span className="fc-t">{t.t}</span>
-                <span className="fc-s">{t.s}</span>
-                <span className="fc-foot">
-                  <span className="fc-cta">{t.soon ? "Coming soon" : "Start here"}</span>
-                  {!t.soon && <Icon name="arrow-right" className="fc-arrow" />}
-                </span>
-              </button>
-            ))}
+        <div className="modal-body nf-body">
+          <div className="nf-grid">
+            {FLOW_CARDS.map(c => {
+              const soon = comingSoon && c.id === "faq";
+              const isNew = comingSoon && c.id === "story";
+              return (
+                <button key={c.id} className={"nf-card tone-" + c.tone + (soon ? " is-soon" : "")} disabled={soon} onClick={soon ? undefined : () => goStudio("?tpl=" + c.id)}>
+                  {soon && <span className="nf-soon">Coming soon</span>}
+                  {isNew && <span className="nf-soon nf-new">New</span>}
+                  <span className="nf-art"><CardArt kind={c.art} /></span>
+                  <span className="nf-cat">{c.cat}</span>
+                  <span className="nf-t">{c.t}</span>
+                  <span className="nf-s">{c.s}</span>
+                  <span className="nf-start">
+                    {soon ? "Coming soon" : <>Start here <Icon name="arrow-right" weight="bold" /></>}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="nf-agents-head">
+            <span className="nf-ah-line" />
+            <span className="nf-ah-txt"><Icon name="sparkle" weight="fill" /> Or hand it to an AI agent</span>
+            <span className="nf-ah-line" />
+          </div>
+          <div className="nf-agent-grid">
+            {[{ id: "t-dm" }, { id: "t-mod" }, { id: "t-blank", name: "Create your own agent", blank: true }].map(pick => {
+              const tpl = AGENT_TEMPLATES.find(t => t.id === pick.id) || {};
+              return (
+                <button key={pick.id} className={"nf-agent" + (pick.blank ? " create" : "")} onClick={() => pickAgent(pick.id, pick.blank)}>
+                  <span className="nf-agent-ico"><Icon name={pick.blank ? "plus" : tpl.icon} weight={pick.blank ? "bold" : "fill"} /></span>
+                  <span className="nf-agent-body">
+                    <span className="nf-agent-tr">
+                      <span className="nf-agent-t">{pick.name || tpl.t}</span>
+                      {!pick.blank && <span className="nf-agent-badge"><Icon name="sparkle" weight="fill" /> AI</span>}
+                    </span>
+                    <span className="nf-agent-s">{pick.blank ? "Start from a blank prompt and shape it yourself" : tpl.s}</span>
+                  </span>
+                  <Icon name="arrow-right" weight="bold" className="nf-agent-arrow" />
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -260,15 +286,27 @@ function MobileBlock() {
   );
 }
 
+function deriveAgentMeta(prompt, caps) {
+  const presets = [
+    { has: ["qualify"],          name: "Lead Catcher",   icon: "magnet" },
+    { has: ["moderate"],         name: "Comment Moderator",  icon: "shield-check" },
+    { has: ["reply", "faq"],     name: "Frontdesk",      icon: "headset" },
+    { has: ["faq"],              name: "FAQ Helper",     icon: "books" },
+    { has: ["engage"],           name: "Comment Buddy",  icon: "heart" },
+    { has: ["reply"],            name: "DM Assistant",   icon: "chat-circle-dots" },
+  ];
+  const hit = presets.find(p => p.has.every(c => caps.includes(c)));
+  return hit || { name: "Custom Agent", icon: "robot" };
+}
+
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "plan": "pro",
-  "dmsSent": 942,
+  "plan": "free",
+  "dmsSent": 342,
   "flowLayout": "rows",
   "flowDensity": "comfy",
-  "agentsState": "live",
-  "inboxState": "live",
-  "analyticsState": "live",
-  "comingStyle": "screen"
+  "homeAibar": "show",
+  "newFlowComingSoon": "off",
+  "aiProvider": "claude"
 }/*EDITMODE-END*/;
 
 function App() {
@@ -279,8 +317,14 @@ function App() {
   const [editing, setEditing] = useAppState(null);
   const [dark,    setDark]    = useAppState(false);
   const [autos,   setAutos]   = useAppState(AUTOMATIONS);
+  const [agents,  setAgents]  = useAppState(AGENTS);
+  const [builderAgent, setBuilderAgent] = useAppState(null);
   const [creating, setCreating] = useAppState(false);
-  const [newKind, setNewKind] = useAppState(null);
+  const [flowSeed, setFlowSeed] = useAppState(null);
+  const [aiPrompt, setAiPrompt] = useAppState("");
+  const [aiAttachments, setAiAttachments] = useAppState([]);
+  const [aiAgent, setAiAgent] = useAppState(null);
+  const [aiSession, setAiSession] = useAppState(0);
   const [toast, setToast] = useAppState(null);
   const [highlightId, setHighlightId] = useAppState(null);
   const [anPeriod, setAnPeriod] = useAppState("7d");
@@ -301,11 +345,15 @@ function App() {
     document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
   }, [dark]);
 
+  const agentsRef = React.useRef(agents);
+  useAppEffect(() => { agentsRef.current = agents; });
   useAppEffect(() => {
     window.__nav = (r) => { setView("app"); setEditing(null); setRoute(r); };
+    window.__openAgent = (id) => { const ag = agentsRef.current.find(a => a.id === id); setBuilderAgent(ag || null); setEditing(null); setRoute("agentbuilder"); };
     window.__demo = {
       newFlow: () => { setView("app"); setEditing(null); setRoute("automations"); setCreating(true); },
-      pickComment: () => { setCreating(false); setEditing("a1"); setNewKind(null); setRoute("builder"); },
+      pickComment: () => { setCreating(false); setFlowSeed(null); setEditing("a1"); setRoute("builder"); },
+      moderator: () => { setCreating(false); setEditing(null); const ag = agentsRef.current.find(a => a.id === "ag3"); setBuilderAgent(ag || null); setRoute("agentbuilder"); },
     };
   }, []);
 
@@ -337,8 +385,87 @@ function App() {
     });
   };
 
-  const openBuilder = (id = null) => { setEditing(id); setNewKind(null); setRoute("builder"); };
-  const startNew = (seed = null, kind = null) => { setCreating(false); setEditing(seed); setNewKind(kind); setRoute("builder"); };
+  const openBuilder = (id = null) => { setFlowSeed(null); setEditing(id); setRoute("builder"); };
+
+  // Mirror a saved agent into the automations list as an "agent" flow row.
+  const syncAgentAutomation = (ag) => {
+    const autoId = "agentauto-" + ag.id;
+    const rec = {
+      id: autoId, kind: "agent", agentId: ag.id,
+      name: ag.name, icon: ag.icon, prompt: ag.prompt || "", caps: ag.caps || [],
+      status: ag.status === "active" ? "live" : "draft",
+      trigger: "", triggerType: "comment", desc: ag.prompt || "",
+      sent: ag.stat || "0", contacts: "0", lastTriggered: ag.status === "active" ? "just now" : "Never", created: Date.now(),
+    };
+    setAutos(prev => {
+      const idx = prev.findIndex(a => a.id === autoId);
+      if (idx >= 0) { const next = [...prev]; next[idx] = { ...prev[idx], ...rec, created: prev[idx].created }; return next; }
+      return [rec, ...prev];
+    });
+  };
+  const openAgentById = (agentId) => { const ag = agents.find(a => a.id === agentId); setBuilderAgent(ag || null); setEditing(null); setRoute("agentbuilder"); };
+
+  const pickAgentTemplate = (tplId, blank) => {
+    if (blank) { setBuilderAgent(null); setRoute("agentbuilder"); return; }
+    const tpl = AGENT_TEMPLATES.find(t => t.id === tplId);
+    const builtin = tpl && agents.find(a => a.default && a.name === tpl.t);
+    if (builtin) { setBuilderAgent(builtin); setRoute("agentbuilder"); return; }
+    setBuilderAgent(tpl ? { fromTemplate: true, name: tpl.t === "Blank agent" ? "" : tpl.t, icon: tpl.icon, prompt: tpl.prompt, caps: tpl.caps, knowledge: [], status: "draft" } : null);
+    setRoute("agentbuilder");
+  };
+
+  const saveAgentRecord = (data, opts = {}) => {
+    const publish = !!opts.publish;
+    const isEdit = data.id && agents.some(a => a.id === data.id);
+    const status = publish ? "active" : (data.status || "draft");
+    const base = isEdit ? { ...agents.find(a => a.id === data.id), ...data } : { ...data, id: "ag" + Date.now(), stat: "0", statLabel: "Handled" };
+    const record = { ...base, status, edited: "Just now" };
+    setAgents(prev => isEdit ? prev.map(a => a.id === record.id ? record : a) : [record, ...prev]);
+    syncAgentAutomation(record);
+    if (publish) { setBuilderAgent(null); setRoute("automations"); showToast("Agent published \u2014 it\u2019s now live"); }
+    else { setBuilderAgent(record); }
+  };
+
+  const startNew = (seed = null) => { setCreating(false); setFlowSeed(null); setEditing(seed); setRoute("builder"); };
+  const startAI = (prompt = "") => { setCreating(false); setEditing(null); setAiPrompt(prompt); setAiAttachments([]); setAiAgent(null); setAiSession(s => s + 1); setRoute("ai"); };
+  const openFromAI = (spec) => { setFlowSeed(spec); setEditing(null); setRoute("builder"); };
+
+  // Background: pick a suitable existing agent, or spin up a new one and add it
+  // to the Agents tab while the user builds the flow up front.
+  const agentTimers = React.useRef([]);
+  useAppEffect(() => () => agentTimers.current.forEach(clearTimeout), []);
+  function ensureAgentForPrompt(prompt, attachments = []) {
+    const caps = (window.detectCaps ? window.detectCaps(prompt) : []);
+    if (attachments.length && !caps.includes("faq")) caps.push("faq");
+    // reuse an existing agent whose capabilities already cover this request
+    const reusable = agents.find(a => a.status !== "building" && caps.length && a.caps && caps.every(c => a.caps.includes(c)));
+    if (reusable) return { id: reusable.id, name: reusable.name, icon: reusable.icon, reused: true };
+    const meta = deriveAgentMeta(prompt, caps);
+    const id = "ag" + Date.now();
+    const placeholder = {
+      id, status: "building", prompt, knowledge: attachments, caps,
+      name: "Building your agent…", icon: "sparkle", stat: "0", statLabel: "Handled", edited: "Just now", auto: true,
+    };
+    setAgents(prev => [placeholder, ...prev]);
+    const tm = setTimeout(() => {
+      setAgents(prev => prev.map(a => a.id === id ? { ...a, status: "draft", name: meta.name, icon: meta.icon } : a));
+    }, 2400);
+    agentTimers.current.push(tm);
+    return { id, name: meta.name, icon: meta.icon, reused: false };
+  }
+
+  // Home composer: build a complete automation. Kicks off a background agent,
+  // then drops the user into the flow wizard with the AI already at work.
+  const startAutomation = (prompt = "", attachments = []) => {
+    setCreating(false);
+    setEditing(null);
+    const agent = ensureAgentForPrompt(prompt, attachments);
+    setAiPrompt(prompt);
+    setAiAttachments(attachments || []);
+    setAiAgent(agent);
+    setAiSession(s => s + 1);
+    setRoute("ai");
+  };
 
   const showToast = (msg) => {
     setToast(msg);
@@ -346,25 +473,32 @@ function App() {
     window.__toastT = setTimeout(() => setToast(null), 3800);
   };
 
-  const publishFlow = (id, name, kind) => {
+  const publishFlow = (id, name, spec) => {
     let liveId = id;
     if (id && autos.some(a => a.id === id)) {
       setAutos(prev => prev.map(a => a.id === id ? { ...a, status: "live" } : a));
     } else {
       liveId = "a" + Date.now();
-      const isStory = kind === "story";
-      const newAuto = {
+      const trg = spec
+        ? (spec.anyComment ? (spec.triggerType === "comment" ? "any comment" : "any reply") : spec.keywords.join(", "))
+        : "PRICE";
+      const newAuto = spec ? {
         id: liveId,
-        name: name || (isStory ? "Story reply \u2192 DM" : "Comment \u2192 DM the link"),
-        icon: isStory ? "image" : "link",
-        trigger: isStory ? "LINK, GUIDE, YES" : "PRICE",
-        triggerType: isStory ? "story" : "comment",
-        status: "live", sent: "0",
+        name: name || spec.name,
+        icon: spec.icon || "link", trigger: trg, triggerType: spec.triggerType, status: "live", sent: "0",
         ctr: "\u2014", contacts: "0", lastTriggered: "just now", created: Date.now(),
-        desc: isStory ? "DMs your link when someone replies to your story" : "Replies with your shop link when someone comments a keyword",
+        desc: "Built with AI \u2014 " + (spec.name || "custom automation"),
+        reply: (spec.msg || "") + (spec.links && spec.links[0] ? spec.links[0].url : ""),
+      } : {
+        id: liveId,
+        name: name || "Comment \u2192 DM the link",
+        icon: "link", trigger: "PRICE", triggerType: "comment", status: "live", sent: "0",
+        ctr: "\u2014", contacts: "0", lastTriggered: "just now", created: Date.now(),
+        desc: "Replies with your shop link when someone comments a keyword",
       };
       setAutos(prev => [newAuto, ...prev]);
     }
+    setFlowSeed(null);
     setEditing(null);
     setHighlightId(liveId);
     setRoute("automations");
@@ -373,14 +507,7 @@ function App() {
     window.__hlT = setTimeout(() => setHighlightId(null), 2600);
   };
 
-  const sideRoute = route === "builder" ? "automations" : route;
-  const builderAuto = editing ? autos.find(a => a.id === editing) : null;
-  const builderKind = builderAuto ? (builderAuto.triggerType === "story" ? "story" : "comment") : (newKind === "story" ? "story" : "comment");
-  const comingTabs = [
-    t.agentsState === "coming" && "agents",
-    t.inboxState === "coming" && "inbox",
-    t.analyticsState === "coming" && "analytics",
-  ].filter(Boolean);
+  const sideRoute = (route === "builder" || route === "ai" || route === "agentbuilder") ? "automations" : route;
 
   return (
     <div className="shell">
@@ -389,25 +516,25 @@ function App() {
         setRoute={r => { setEditing(null); setRoute(r); }}
         dark={dark}
         setDark={setDark}
-        comingTabs={comingTabs}
-        comingStyle={t.comingStyle}
         onExit={() => { window.location.href = "onboarding.html"; }}
       />
       <main className="main">
-        <Topbar route={route} editing={editing} autos={autos} builderKind={builderKind} onBack={() => setRoute("automations")} onNew={() => setCreating(true)} onRename={renameAuto} onPublish={publishFlow} period={anPeriod} setPeriod={setAnPeriod} />
-        {route === "home"        && <HomeScreen        autos={autos} toggleAuto={toggleAuto} openBuilder={openBuilder} onNew={() => setCreating(true)} plan={plan} onUpgrade={openUpgrade} />}
-        {route === "automations" && <AutomationsScreen autos={autos} toggleAuto={toggleAuto} openBuilder={openBuilder} deleteAuto={deleteAuto} duplicateAuto={duplicateAuto} renameAuto={renameAuto} bulkStatus={bulkStatus} bulkDelete={bulkDelete} onNew={() => setCreating(true)} highlightId={highlightId} layout={t.flowLayout} setLayout={v => setTweak("flowLayout", v)} density={t.flowDensity} setArchived={setArchived} />}
-        {route === "builder"     && (builderKind === "story"
-          ? <StoryBuilderScreen auto={builderAuto} plan={plan} onPublish={publishFlow} />
-          : <BuilderScreen       auto={builderAuto} plan={plan} onPublish={publishFlow} />)}
-        {route === "inbox"       && (t.inboxState === "coming" ? <ComingSoon tab="inbox" /> : <InboxScreen />)}
+        {route !== "ai" && <Topbar route={route} editing={editing} autos={autos} onBack={() => setRoute("automations")} onNew={() => setCreating(true)} onRename={renameAuto} onPublish={publishFlow} period={anPeriod} setPeriod={setAnPeriod} />}
+        {route === "home"        && <HomeScreen        autos={autos} toggleAuto={toggleAuto} openBuilder={openBuilder} onNew={() => setCreating(true)} onAI={t.homeAibar === "show" ? startAI : null} onCreateAgent={startAutomation} plan={plan} onUpgrade={openUpgrade} />}
+        {route === "automations" && <AutomationsScreen autos={autos} toggleAuto={toggleAuto} openBuilder={openBuilder} openAgent={openAgentById} deleteAuto={deleteAuto} duplicateAuto={duplicateAuto} renameAuto={renameAuto} bulkStatus={bulkStatus} bulkDelete={bulkDelete} onNew={() => setCreating(true)} highlightId={highlightId} layout={t.flowLayout} setLayout={v => setTweak("flowLayout", v)} density={t.flowDensity} setArchived={setArchived} />}
+        {route === "builder"     && <BuilderScreen     auto={editing ? autos.find(a => a.id === editing) : null} plan={plan} onPublish={publishFlow} seed={flowSeed} />}
+        {route === "ai"          && <AIFlowBuilder     key={aiSession} initialPrompt={aiPrompt} attachments={aiAttachments} agent={aiAgent} isPro={isPro} onOpenInBuilder={openFromAI} onPublish={(spec) => publishFlow(null, spec.name, spec)} onCancel={() => setRoute("automations")} />}
+        {route === "connect"     && <ConnectAIScreen defaultProvider={t.aiProvider} />}
+        {route === "integrations" && <IntegrationsScreen defaultProvider={t.aiProvider} />}
+        {route === "inbox"       && <InboxScreen />}
         {route === "contacts"    && <ContactsScreen />}
-        {route === "agents"      && (t.agentsState === "coming" ? <ComingSoon tab="agents" /> : <AgentsScreen />)}
-        {route === "analytics"   && (t.analyticsState === "coming" ? <ComingSoon tab="analytics" /> : <AnalyticsScreen   autos={autos} plan={plan} onUpgrade={openUpgrade} period={anPeriod} />)}
+        {route === "agentbuilder" && <AgentBuilder agent={builderAgent} onSave={saveAgentRecord} onCancel={() => { setBuilderAgent(null); setRoute("automations"); }} />}
+        {route === "analytics"   && <AnalyticsScreen   autos={autos} plan={plan} onUpgrade={openUpgrade} period={anPeriod} />}
+        {route === "brand"       && <BrandScreen />}
         {route === "settings"    && <SettingsScreen plan={plan} onUpgrade={openUpgrade} />}
         {route === "billing"     && <BillingScreen plan={plan} onUpgrade={openUpgrade} />}
       </main>
-      {creating && <NewFlowModal onClose={() => setCreating(false)} onPick={startNew} />}
+      {creating && <NewFlowModal onClose={() => setCreating(false)} onPick={startNew} onAI={() => startAI("")} onPickAgent={pickAgentTemplate} comingSoon={t.newFlowComingSoon === "on"} />}
       {toast && (
         <div className="toast" role="status">
           <span className="toast-ico"><Icon name="check" weight="bold" /></span>
@@ -418,11 +545,10 @@ function App() {
       <TweaksPanel title="Tweaks">
         <TweakSection label="Automations page" />
         <TweakRadio label="Density" value={t.flowDensity} options={["compact", "comfy"]} onChange={v => setTweak("flowDensity", v)} />
-        <TweakSection label="Tab state" />
-        <TweakRadio label="Coming-soon style" value={t.comingStyle} options={["screen", "disabled"]} onChange={v => setTweak("comingStyle", v)} />
-        <TweakRadio label="Agents" value={t.agentsState} options={["coming", "live"]} onChange={v => setTweak("agentsState", v)} />
-        <TweakRadio label="Inbox" value={t.inboxState} options={["coming", "live"]} onChange={v => setTweak("inboxState", v)} />
-        <TweakRadio label="Analytics" value={t.analyticsState} options={["coming", "live"]} onChange={v => setTweak("analyticsState", v)} />
+        <TweakSection label="AI features" />
+        <TweakRadio label="Home AI bar" value={t.homeAibar} options={["show", "hide"]} onChange={v => setTweak("homeAibar", v)} />
+        <TweakRadio label="Story & DM cards" value={t.newFlowComingSoon} options={["off", "on"]} onChange={v => setTweak("newFlowComingSoon", v)} />
+        <TweakRadio label="Default AI provider" value={t.aiProvider} options={["claude", "chatgpt"]} onChange={v => setTweak("aiProvider", v)} />
         <TweakSection label="Plan & usage" />
         <TweakRadio label="Plan" value={t.plan} options={["free", "pro"]} onChange={v => setTweak("plan", v)} />
         {t.plan === "free" && (

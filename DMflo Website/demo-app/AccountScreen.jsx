@@ -4,7 +4,7 @@ const { useState: useAcctState } = React;
 
 const ACCT_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "plan": "free",
-  "dmsSent": 942
+  "dmsSent": 342
 }/*EDITMODE-END*/;
 
 const PRO_PERKS = [

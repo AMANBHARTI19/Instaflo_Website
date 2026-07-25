@@ -234,7 +234,7 @@ const AGENT_CAPS = [
 
 const AGENTS = [
   {
-    id: "ag1", name: "Frontdesk", icon: "headset", status: "active",
+    id: "ag1", name: "DM Concierge", icon: "headset", status: "active", default: true,
     prompt: "You are Maya's friendly front desk. Reply to DMs warmly in a casual, lowercase tone. Answer questions about pricing, shipping and the launch using the knowledge base. If someone wants to buy, send the shop link.",
     caps: ["reply", "faq"],
     knowledge: [
@@ -251,11 +251,12 @@ const AGENTS = [
     stat: "318", statLabel: "Leads tagged", edited: "5d ago",
   },
   {
-    id: "ag3", name: "Comment Guard", icon: "shield-check", status: "draft",
+    id: "ag3", name: "Comment Moderator", icon: "shield-check", status: "active", default: true,
     prompt: "Under every reel, like and reply to genuine comments with a short friendly note. Hide comments that are spam, contain external links, or are inappropriate.",
     caps: ["engage", "moderate"],
     knowledge: [],
-    stat: "0", statLabel: "Comments", edited: "Just now",
+    watch: { mode: "selected", postIds: ["p1"] },
+    stat: "1,204", statLabel: "Comments handled", edited: "1d ago",
   },
 ];
 
@@ -270,4 +271,95 @@ const AGENT_TEMPLATES = [
     prompt: "" },
 ];
 
-Object.assign(window, { AUTOMATIONS, TRIGGER_TYPES, CONVERSATIONS, THREAD, CHART, CONTACTS, CONTACT_LISTS, AGENT_CAPS, AGENTS, AGENT_TEMPLATES });
+/* ---- Brand Kit (account-level knowledge every agent reuses) ------------ */
+const TONE_OPTIONS = [
+  { id: "warm",        label: "Warm" },
+  { id: "casual",      label: "Casual" },
+  { id: "playful",     label: "Playful" },
+  { id: "confident",   label: "Confident" },
+  { id: "professional",label: "Professional" },
+  { id: "concise",     label: "Concise" },
+  { id: "lowercase",   label: "lowercase" },
+  { id: "emoji",       label: "Emoji-friendly" },
+];
+
+const LINK_TYPES = [
+  { id: "shop",       icon: "shopping-bag",    label: "Shop / store" },
+  { id: "booking",    icon: "calendar-check",  label: "Booking / calendar" },
+  { id: "newsletter", icon: "envelope-simple", label: "Newsletter / email" },
+  { id: "portfolio",  icon: "browser",         label: "Portfolio / website" },
+  { id: "leadmagnet", icon: "gift",            label: "Freebie / lead magnet" },
+  { id: "social",     icon: "at",              label: "Another profile" },
+  { id: "other",      icon: "link",            label: "Other link" },
+];
+
+const BRAND = {
+  name: "Maya Makes",
+  tagline: "Small-batch ceramics & launch kits for indie creators",
+  audience: "Indie makers and small shop owners launching their first product",
+  tones: ["warm", "casual", "lowercase", "emoji"],
+  sample: "hey! 👋 so glad you found us — everything's handmade in small batches right here in the studio. lmk what you're after and I'll point you to the right thing 💚",
+  dos: [
+    "Talk like a friend — warm, first-person, lowercase is fine",
+    "Use the customer’s name when you know it",
+    "Point buyers to the shop link when they show intent",
+  ],
+  donts: [
+    "Don’t be pushy or use hard-sell language",
+    "Avoid corporate jargon and canned phrases",
+    "Never promise ship dates or stock we can’t back up",
+  ],
+  links: [
+    { type: "shop",       label: "Shop the ceramics",      url: "maya-makes.com/shop" },
+    { type: "booking",    label: "Book a studio workshop", url: "cal.com/mayamakes" },
+    { type: "newsletter", label: "Join the studio list",   url: "mayamakes.com/list" },
+  ],
+  resources: [
+    { type: "doc", label: "Pricing & FAQ.pdf",   meta: "320 KB · scanned" },
+    { type: "doc", label: "Shipping policy.docx", meta: "88 KB · scanned" },
+  ],
+};
+
+// Product source — connect a website or a Shopify store.
+const SHOP = {
+  connected: true,
+  platform: "shopify",
+  store: "maya-makes.myshopify.com",
+  synced: "2m ago",
+  productCount: 24,
+};
+
+const PRODUCTS = [
+  { id: "pr1", name: "Speckled mug — sage", price: "₹1,290", emoji: "\u2615", tone: "lime",  stock: "In stock", qty: 42, link: "maya-makes.com/speckled-mug",
+    blurb: "Hand-thrown 350ml stoneware mug with a soft speckled sage glaze. Microwave & dishwasher safe. Best for everyday coffee lovers and easy first gifts." },
+  { id: "pr2", name: "Launch Kit (starter)", price: "₹3,499", emoji: "\uD83D\uDCE6", tone: "blue",  stock: "In stock", qty: 18, link: "maya-makes.com/launch-kit",
+    blurb: "Everything a new maker needs to open shop — templates, packaging and a quick-start guide. Best for indie creators launching their first product." },
+  { id: "pr3", name: "Ripple bud vase",       price: "₹1,850", emoji: "\uD83C\uDF3F", tone: "pink",  stock: "Low stock", qty: 5, link: "maya-makes.com/ripple-vase",
+    blurb: "Small-batch ceramic bud vase with a rippled matte finish. A giftable statement piece — best for styling shelves and thoughtful housewarmings." },
+  { id: "pr4", name: "Matte dinner plate set", price: "₹4,200", emoji: "\uD83C\uDF7D\uFE0F", tone: "lime", stock: "In stock", qty: 27, link: "maya-makes.com/plate-set",
+    blurb: "Set of four handmade matte dinner plates, chip-resistant and stackable. Best for couples and small households upgrading their table." },
+  { id: "pr5", name: "Pour-over dripper",     price: "₹2,150", emoji: "\u2615", tone: "blue",  stock: "In stock", qty: 33, link: "maya-makes.com/pour-over",
+    blurb: "Ceramic pour-over dripper that fits most mugs and carafes. Brews a clean, bright cup — best for home baristas and slow-morning rituals." },
+  { id: "pr6", name: "Trinket dish — trio",   price: "₹990",   emoji: "\uD83E\uDE9E", tone: "pink",  stock: "Sold out", qty: 0, link: "maya-makes.com/trinket-trio",
+    blurb: "Trio of tiny hand-pinched dishes for rings, spices or clips. An easy add-on gift — best for stocking fillers and cart top-ups." },
+  { id: "pr7", name: "Glaze sample box",      price: "₹650",   emoji: "\uD83C\uDFA8", tone: "lime",  stock: "In stock", qty: 61, link: "maya-makes.com/glaze-box",
+    blurb: "Swatch box of six studio glazes so buyers can preview colours before ordering. Best for undecided shoppers and repeat custom-order clients." },
+  { id: "pr8", name: "Gift card",             price: "₹500+",  emoji: "\uD83C\uDF81", tone: "blue",  stock: "Always",   qty: null, link: "maya-makes.com/gift-card",
+    blurb: "Digital gift card in any amount, delivered instantly by email. Best for last-minute gifting and followers who can't decide." },
+];
+
+Object.assign(window, { AUTOMATIONS, TRIGGER_TYPES, CONVERSATIONS, THREAD, CHART, CONTACTS, CONTACT_LISTS, AGENT_CAPS, AGENTS, AGENT_TEMPLATES, TONE_OPTIONS, BRAND, SHOP, PRODUCTS, LINK_TYPES });
+
+/* ---- Instagram content (shared by the flow builder + AI builder) -------- */
+const IG_POSTS = [
+  { id: "p1", kind: "Reel", cap: "5 tips for faster launches", emoji: "\uD83D\uDE80", likes: "12.4k" },
+  { id: "p2", kind: "Post", cap: "New drop is live",           emoji: "\uD83D\uDECD\uFE0F", likes: "8.1k" },
+  { id: "p3", kind: "Reel", cap: "Behind the scenes",          emoji: "\uD83C\uDFAC", likes: "5.7k" },
+  { id: "p4", kind: "Post", cap: "Q&A with you",               emoji: "\uD83D\uDCAC", likes: "3.2k" },
+  { id: "p5", kind: "Post", cap: "Studio tour",                emoji: "\uD83C\uDFE0", likes: "2.1k" },
+  { id: "p6", kind: "Reel", cap: "Packing orders",             emoji: "\uD83D\uDCE6", likes: "9.4k" },
+  { id: "p7", kind: "Post", cap: "Customer love",              emoji: "\uD83D\uDC9D", likes: "1.8k" },
+  { id: "p8", kind: "Reel", cap: "Restock alert",              emoji: "\uD83D\uDD14", likes: "4.6k" },
+];
+
+Object.assign(window, { IG_POSTS });

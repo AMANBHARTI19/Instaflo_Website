@@ -36,7 +36,66 @@ function HomeBanner({ plan, onUpgrade }) {
 
 function PendingPipeline_REMOVED() { return null; }
 
-function HomeScreen({ autos, toggleAuto, openBuilder, onNew, plan, onUpgrade }) {
+function HomeAIBar({ onAI }) {
+  const { useState } = React;
+  const [val, setVal] = useState("");
+  const examples = [
+    "DM my link when someone comments LINK",
+    "Collect emails for my launch waitlist",
+    "Auto-reply to story replies",
+  ];
+  const go = () => onAI((val || "").trim());
+  return (
+    <div className="home-aibar">
+      <span className="hab-spark"><Icon name="sparkle" weight="fill" /></span>
+      <div className="hab-main">
+        <div className="hab-inputrow">
+          <input
+            value={val}
+            onChange={e => setVal(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && val.trim() && go()}
+            placeholder="Describe an automation — e.g. “when someone comments PRICE, DM them my shop link”"
+          />
+          <button className="btn btn-primary" onClick={go} disabled={!val.trim()}>
+            <Icon name="sparkle" weight="fill" /> Build it
+          </button>
+        </div>
+        <div className="hab-examples">
+          <span className="sys">Try</span>
+          {examples.map((ex, i) => (
+            <button key={i} className="hab-ex" onClick={() => onAI(ex)}>{ex}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HomeComposer({ onCreateAgent }) {
+  const { useState } = React;
+  const [open, setOpen] = useState(() => {
+    try { return localStorage.getItem("dmflo-home-composer") !== "collapsed"; } catch (e) { return true; }
+  });
+  const setOpenPersist = (v) => {
+    setOpen(v);
+    try { localStorage.setItem("dmflo-home-composer", v ? "open" : "collapsed"); } catch (e) {}
+  };
+  if (!open) {
+    return (
+      <button className="home-composer-bar" onClick={() => setOpenPersist(true)}>
+        <span className="acm-spark"><Icon name="sparkle" weight="fill" /></span>
+        <span className="hcb-text">
+          <span className="hcb-t">Create new automation</span>
+          <span className="hcb-s">Describe it in plain English and we’ll build it</span>
+        </span>
+        <span className="hcb-open"><Icon name="plus" weight="bold" /> New</span>
+      </button>
+    );
+  }
+  return <AgentComposer onCreate={onCreateAgent} title="Create new automation" cta="Create automation" onCollapse={() => setOpenPersist(false)} desc="Describe what you want to automate — we’ll build the flow and set up an agent to run it." placeholder="e.g. Reply to every comment in my brand voice using my website and brand guide, and DM interested people my shop link…" />;
+}
+
+function HomeScreen({ autos, toggleAuto, openBuilder, onNew, onAI, onCreateAgent, plan, onUpgrade }) {
   const mounted = useMounted();
   const max = Math.max(...CHART.map(c => c.v));
   const live = autos.filter(a => a.status === "live");
@@ -56,7 +115,7 @@ function HomeScreen({ autos, toggleAuto, openBuilder, onNew, plan, onUpgrade }) 
   ];
 
   return (
-    <div className="content">
+    <div className="content home">
       <HomeBanner plan={plan} onUpgrade={onUpgrade} />
 
       <div className="greet">

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DMflo — New Automation modal (balanced variation)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="calm.css">
+<style>
+  html,body{height:100%}
+  body{margin:0;font-family:var(--font-sans);background:
+    radial-gradient(1100px 620px at 78% -10%, oklch(0.93 0.045 300 / .5), transparent 60%),
+    radial-gradient(900px 560px at 10% 110%, oklch(0.95 0.06 126 / .4), transparent 55%),
+    var(--paper);
+    display:flex;align-items:center;justify-content:center;padding:32px}
+  a{color:var(--accent-press);text-decoration:none}
+  a:hover{color:var(--accent-hover)}
+
+  /* ---- modal shell ---- */
+  .v2{width:min(920px,100%);background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-xl);box-shadow:var(--shadow-lg);overflow:hidden;
+    animation:v2in .22s cubic-bezier(.2,.9,.3,1.1) both}
+  @keyframes v2in{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
+  .v2-head{display:flex;align-items:flex-start;gap:14px;padding:26px 28px 18px}
+  .v2-head .mh{flex:1;min-width:0}
+  .v2-head h2{font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:-.01em;color:var(--ink);margin:0 0 4px}
+  .v2-head .sub{font-size:14px;color:var(--ink-2);line-height:1.5}
+  .v2-x{width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;
+    border-radius:var(--r-pill);border:1px solid var(--line);background:var(--surface);
+    color:var(--ink-2);cursor:pointer;font-size:16px;transition:background .12s,color .12s}
+  .v2-x:hover{background:var(--sunken);color:var(--ink)}
+
+  /* ---- two equal lanes ---- */
+  .v2-lanes{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:6px 20px 22px}
+  .v2-lane{padding:14px 12px;display:flex;flex-direction:column;gap:12px;position:relative}
+  .v2-lane + .v2-lane::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:1px;background:var(--line)}
+
+  .lane-head{display:flex;align-items:center;gap:11px;padding:0 6px 2px}
+  .lane-ico{width:40px;height:40px;flex:none;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:20px}
+  .lane-flow .lane-ico{background:var(--accent-soft);color:var(--accent-press)}
+  .lane-ai   .lane-ico{background:oklch(0.93 0.045 300 / .6);color:oklch(0.48 0.15 300)}
+  .lane-head h3{font-family:var(--font-display);font-weight:700;font-size:15.5px;color:var(--ink);margin:0;line-height:1.15}
+  .lane-head p{font-size:12px;color:var(--ink-3);margin:2px 0 0;line-height:1.35}
+  .lane-tag{margin-left:auto;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-3);border:1px solid var(--line);border-radius:var(--r-pill);padding:3px 9px}
+
+  /* ---- option cards (identical both lanes) ---- */
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:13px 14px;cursor:pointer;transition:border-color .14s,box-shadow .14s,transform .14s,background .14s}
+  .opt:hover{border-color:var(--ink-4);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+  .opt:active{transform:none;box-shadow:var(--shadow-xs)}
+  .opt-ico{width:42px;height:42px;flex:none;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:var(--sunken);border:1px solid var(--line);color:var(--ink-2)}
+  .lane-flow .opt:hover .opt-ico{background:var(--accent-soft);border-color:transparent;color:var(--accent-press)}
+  .lane-ai .opt:hover .opt-ico{background:oklch(0.93 0.045 300 / .5);border-color:transparent;color:oklch(0.48 0.15 300)}
+  .opt-body{min-width:0;flex:1}
+  .opt-tr{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+  .opt-t{font-weight:650;font-size:14.5px;color:var(--ink);letter-spacing:-.005em}
+  .opt-s{font-size:12.5px;color:var(--ink-2);line-height:1.4}
+  .opt-arrow{flex:none;color:var(--ink-4);font-size:15px;transition:color .14s,transform .14s}
+  .opt:hover .opt-arrow{color:var(--ink-2);transform:translateX(2px)}
+  .ai-badge{display:inline-flex;align-items:center;gap:3px;font-family:var(--font-mono);font-size:9px;font-weight:700;
+    letter-spacing:.05em;color:oklch(0.48 0.15 300);background:oklch(0.93 0.045 300 / .6);border-radius:var(--r-pill);padding:2px 7px}
+  .opt.create{border-style:dashed;background:var(--paper)}
+  .opt.create .opt-ico{background:transparent}
+  .opt.is-soon{cursor:default;opacity:.7}
+  .opt.is-soon:hover{border-color:var(--line);box-shadow:none;transform:none}
+  .opt.is-soon:hover .opt-ico{background:var(--sunken);border-color:var(--line);color:var(--ink-2)}
+  .opt.is-soon .opt-arrow{display:none}
+  .soon-badge{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:9px;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);background:var(--sunken);
+    border:1px solid var(--line);border-radius:var(--r-pill);padding:2px 7px}
+
+  .v2-foot{display:flex;align-items:center;gap:8px;justify-content:center;
+    padding:14px 28px 22px;border-top:1px solid var(--line-2);color:var(--ink-3);font-size:12.5px}
+  .v2-foot i{color:var(--ink-4)}
+
+  @media(max-width:720px){
+    .v2-lanes{grid-template-columns:1fr}
+    .v2-lane + .v2-lane::before{left:16px;right:16px;top:0;bottom:auto;width:auto;height:1px}
+  }
+</style>
+</head>
+<body>
+<div class="v2" role="dialog" aria-modal="true" aria-label="Start a new automation">
+  <div class="v2-head">
+    <div class="mh">
+      <h2>Start a new automation</h2>
+      <div class="sub">Two ways to automate. Build the rules yourself, or hand it to an AI agent.</div>
+    </div>
+    <button class="v2-x" aria-label="Close"><i class="ph-bold ph-x"></i></button>
+  </div>
+
+  <div class="v2-lanes">
+    <!-- LANE 1 — Rule-based flows -->
+    <div class="v2-lane lane-flow">
+      <div class="lane-head">
+        <span class="lane-ico"><i class="ph-fill ph-flow-arrow"></i></span>
+        <div>
+          <h3>Build a flow</h3>
+          <p>You set the trigger and the reply</p>
+        </div>
+        <span class="lane-tag">Rules</span>
+      </div>
+
+      <button class="opt">
+        <span class="opt-ico"><i class="ph-fill ph-chat-circle-text"></i></span>
+        <span class="opt-body">
+          <span class="opt-tr"><span class="opt-t">Comment to DM</span></span>
+          <span class="opt-s">When someone comments a keyword</span>
+        </span>
+        <i class="ph-bold ph-arrow-right opt-arrow"></i>
+      </button>
+
+      <button class="opt">
+        <span class="opt-ico"><i class="ph-fill ph-heart"></i></span>
+        <span class="opt-body">
+          <span class="opt-tr"><span class="opt-t">Story Reply</span></span>
+          <span class="opt-s">When someone reacts or replies to a story</span>
+        </span>
+        <i class="ph-bold ph-arrow-right opt-arrow"></i>
+      </button>
+
+      <button class="opt is-soon" disabled>
+        <span class="opt-ico"><i class="ph-fill ph-paper-plane-tilt"></i></span>
+        <span class="opt-body">
+          <span class="opt-tr"><span class="opt-t">Auto reply to DMs</span><span class="soon-badge">Coming soon</span></span>
+          <span class="opt-s">When someone DMs a keyword</span>
+        </span>
+        <i class="ph-bold ph-arrow-right opt-arrow"></i>
+      </button>
+    </div>
+
+    <!-- LANE 2 — AI agents (equal prominence) -->
+    <div class="v2-lane lane-ai">
+      <div class="lane-head">
+        <span class="lane-ico"><i class="ph-fill ph-sparkle"></i></span>
+        <div>
+          <h3>Deploy an agent</h3>
+          <p>AI handles it end to end</p>
+        </div>
+        <span class="lane-tag">AI</span>
+      </div>
+
+      <button class="opt">
+        <span class="opt-ico"><i class="ph-fill ph-shield-check"></i></span>
+        <span class="opt-body">
+          <span class="opt-tr"><span class="opt-t">Comment Moderator</span><span class="ai-badge"><i class="ph-fill ph-sparkle"></i> AI</span></span>
+          <span class="opt-s">Engages real comments, hides spam</span>
+        </span>
+        <i class="ph-bold ph-arrow-right opt-arrow"></i>
+      </button>
+
+      <button class="opt">
+        <span class="opt-ico"><i class="ph-fill ph-headset"></i></span>
+        <span class="opt-body">
+          <span class="opt-tr"><span class="opt-t">DM Concierge</span><span class="ai-badge"><i class="ph-fill ph-sparkle"></i> AI</span></span>
+          <span class="opt-s">Replies to DMs and answers FAQs from your docs</span>
+        </span>
+        <i class="ph-bold ph-arrow-right opt-arrow"></i>
+      </button>
+
+      <button class="opt create">
+        <span class="opt-ico"><i class="ph-bold ph-plus"></i></span>
+        <span class="opt-body">
+          <span class="opt-tr"><span class="opt-t">Create your own agent</span></span>
+          <span class="opt-s">Start from a blank prompt and shape it yourself</span>
+        </span>
+        <i class="ph-bold ph-arrow-right opt-arrow"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="v2-foot"><i class="ph-fill ph-lightbulb"></i> Not sure? Flows are best for simple keyword rules. Agents handle open-ended conversations.</div>
+</div>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="oklch(0.982 0.004 95)"/>
+    <rect x="14" y="30" width="34" height="40" rx="7" fill="oklch(0.95 0.06 126)"/>
+    <rect x="52" y="30" width="34" height="40" rx="7" fill="oklch(0.93 0.045 300 / .6)"/>
+    <circle cx="24" cy="42" r="4.5" fill="oklch(0.78 0.16 126)"/>
+    <circle cx="62" cy="42" r="4.5" fill="oklch(0.48 0.15 300)"/>
+    <rect x="18" y="54" width="26" height="4" rx="2" fill="oklch(0.55 0.14 126 / .6)"/>
+    <rect x="56" y="54" width="26" height="4" rx="2" fill="oklch(0.48 0.15 300 / .5)"/>
+  </svg>
+</template>
+</body>
+</html>

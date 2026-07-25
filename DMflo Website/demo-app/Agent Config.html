@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DMflo — Agent Config (latest)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="calm.css">
+<style>
+  /* Standalone shell: only the agent config screen, no app chrome */
+  body { background: var(--paper); }
+  .agc-switch {
+    position: fixed; z-index: 200; bottom: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; padding: 5px; border-radius: var(--r-pill);
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1, 0 4px 16px rgba(0,0,0,.08));
+  }
+  .agc-switch button {
+    font: inherit; font-size: 13px; font-weight: 600; color: var(--ink-2);
+    padding: 7px 14px; border-radius: var(--r-pill); border: 0; background: transparent; cursor: pointer;
+  }
+  .agc-switch button.on { background: var(--accent-soft); color: var(--accent-press); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="data.jsx"></script>
+<script type="text/babel" src="AgentTest.jsx"></script>
+<script type="text/babel" src="AgentBuilder.jsx"></script>
+
+<script type="text/babel">
+// Standalone host: renders the latest Agent config screen (AgentBuilder.jsx).
+// Three entry states, exactly as reached from New automation → agent options.
+function AgentConfigHost() {
+  const { useState } = React;
+  const [which, setWhich] = useState("mod"); // mod | dm | new
+  const builtinMod = AGENTS.find(a => a.default && a.name === "Comment Moderator");
+  const builtinDm  = AGENTS.find(a => a.default && a.name === "DM Concierge");
+  const agent = which === "mod" ? builtinMod : which === "dm" ? builtinDm : null;
+  const noop = () => {};
+  return (
+    <>
+      <div className="agc-switch">
+        <button className={which === "mod" ? "on" : ""} onClick={() => setWhich("mod")}>Comment Moderator</button>
+        <button className={which === "dm" ? "on" : ""} onClick={() => setWhich("dm")}>DM Concierge</button>
+        <button className={which === "new" ? "on" : ""} onClick={() => setWhich("new")}>New Agent</button>
+      </div>
+      <AgentBuilder key={which} agent={agent} onSave={noop} onCancel={noop} />
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<AgentConfigHost />);
+</script>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="oklch(0.982 0.004 95)"/>
+    <rect x="18" y="24" width="14" height="14" rx="4" fill="oklch(0.86 0.16 126)"/>
+    <rect x="38" y="28" width="34" height="5" rx="2.5" fill="oklch(0.30 0.02 260)"/>
+    <rect x="18" y="50" width="64" height="4" rx="2" fill="oklch(0.78 0.004 80)"/>
+    <rect x="18" y="60" width="50" height="4" rx="2" fill="oklch(0.78 0.004 80)"/>
+    <rect x="18" y="74" width="24" height="10" rx="3" fill="oklch(0.86 0.16 126)"/>
+  </svg>
+</template>
+</body>
+</html>

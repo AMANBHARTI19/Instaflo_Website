@@ -1,5 +1,5 @@
 // Instaflo Calm — Flow builder (canvas + inspector)
-function BuilderScreen({ auto, plan, onPublish }) {
+function BuilderScreen({ auto, plan, onPublish, seed }) {
   const { useState, useRef, useEffect } = React;
   const POSTS = [
     { id: "p1", kind: "Reel", cap: "5 tips for faster launches", emoji: "\uD83D\uDE80", likes: "12.4k" },
@@ -8,8 +8,8 @@ function BuilderScreen({ auto, plan, onPublish }) {
     { id: "p4", kind: "Post", cap: "Q&A with you",               emoji: "\uD83D\uDCAC", likes: "3.2k" },
   ];
   const [sel, setSel] = useState("post");
-  const [postSrc, setPostSrc] = useState("specific");
-  const [post, setPost] = useState("p1");
+  const [postSrc, setPostSrc] = useState(seed?.postSrc || "specific");
+  const [post, setPost] = useState(seed?.postId || "p1");
   const [showAll, setShowAll] = useState(false);
   const [showUpgrade, setShowUpgrade] = useState(null);
   const isPro = plan && plan.isPro;
@@ -20,18 +20,18 @@ function BuilderScreen({ auto, plan, onPublish }) {
     { id: "p8", kind: "Reel", cap: "Restock alert",  emoji: "\uD83D\uDD14", likes: "4.6k" },
   ];
   const ALL_POSTS = POSTS.concat(EXTRA);
-  const [msg, setMsg] = useState("hey! 👋 here's the link you asked for, plus a lil welcome gift inside 💚");
-  const [keywords, setKeywords] = useState(["PRICE", "COST", "LINK"]);
+  const [msg, setMsg] = useState(seed?.msg ? (seed.msg + (seed.links?.[0]?.url || "")).trim() : "hey! 👋 here's the link you asked for, plus a lil welcome gift inside 💚");
+  const [keywords, setKeywords] = useState(seed?.keywords?.length ? seed.keywords : ["PRICE", "COST", "LINK"]);
   const [kwInput, setKwInput] = useState("");
-  const [anyComment, setAnyComment] = useState(false);
-  const [publicReply, setPublicReply] = useState(true);
-  const [replies, setReplies] = useState(["Sent you a DM! \uD83D\uDC8C", "Check your inbox \uD83D\uDC40", "Just slid into your DMs \uD83D\uDE80"]);
-  const [collectEmail, setCollectEmail] = useState(false);
-  const [requireFollow, setRequireFollow] = useState(false);
+  const [anyComment, setAnyComment] = useState(seed?.anyComment || false);
+  const [publicReply, setPublicReply] = useState(seed ? !!seed.publicReply : true);
+  const [replies, setReplies] = useState(seed?.replies?.length ? seed.replies : ["Sent you a DM! \uD83D\uDC8C", "Check your inbox \uD83D\uDC40", "Just slid into your DMs \uD83D\uDE80"]);
+  const [collectEmail, setCollectEmail] = useState(seed?.collectEmail || false);
+  const [requireFollow, setRequireFollow] = useState(seed?.requireFollow || false);
   const [followMsg, setFollowMsg] = useState("one tiny thing first, just hit follow and I'll send it right over 💛");
   const [followBtn, setFollowBtn] = useState("Following now");
   const [emailMsg, setEmailMsg] = useState("Thanks for your comment ❤️ Just one last thing, what's a good email for you? We'll send it to your inbox too 🚀");
-  const [links, setLinks] = useState([{ label: "Get the link", url: "https://shop.dmflo.co/maya" }]);
+  const [links, setLinks] = useState(seed?.links?.length ? seed.links : [{ label: "Get the link", url: "https://shop.dmflo.co/maya" }]);
   const chosen = ALL_POSTS.find(p => p.id === post) || ALL_POSTS[0];
 
   const addKw = e => {
@@ -47,8 +47,9 @@ function BuilderScreen({ auto, plan, onPublish }) {
       {/* canvas */}
       <div className="canvas-area">
         <div className="builder-flow">
-          <div className="sys" style={{ marginBottom: 18 }}>
+          <div className="sys" style={{ marginBottom: 18, display: "flex", alignItems: "center", gap: 8 }}>
             Flow · {auto ? auto.name : "Untitled automation"}
+            {seed && <span className="ai-made-tag"><Icon name="sparkle" weight="fill" /> Generated with AI — tweak anything</span>}
           </div>
 
           <div className={`bnode source${sel === "post" ? " sel" : ""}`} onClick={() => setSel("post")}>
