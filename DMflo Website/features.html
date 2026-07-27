@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Features: DMflo</title>
-<meta name="description" content="Meet the team of AI agents that runs your Instagram: engagement in your brand voice, intent-driven sales, comment moderation, lead capture and Hinglish fluency.">
+<meta name="description" content="Meet the team of AI agents that runs your Instagram: engagement in your brand voice, intent-driven sales, comment moderation, lead capture, and replies in any language or mixed language your audience writes in.">
 <link rel="icon" href="assets/mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,21 +148,49 @@
   <section class="frow" id="language" data-screen-label="Language edge">
     <div>
       <span class="num">The edge · Language</span>
-      <h2>Fluent in how your audience actually types</h2>
-      <p>Your audience doesn&rsquo;t write textbook English. They write &ldquo;price kitna hai&rdquo;, &ldquo;rate batao&rdquo;, &ldquo;DM me na&rdquo;. Every agent on the team understands the real mix of Hindi and English, and replies in kind. Best-in-class Hinglish today, more languages coming.</p>
+      <h2>Any language. Any script. Even the mixed ones.</h2>
+      <p>Whatever language a comment or DM comes in, the agents answer in that same one. Spanish in, Spanish out. Devanagari in, Devanagari out. And when your audience blends two languages into one sentence, the way real people actually type, DMflo reads the hybrid natively.</p>
       <ul>
-        <li><i class="ph-fill ph-check"></i> Roman-Hindi, Devanagari, English and the mix</li>
-        <li><i class="ph-fill ph-check"></i> Handles slang, typos and short forms</li>
-        <li><i class="ph-fill ph-check"></i> Replies in the same vibe your audience used</li>
+        <li><i class="ph-fill ph-check"></i> Detects language <em>and</em> script, then mirrors both</li>
+        <li><i class="ph-fill ph-check"></i> Native on hybrids: Hinglish, Spanglish, Konglish, Tanglish, Taglish</li>
+        <li><i class="ph-fill ph-check"></i> Handles slang, typos, short forms and emoji</li>
+        <li><i class="ph-fill ph-check"></i> No language rules or translation step to configure</li>
       </ul>
+      <div class="script-row" style="margin-top:20px;">
+        <span class="script-pill">English</span>
+        <span class="script-pill">हिन्दी</span>
+        <span class="script-pill">Español</span>
+        <span class="script-pill">한국어</span>
+        <span class="script-pill">العربية</span>
+        <span class="script-pill">தமிழ்</span>
+        <span class="script-pill">Português</span>
+        <span class="script-pill">+ more</span>
+      </div>
     </div>
     <div class="frow-media" style="background:var(--paper); padding:24px;">
-      <div style="width:100%; max-width:330px; display:flex; flex-direction:column; gap:10px;">
-        <div class="demo-row them" style="opacity:1; transform:none;"><div class="b-ava">A</div><div class="bubble">bhai ye <b>price kitna</b> ka hai? 😍</div></div>
-        <div class="tag-detect" style="opacity:1; transform:none;">Sales agent · intent <span class="k">BUYING</span> <i class="ph-fill ph-circle"></i> Hinglish</div>
-        <div class="demo-row us" style="opacity:1; transform:none;"><div class="b-ava">if</div><div class="bubble">Heyy! 💚 ₹1,299 ka hai, COD available. Link bheju? 👇</div></div>
-        <div class="demo-row them" style="opacity:1; transform:none;"><div class="b-ava">A</div><div class="bubble"><b>how to order</b>?</div></div>
-        <div class="demo-row us" style="opacity:1; transform:none;"><div class="b-ava">if</div><div class="bubble">Tap the link &amp; pick your size, 2 mins max!</div></div>
+      <div class="hybrid" style="max-width:360px;">
+        <div class="hybrid-tabs">
+          <span class="hybrid-tab on">Hinglish</span>
+          <span class="hybrid-tab">Spanglish</span>
+          <span class="hybrid-tab">Konglish</span>
+          <span class="hybrid-tab">Tanglish</span>
+        </div>
+        <div class="hybrid-parse">
+          <div class="hybrid-line">
+            <span class="tok a"><b>bhai</b><span>hindi</span></span>
+            <span class="tok a"><b>ye</b><span>hindi</span></span>
+            <span class="tok b"><b>price</b><span>english</span></span>
+            <span class="tok a"><b>kitna</b><span>hindi</span></span>
+            <span class="tok b"><b>hai</b><span>hindi</span></span>
+            <span class="tok b"><b>bro</b><span>english</span></span>
+          </div>
+          <div class="hybrid-out">
+            <i class="ph-fill ph-brain"></i>
+            <span>One sentence, two languages, Roman script. Understood as <b>&ldquo;what&rsquo;s the price?&rdquo;</b> &mdash; intent: <b>buying</b>.</span>
+          </div>
+        </div>
+        <div class="demo-row us" style="opacity:1; transform:none;"><div class="b-ava">if</div><div class="bubble">Heyy! 💚 ₹1,299 ka hai bhai, COD bhi hai. Link bheju? 👇</div></div>
+        <div class="tag-detect" style="opacity:1; transform:none;">Replied in <span class="k">Hinglish</span> <i class="ph-fill ph-circle"></i> same mix they used</div>
       </div>
     </div>
   </section>
