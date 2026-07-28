@@ -413,6 +413,39 @@ html[data-hero="c"] .heroC { display: grid; }
    PRICING
    ======================================================================= */
 .bill-note { display: inline-flex; align-items: center; gap: 9px; background: var(--violet-soft); color: var(--violet); border: var(--border-w) solid var(--violet); padding: 9px 16px; border-radius: var(--radius-pill); font-weight: 700; font-size: 14px; }
+
+/* ---- monthly / yearly billing toggle ---- */
+.bill-toggle-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 30px; }
+.bill-toggle {
+  display: inline-flex; align-items: center; gap: 4px; position: relative;
+  background: var(--sunken); border: var(--border-w) solid var(--ink);
+  border-radius: var(--radius-pill); padding: 4px; box-shadow: var(--shadow-hard);
+}
+.bill-toggle button {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  color: var(--ink-2); background: transparent; border: 0; cursor: pointer;
+  padding: 9px 20px; border-radius: var(--radius-pill); transition: color .18s ease, background .18s ease;
+}
+.bill-toggle button:hover { color: var(--ink); }
+.bill-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--lime); }
+.bill-toggle button:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+.save-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-weight: 800; font-size: 13px;
+  background: var(--lime); color: var(--on-lime);
+  border: var(--border-w) solid var(--ink); border-radius: var(--radius-pill);
+  padding: 5px 12px; transform: rotate(-2deg);
+}
+.save-tag i { font-size: 14px; }
+/* struck-through monthly price shown on the yearly view */
+.tier .was {
+  font-family: var(--font-display); font-weight: 700; font-size: 20px;
+  color: var(--ink-3); text-decoration: line-through; text-decoration-thickness: 2px;
+  margin-right: 2px; line-height: 1;
+}
+.tier.feat .was { color: var(--on-dark-dim); }
+.tier .bill-sub { font: var(--text-mono); font-size: 11.5px; color: var(--ink-3); margin-top: 6px; }
+.tier.feat .bill-sub { color: var(--on-dark-dim); }
 .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
 .tier {
   background: var(--surface); border: var(--border-w) solid var(--ink);
@@ -434,6 +467,18 @@ html[data-hero="c"] .heroC { display: grid; }
 .tier li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--ink-2); }
 .tier li i { color: var(--success); font-size: 18px; margin-top: 1px; flex: none; }
 .tier .btn { margin-top: auto; }
+
+/* ---- keep the three plan cards on a shared horizontal rhythm ----
+   Each of these rows varies in height per tier (longer audience label,
+   longer description, empty bill-sub on monthly), which would otherwise
+   push each card's feature list to a different starting height. */
+.tier .reach-l { min-height: 2.4em; display: flex; align-items: flex-start; }
+.tier .price-row { min-height: 52px; align-items: baseline; }
+.tier .bill-sub { min-height: 1.4em; }
+.tier .plan-desc { min-height: 4.2em; margin-top: 10px; font-size: 15px; color: var(--ink-2); }
+.tier.feat .plan-desc { color: var(--on-dark-dim); }
+/* the feature list starts at the same y on every card, and the CTA pins to the bottom */
+.tier ul { flex: 1; }
 
 /* highlighted "key" feature row (DM limits etc.) */
 .tier li.key {

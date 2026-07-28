@@ -14,7 +14,10 @@
       "Bash(git stash *)",
       "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch .env \"Instaflo Website/.env\"' --prune-empty --tag-name-filter cat -- --all)",
       "Bash(git push *)",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(mkdir -p .claude && cat .claude/launch.json 2>/dev/null || echo \"MISSING\")",
+      "Bash(lsof -i :3000 -sTCP:LISTEN -P)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)"
     ],
     "additionalDirectories": [
       "/Users/aman/Documents/Instaflo Website"

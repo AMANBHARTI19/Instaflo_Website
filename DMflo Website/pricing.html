@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing: DMflo</title>
-<meta name="description" content="Three flat plans: Free to start, Pro at ₹499/month, Agentic at ₹1,500/month. No per-contact or per-message billing. However much you grow, the price doesn't move.">
+<meta name="description" content="Three flat plans: Free to start, Pro from ₹499/month, Agentic from ₹1,499/month. Save 20% with yearly billing. No per-contact or per-message billing. However much you grow, the price doesn't move.">
 <link rel="icon" href="assets/mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +50,15 @@
 
 <!-- TIERS -->
 <section class="sec wrap" style="padding-top:36px;" data-screen-label="Plans">
+
+  <div class="bill-toggle-wrap">
+    <div class="bill-toggle" role="group" aria-label="Billing period">
+      <button type="button" data-bill="monthly" aria-pressed="false">Monthly</button>
+      <button type="button" data-bill="yearly" aria-pressed="true">Yearly</button>
+    </div>
+    <span class="save-tag"><i class="ph-fill ph-tag"></i>Save 20% with yearly billing</span>
+  </div>
+
   <div class="tier-grid">
 
     <article class="tier">
@@ -57,7 +66,8 @@
       <div class="reach-l">Get your first results</div>
       <div class="price-row"><span class="price">₹0</span><span class="per">to start</span></div>
       <div class="usd">free everywhere</div>
-      <p style="color:var(--ink-2); font-size:15px; margin-top:10px;">Start automating your DMs and comments, and see the agents work before you pay a rupee.</p>
+      <div class="bill-sub">free on monthly &amp; yearly</div>
+      <p class="plan-desc">Start automating your DMs and comments, and see the agents work before you pay a rupee.</p>
       <ul>
         <li><i class="ph-fill ph-check-circle"></i>Up to <strong>1,000 automated replies</strong> / month</li>
         <li><i class="ph-fill ph-check-circle"></i>1 Instagram account</li>
@@ -74,9 +84,15 @@
     <article class="tier">
       <div class="name">Pro</div>
       <div class="reach-l">Creators &amp; small brands</div>
-      <div class="price-row"><span class="price">₹499</span><span class="per">/ month, flat</span></div>
-      <div class="usd">$15/mo in US &amp; Canada</div>
-      <p style="color:var(--ink-2); font-size:15px; margin-top:10px;">Unlimited automation plus power features to boost engagement and growth.</p>
+      <div class="price-row"
+           data-price-m="₹599" data-price-y="₹499"
+           data-usd-m="$15/mo in US &amp; Canada" data-usd-y="$12/mo in US &amp; Canada"
+           data-sub-y="₹5,988 billed yearly · save ₹1,200">
+        <span class="was">₹599</span><span class="price">₹499</span><span class="per">/ month, flat</span>
+      </div>
+      <div class="usd">$12/mo in US &amp; Canada</div>
+      <div class="bill-sub">₹5,988 billed yearly · save ₹1,200</div>
+      <p class="plan-desc">Unlimited automation plus power features to boost engagement and growth.</p>
       <ul>
         <li><i class="ph-fill ph-check-circle"></i><strong>Unlimited</strong> comment &amp; DM automation</li>
         <li><i class="ph-fill ph-check-circle"></i>Everything in Free</li>
@@ -93,12 +109,18 @@
       <span class="flag">Full autopilot</span>
       <div class="name">Agentic</div>
       <div class="reach-l">Bigger creators, brands &amp; agencies</div>
-      <div class="price-row"><span class="price">₹1,500</span><span class="per">/ month, flat</span></div>
+      <div class="price-row"
+           data-price-m="₹1,999" data-price-y="₹1,499"
+           data-usd-m="$35/mo in US &amp; Canada" data-usd-y="$29/mo in US &amp; Canada"
+           data-sub-y="₹17,988 billed yearly · save ₹6,000">
+        <span class="was">₹1,999</span><span class="price">₹1,499</span><span class="per">/ month, flat</span>
+      </div>
       <div class="usd">$29/mo in US &amp; Canada</div>
-      <p style="color:var(--on-dark-dim); font-size:15px; margin-top:10px;">The full agentic platform for selling more to a highly engaged audience.</p>
+      <div class="bill-sub">₹17,988 billed yearly · save ₹6,000</div>
+      <p class="plan-desc">The full agentic platform for engaging, supporting and selling more to a highly engaged audience.</p>
       <ul>
         <li><i class="ph-fill ph-check-circle"></i>Everything in Pro</li>
-        <li><i class="ph-fill ph-check-circle"></i>Up to 5 Instagram accounts</li>
+        <li><i class="ph-fill ph-check-circle"></i>Up to 2 Instagram accounts</li>
         <li><i class="ph-fill ph-check-circle"></i>Agents reply in your voice</li>
         <li><i class="ph-fill ph-check-circle"></i>CRM &amp; marketing-automation integrations</li>
         <li><i class="ph-fill ph-check-circle"></i>Agents that understand your goals and work toward them autonomously</li>
@@ -109,7 +131,7 @@
     </article>
 
   </div>
-  <p class="center cta-note mt-m">Every plan is flat. However much you send, the price doesn&rsquo;t move. Prices in INR; USD shown for US &amp; Canada. Cancel anytime.</p>
+  <p class="center cta-note mt-m">Every plan is flat. However much you send, the price doesn&rsquo;t move. Yearly billing saves you 20% and is charged once a year. Prices in INR; USD shown for US &amp; Canada. Cancel anytime.</p>
 </section>
 
 <!-- AGENTS ON EVERY PLAN -->
