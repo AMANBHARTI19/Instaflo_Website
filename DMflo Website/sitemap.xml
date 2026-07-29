@@ -66,9 +66,6 @@
     <priority>0.2</priority>
   </url>
 
-  <!-- Uncomment each as you publish it -->
-
-  <!--
   <url>
     <loc>https://trydmflo.com/manychat-alternative.html</loc>
     <lastmod>2026-07-29</lastmod>
@@ -92,6 +89,5 @@
     <lastmod>2026-07-29</lastmod>
     <priority>0.8</priority>
   </url>
-  -->
 
 </urlset>
