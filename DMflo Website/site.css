@@ -659,3 +659,36 @@ html[data-stickers="off"] .demo-sticker { display: none; }
   .cmp th, .cmp td { padding: 13px 12px; }
   .demo-sticker { display: none; }
 }
+
+/* =======================================================================
+   WHY DMFLO · COMPARISON (home)
+   ======================================================================= */
+.cmp2{border:var(--border-w-bold) solid var(--ink);border-radius:var(--radius-lg);background:var(--surface);box-shadow:var(--shadow-hard-lg);overflow:hidden;margin-top:34px}
+.cmp2-head{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px;align-items:center;padding:16px 24px;background:var(--feature)}
+.cmp2-head > *{font:var(--text-label);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--on-dark-dim)}
+.cmp2-head .us{display:inline-flex;align-items:center;gap:7px;background:var(--lime);color:var(--on-lime);padding:6px 12px;border-radius:var(--radius-pill);justify-self:start;font-weight:700}
+.cmp2-group{display:flex;align-items:center;gap:10px;padding:14px 24px 12px;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:var(--text-label);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--ink-3)}
+.cmp2-group b{color:var(--ink)}
+.cmp2-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px;padding:18px 24px;border-bottom:1px solid var(--line);transition:background .14s}
+.cmp2-row:hover{background:var(--lime-soft)}
+.cmp2-row:last-child{border-bottom:0}
+.cmp2-what b{display:block;font-size:16px;font-weight:700;color:var(--ink);letter-spacing:var(--track-tight)}
+.cmp2-what span{display:block;font-size:13.5px;line-height:1.5;color:var(--ink-3);margin-top:4px}
+.cmp2-us,.cmp2-them{display:flex;gap:9px;font-size:15px;line-height:1.45}
+.cmp2-us{color:var(--ink);font-weight:600}
+.cmp2-us em{font-style:italic;color:var(--ink-2)}
+.cmp2-them{color:var(--ink-3)}
+.cmp2-us i{color:var(--on-lime);background:var(--lime);border-radius:50%;font-size:11px;flex:none;align-self:flex-start;width:18px;height:18px;display:grid;place-items:center;margin-top:2px}
+.cmp2-them i{color:var(--ink-4);font-size:14px;flex:none;align-self:flex-start;width:18px;height:18px;display:grid;place-items:center;margin-top:2px}
+.cmp2-foot{display:flex;align-items:flex-start;gap:12px;margin-top:22px;padding:18px 22px;border:var(--border-w) dashed var(--ink);border-radius:var(--radius-md);background:var(--lime-soft);font-size:16px;line-height:1.55;color:var(--ink)}
+.cmp2-foot i{color:var(--on-lime);background:var(--lime);border-radius:50%;font-size:14px;flex:none;align-self:flex-start;width:24px;height:24px;display:grid;place-items:center;margin-top:1px}
+@media(max-width:820px){
+  .cmp2-head{display:none}
+  .cmp2-row{grid-template-columns:1fr;gap:12px;padding:18px 20px}
+  .cmp2-group{padding:12px 20px}
+  .cmp2-us,.cmp2-them{padding-left:0}
+  .cmp2-us::before,.cmp2-them::before{font:var(--text-label);font-size:9.5px;letter-spacing:var(--track-label);text-transform:uppercase;padding:4px 8px;border-radius:var(--radius-xs);flex:none;height:fit-content;margin-top:1px}
+  .cmp2-us::before{content:"DMflo";background:var(--lime);color:var(--on-lime)}
+  .cmp2-them::before{content:"Others";background:var(--sunken);color:var(--ink-3)}
+  .cmp2-us i,.cmp2-them i{display:none}
+}
