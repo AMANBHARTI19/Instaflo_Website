@@ -418,25 +418,44 @@ html[data-hero="c"] .heroC { display: grid; }
 .bill-toggle-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 30px; }
 .bill-toggle {
   display: inline-flex; align-items: center; gap: 4px; position: relative;
-  background: var(--sunken); border: var(--border-w) solid var(--ink);
-  border-radius: var(--radius-pill); padding: 4px; box-shadow: var(--shadow-hard);
+  background: var(--surface); border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill); padding: 5px; box-shadow: var(--shadow-hard);
 }
 .bill-toggle button {
-  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800; font-size: 19px;
   color: var(--ink-2); background: transparent; border: 0; cursor: pointer;
-  padding: 9px 20px; border-radius: var(--radius-pill); transition: color .18s ease, background .18s ease;
+  padding: 12px 26px; border-radius: var(--radius-pill);
+  transition: color .18s ease, background .18s ease;
 }
 .bill-toggle button:hover { color: var(--ink); }
-.bill-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--lime); }
+.bill-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .bill-toggle button:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
-.save-tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-display); font-weight: 800; font-size: 13px;
+
+/* "SAVE 20%" chip riding inside the active pill */
+.bill-toggle .save-chip {
+  font: var(--text-mono); font-weight: 700; font-size: 13px;
+  letter-spacing: 0.04em; text-transform: uppercase;
   background: var(--lime); color: var(--on-lime);
-  border: var(--border-w) solid var(--ink); border-radius: var(--radius-pill);
-  padding: 5px 12px; transform: rotate(-2deg);
+  border-radius: var(--radius-pill); padding: 5px 11px;
+  opacity: 0; transform: scale(.85);
+  width: 0; margin-right: -10px; overflow: hidden; white-space: nowrap;
+  transition: opacity .18s ease, transform .18s ease;
 }
-.save-tag i { font-size: 14px; }
+.bill-toggle button[aria-pressed="true"] .save-chip {
+  opacity: 1; transform: scale(1); width: auto; margin-right: 0;
+}
+/* caption under the toggle — swapped by site.js per billing mode */
+.bill-caption {
+  font: var(--text-mono); font-size: 14px; letter-spacing: 0.02em;
+  color: var(--ink-3); text-align: center;
+}
+/* the full-size pill overflows narrow phones — scale it down to fit */
+@media (max-width: 460px) {
+  .bill-toggle button { font-size: 16px; padding: 11px 16px; gap: 7px; }
+  .bill-toggle .save-chip { font-size: 11px; padding: 4px 8px; }
+  .bill-caption { font-size: 12.5px; }
+}
 /* struck-through monthly price shown on the yearly view */
 .tier .was {
   font-family: var(--font-display); font-weight: 700; font-size: 20px;

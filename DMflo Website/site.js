@@ -51,6 +51,13 @@
           b.setAttribute("aria-pressed", b.getAttribute("data-bill") === mode ? "true" : "false");
         });
 
+        var caption = document.querySelector("[data-bill-caption]");
+        if (caption) {
+          caption.textContent = yearly
+            ? "Billed once a year · save 20%"
+            : "Billed every month · cancel anytime";
+        }
+
         document.querySelectorAll(".tier .price-row[data-price-m]").forEach(function (row) {
           var tier = row.closest(".tier");
           var price = row.querySelector(".price");
