@@ -8,7 +8,7 @@
     { "src": "/api/waitlist", "dest": "/api/waitlist.js" },
     { "src": "/assets/(.*)", "dest": "/DMflo Website/assets/$1" },
     { "src": "/demo-app/(.*)", "dest": "/DMflo Website/demo-app/$1" },
-    { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx))", "dest": "/DMflo Website/$1" },
+    { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx|txt|xml))", "dest": "/DMflo Website/$1" },
     { "src": "/([a-z-]*)\\.html", "dest": "/DMflo Website/$1.html" },
     { "src": "/", "dest": "/DMflo Website/index.html" }
   ]
