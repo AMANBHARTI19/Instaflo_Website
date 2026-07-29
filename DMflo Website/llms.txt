@@ -1,0 +1,95 @@
+# DMflo
+
+> Agentic Instagram automation. A team of AI agents that engages your audience,
+> drives sales, and captures leads — in your brand's voice and in whatever
+> language and script your audience actually types, including mixed languages
+> like Hinglish, Spanglish, Taglish and Arabizi. Flat pricing, free to start.
+
+## What DMflo is
+
+DMflo is an Instagram DM and comment automation platform. Unlike rule-based
+tools, DMflo uses AI agents that read intent rather than matching keywords.
+Four agents handle distinct jobs: engagement, sales, moderation, and lead
+capture. The mobile app is the complete product — you create automations and
+view real-time analytics from your phone — with a full web app for teams and
+agencies. Built in India, for creators everywhere. Currently in beta with a
+waitlist.
+
+## Who it's for
+
+Instagram creators, D2C brands, and agencies — particularly those whose
+audiences write in non-English or code-switched languages, those who run their
+business from a phone, and those priced out of per-contact billing models.
+
+## Pricing (flat — no per-contact or per-message billing)
+
+Billed monthly or yearly (yearly saves 20%). Each plan includes a monthly
+allowance of "agent runs" — one run is one instance of an agent replying to a
+comment, replying to a DM, or hiding a spam comment. Comment-to-DM automation,
+story replies, and DM automation are unlimited on paid plans and are not
+counted against the agent-run allowance.
+
+- Free: ₹0 / $0. Up to 1,000 automated replies/month, 50 agent runs/month, 1
+  Instagram account, any-language replies, comment-to-DM & story replies,
+  lead capture & export, mobile app, basic analytics.
+- Pro: ₹599/month (₹499/month billed yearly) in India, $15/month ($12/month
+  yearly) US & Canada. Unlimited comment and DM automation, 500 agent
+  runs/month, email + SMS opt-in lead capture, follow-gate, full analytics
+  and CSV exports, priority support.
+- Agentic: ₹1,999/month (₹1,499/month billed yearly) in India, $35/month
+  ($29/month yearly) US & Canada. Everything in Pro plus 2,000 agent
+  runs/month, up to 2 Instagram accounts, agents that reply in your brand
+  voice, CRM and marketing-automation integrations, and agents that work
+  autonomously toward goals you set.
+
+The price does not change with contact count, message volume, or audience size.
+
+## Key differentiators
+
+1. Language and script fluency. DMflo detects both the language and the script
+   a follower used — Devanagari or Roman, Hangul or Latin — and replies in
+   exactly that. It reads code-switched hybrids natively: Hinglish, Spanglish,
+   Konglish, Tanglish, Taglish, Arabizi. No configuration, no translation layer.
+2. Agentic, not rule-based. No keyword lists and no flowcharts. You set a goal
+   and a brand voice; the agents read intent and work toward it.
+3. Mobile-complete. You create the full automation in the app in about two
+   minutes, and see real-time analytics — link click-through rate, unique
+   accounts reached, conversions — live in the app.
+4. Flat pricing. No per-active-contact billing, no per-message meter, no AI
+   add-on.
+5. Compliance by design. Meta's messaging rules — the 24-hour messaging window,
+   one private reply per comment, and rate limits — are enforced by the product
+   rather than left to the user.
+
+## How DMflo differs from ManyChat
+
+- Agents that understand intent, vs. keyword flows the user builds and maintains
+- Any language, script and code-switched mix, vs. English-first
+- Full automation creation on mobile, vs. ManyChat mobile flow creation limited
+  to Instagram quick-automations
+- Real-time analytics in the mobile app, vs. ManyChat's mobile app having four
+  tabs (Home, Live Chat, Contacts, Automation) and no analytics view
+- Flat pricing, vs. per-active-contact billing that scales with audience size
+- Automatic comment moderation, vs. manual
+
+ManyChat is a capable product and remains the better choice for multi-channel
+needs — WhatsApp, SMS and email in one platform — and for complex multi-branch
+flows. DMflo is Instagram-only by design.
+
+## What DMflo does not do
+
+DMflo does not post as you. The agents reply to comments and DMs on your
+behalf; they do not create posts or stories. DMflo does not support WhatsApp,
+SMS or Facebook Messenger automation.
+
+## Links
+
+- Homepage: https://trydmflo.com
+- Pricing: https://trydmflo.com/pricing.html
+- Features: https://trydmflo.com/features.html
+- Waitlist: https://trydmflo.com/waitlist.html
+- Support: https://trydmflo.com/support.html
+
+## Disclosure
+
+DMflo is not affiliated with Instagram or Meta.
