@@ -48,11 +48,14 @@
   "url": "https://trydmflo.com",
   "inLanguage": ["en", "hi", "es", "ko", "ar", "pt", "tl"],
   "offers": [
-    { "@type": "Offer", "name": "Free",    "price": "0",    "priceCurrency": "INR" },
-    { "@type": "Offer", "name": "Pro",     "price": "499",  "priceCurrency": "INR",
-      "description": "Flat monthly. No per-contact billing." },
-    { "@type": "Offer", "name": "Agentic", "price": "1499", "priceCurrency": "INR",
-      "description": "Flat monthly. No per-contact billing." }
+    { "@type": "Offer", "name": "Free",    "price": "0",    "priceCurrency": "INR",
+      "availability": "https://schema.org/PreOrder", "url": "https://trydmflo.com/pricing.html" },
+    { "@type": "Offer", "name": "Pro",     "price": "599",  "priceCurrency": "INR",
+      "description": "Flat monthly. No per-contact billing. ₹499/month billed yearly.",
+      "availability": "https://schema.org/PreOrder", "url": "https://trydmflo.com/pricing.html" },
+    { "@type": "Offer", "name": "Agentic", "price": "1999", "priceCurrency": "INR",
+      "description": "Flat monthly. No per-contact billing. ₹1,499/month billed yearly.",
+      "availability": "https://schema.org/PreOrder", "url": "https://trydmflo.com/pricing.html" }
   ],
   "featureList": [
     "Keyword-triggered automation flows",
@@ -75,6 +78,14 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    { "@type": "Question", "name": "What is DMflo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "DMflo is a team of AI agents that runs your Instagram: they engage your audience, read buying intent and sell, hide spam, and capture leads, all in your brand’s voice and in whatever language your audience types. You keep keyword flows for the replies you want word-for-word, and the agents handle everything those keywords miss." } },
+    { "@type": "Question", "name": "How much does DMflo cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Free to start, with 50 agent runs a month and no card needed. Pro is ₹599/month (₹499 billed yearly) and Agentic is ₹1,999/month (₹1,499 billed yearly). Every plan is flat: no per-contact or per-message billing, so your bill never moves as your audience grows." } },
+    { "@type": "Question", "name": "Does DMflo reply in Hindi and Hinglish?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, natively, and in the script the person used, Devanagari or Roman. The agents read Hinglish the way people actually type it (“price kitna hai”, “kaise order karu”) along with Tamil, Telugu, Bengali, Marathi and other Indian languages. Nothing to configure." } },
+    { "@type": "Question", "name": "How is DMflo different from ManyChat?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Two things: pricing and intent. DMflo is flat whatever your contact count, while ManyChat scales with your audience, so the gap widens as you grow. And instead of only firing keyword rules, DMflo’s agents understand what a message means and reply in your voice. See the full comparison." } },
     { "@type": "Question", "name": "Is this just keyword automation with a new coat of paint?",
       "acceptedAnswer": { "@type": "Answer", "text": "No. Keyword tools fire a canned reply when a word matches, and dump the thinking on you. DMflo runs a team of agents that understand what a message means: they read intent, reply in your voice, hide spam, and steer conversations toward a sale or a captured lead. You set the goal; they work toward it." } },
     { "@type": "Question", "name": "Will it sound like a bot to my audience?",
@@ -501,6 +512,22 @@
     <h2 class="h2">Questions people actually ask.</h2>
   </div>
   <div class="faq">
+    <details>
+      <summary>What is DMflo?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <p class="ans">DMflo is a team of AI agents that runs your Instagram: they engage your audience, read buying intent and sell, hide spam, and capture leads, all in your brand&rsquo;s voice and in whatever language your audience types. You keep keyword flows for the replies you want word-for-word, and the agents handle everything those keywords miss.</p>
+    </details>
+    <details>
+      <summary>How much does DMflo cost?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <p class="ans">Free to start, with 50 agent runs a month and no card needed. Pro is &#8377;599/month (&#8377;499 billed yearly) and Agentic is &#8377;1,999/month (&#8377;1,499 billed yearly). Every plan is flat: no per-contact or per-message billing, so your bill never moves as your audience grows.</p>
+    </details>
+    <details>
+      <summary>Does DMflo reply in Hindi and Hinglish?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <p class="ans">Yes, natively, and in the script the person used, Devanagari or Roman. The agents read Hinglish the way people actually type it (&ldquo;price kitna hai&rdquo;, &ldquo;kaise order karu&rdquo;) along with Tamil, Telugu, Bengali, Marathi and other Indian languages. Nothing to configure.</p>
+    </details>
+    <details>
+      <summary>How is DMflo different from ManyChat?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
+      <p class="ans">Two things: pricing and intent. DMflo is flat whatever your contact count, while ManyChat scales with your audience, so the gap widens as you grow. And instead of only firing keyword rules, DMflo&rsquo;s agents understand what a message means and reply in your voice. See the <a href="manychat-alternative.html">full comparison</a>.</p>
+    </details>
     <details>
       <summary>Is this just keyword automation with a new coat of paint?<span class="ic"><i class="ph-bold ph-plus"></i></span></summary>
       <p class="ans">No. Keyword tools fire a canned reply when a word matches, and dump the thinking on you. DMflo runs a team of agents that understand what a message <em>means</em>: they read intent, reply in your voice, hide spam, and steer conversations toward a sale or a captured lead. You set the goal; they work toward it.</p>
