@@ -7,6 +7,9 @@
 
 ## What DMflo is
 
+DMflo is a product of DMFLO LABS (OPC) PRIVATE LIMITED, a company registered
+in India (Bangalore, Karnataka).
+
 DMflo is an Instagram DM and comment automation platform. Unlike rule-based
 tools, DMflo uses AI agents that read intent rather than matching keywords.
 Four agents handle distinct jobs: engagement, sales, moderation, and lead
