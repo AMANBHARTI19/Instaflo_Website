@@ -580,6 +580,30 @@ html[data-hero="c"] .heroC { display: grid; }
 .footer .socials a:hover { background: var(--lime); color: var(--on-lime); }
 
 /* =======================================================================
+   LAUNCH BADGES (Fazier, etc.)
+   ======================================================================= */
+.launch-badges { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+/* standalone strip between page sections */
+.launch-strip { padding: 8px 0 4px; }
+.launch-badges-strip { justify-content: center; }
+.launch-badges a {
+  display: inline-flex;
+  border-radius: 8px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.launch-badges a:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.launch-badges img { display: block; height: auto; border-radius: 8px; }
+.launch-badges-footer { margin-top: 18px; }
+
+/* the neutral Fazier badge art is light-on-light — give it a plate in dark theme */
+[data-theme="dark"] .launch-badges a {
+  background: #fff;
+  padding: 4px 6px;
+  border: var(--border-w) solid var(--ink);
+}
+
+/* =======================================================================
    PAGE HEADER (interior pages)
    ======================================================================= */
 .phead { padding: 64px 0 20px; text-align: center; }
