@@ -2,10 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "api/waitlist.js", "use": "@vercel/node" },
+    { "src": "api/geo.js", "use": "@vercel/node" },
     { "src": "DMflo Website/**", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/waitlist", "dest": "/api/waitlist.js" },
+    { "src": "/api/geo", "dest": "/api/geo.js" },
     { "src": "/assets/(.*)", "dest": "/DMflo Website/assets/$1" },
     { "src": "/demo-app/(.*)", "dest": "/DMflo Website/demo-app/$1" },
     { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx|txt|xml))", "dest": "/DMflo Website/$1" },
