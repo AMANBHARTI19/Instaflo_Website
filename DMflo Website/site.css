@@ -583,10 +583,6 @@ html[data-hero="c"] .heroC { display: grid; }
    LAUNCH BADGES (Fazier, etc.)
    ======================================================================= */
 .launch-badges { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-
-/* standalone strip between page sections */
-.launch-strip { padding: 8px 0 4px; }
-.launch-badges-strip { justify-content: center; }
 .launch-badges a {
   display: inline-flex;
   border-radius: 8px;
