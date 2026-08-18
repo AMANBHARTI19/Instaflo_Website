@@ -125,7 +125,7 @@ mark.mk { background: var(--lime); color: var(--on-lime); padding: 0 .12em; bord
 /* =======================================================================
    HERO (shared) + variants
    ======================================================================= */
-.hero { padding-block: 64px 16px; overflow: hidden; }
+.hero { padding: 64px 0 16px; overflow: hidden; }
 .dotgrid {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background-image: radial-gradient(var(--line) 1.4px, transparent 1.4px);
@@ -241,7 +241,7 @@ html[data-hero="c"] .heroC { display: grid; }
 /* =======================================================================
    TRUST / MARQUEE
    ======================================================================= */
-.trust { padding-block: 8px 40px; }
+.trust { padding: 8px 0 40px; }
 .trust .lab { text-align: center; margin-bottom: 18px; }
 .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
 .marquee-track { display: flex; gap: 44px; width: max-content; animation: scroll 26s linear infinite; }
@@ -253,7 +253,7 @@ html[data-hero="c"] .heroC { display: grid; }
 /* =======================================================================
    SECTION HEADER
    ======================================================================= */
-.sec { padding-block: 56px; }
+.sec { padding: 56px 0; }
 .sec-head { max-width: 720px; margin-bottom: 48px; }
 .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .sec-head .h2 { margin: 16px 0 14px; }
@@ -566,7 +566,7 @@ html[data-hero="c"] .heroC { display: grid; }
 /* =======================================================================
    FOOTER
    ======================================================================= */
-.footer { border-top: var(--border-w) solid var(--ink); padding-block: 56px 40px; background: var(--surface); }
+.footer { border-top: var(--border-w) solid var(--ink); padding: 56px 0 40px; background: var(--surface); }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 44px; }
 .footer .blurb { font-size: 15px; color: var(--ink-2); max-width: 30ch; margin: 16px 0 18px; }
 .footer h4 { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
@@ -602,7 +602,7 @@ html[data-hero="c"] .heroC { display: grid; }
 /* =======================================================================
    PAGE HEADER (interior pages)
    ======================================================================= */
-.phead { padding-block: 64px 20px; text-align: center; }
+.phead { padding: 64px 0 20px; text-align: center; }
 .phead .display { font-size: clamp(44px, 6vw, 84px); margin: 18px 0 18px; }
 .phead .lead { max-width: 56ch; margin: 0 auto; font-size: 19px; }
 
@@ -688,21 +688,9 @@ html[data-stickers="off"] .demo-sticker { display: none; }
   .footer .blurb { max-width: 46ch; }
 }
 @media (max-width: 720px) {
-  /* the burger toggles .open on .nav-links; without a rule for the open
-     state the class flipped but the panel stayed display:none and nothing
-     appeared. Drop it below the bar as a panel instead. */
   .nav-links { display: none; }
-  .nav-links.open {
-    display: flex; flex-direction: column; align-items: stretch; gap: 2px;
-    position: absolute; left: 0; right: 0; top: 100%;
-    margin-left: 0; padding: 10px 22px 16px;
-    background: var(--surface);
-    border-bottom: var(--border-w) solid var(--line);
-    box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.28);
-  }
-  .nav-links.open a { padding: 12px 12px; border-radius: var(--radius-sm); font-size: 16px; }
   .nav-burger { display: inline-flex; }
-  .sec { padding-block: 40px; }
+  .sec { padding: 40px 0; }
   .feat-grid { grid-template-columns: 1fr; }
   .fcard.span2 { grid-column: span 1; }
   .band-grid { grid-template-columns: 1fr 1fr; }
@@ -725,6 +713,21 @@ html[data-stickers="off"] .demo-sticker { display: none; }
    edges. Trim the gutter slightly and step the body sizes down so more
    words fit per line, and add a little leading to keep the shorter
    measure readable. --------------------------------------------------- */
+@media (max-width: 560px) {
+  .wrap { padding: 0 22px; }
+  /* .band and .cta-card sit inside .wrap and add their own inset —
+     keep the total from squeezing the text column further */
+  .band { padding: 38px 22px; }
+  .cta-card { padding: 44px 22px; }
+  /* smaller type = more characters per line at a fixed width */
+  .lead, .frow p { font-size: 16.5px; line-height: 1.6; }
+  .sec-head .lead, .phead .lead { font-size: 16.5px; }
+  .fcard p, .step p, .who-card p { font-size: 15.5px; line-height: 1.6; }
+  .faq .ans { font-size: 15.5px; line-height: 1.65; }
+  .band .band-note { font-size: 15.5px; line-height: 1.6; }
+  .faq summary { font-size: 18px; gap: 12px; padding: 20px 2px; }
+  .faq .ans { padding: 0 2px 22px; }
+}
 
 /* =======================================================================
    WHY DMFLO · COMPARISON (home)
@@ -982,89 +985,4 @@ html[data-stickers="off"] .demo-sticker { display: none; }
   .swap { grid-template-columns: 1fr; }
   .proof { max-width: 100%; }
   .miss { gap: 10px; }
-}
-
-/* =======================================================================
-   PHONE REFINEMENTS (must stay last — later equal-specificity media
-   queries above would otherwise override these)
-   ======================================================================= */
-@media (max-width: 560px) {
-  .wrap { padding: 0 22px; }
-  /* .band and .cta-card sit inside .wrap and add their own inset —
-     keep the total from squeezing the text column further */
-  .band { padding: 38px 22px; }
-  .cta-card { padding: 44px 22px; }
-  /* smaller type = more characters per line at a fixed width */
-  .lead, .frow p { font-size: 16.5px; line-height: 1.6; }
-  .sec-head .lead, .phead .lead { font-size: 16.5px; }
-  .fcard p, .step p, .who-card p { font-size: 15.5px; line-height: 1.6; }
-  .faq .ans { font-size: 15.5px; line-height: 1.65; }
-  .band .band-note { font-size: 15.5px; line-height: 1.6; }
-  .faq summary { font-size: 18px; gap: 12px; padding: 20px 2px; }
-  .faq .ans { padding: 0 2px 22px; }
-
-  /* ---- cards on phones ------------------------------------------------
-     The hard offset shadows (3-5px, no blur) extend past the card's right
-     and bottom edges, so at a 22px gutter the card reads as ~17px from the
-     right but 22px from the left — lopsided and edge-hugging, and html has
-     overflow-x: clip so the overhang gets cut rather than scrolled. Shrink
-     the offset and trim interior padding so cards sit evenly inside the
-     gutter with room to breathe. -------------------------------------- */
-  .tier.feat, .cmp2, .ptable, .mockcard {
-    box-shadow: 3px 3px 0 var(--ink);
-  }
-  .fcard, .who-card, .step { padding: 22px 20px; }
-  .tier { padding: 24px 20px; }
-  .cmp2-row { padding: 16px 18px; }  /* .cmp2-head is display:none below 820px */
-  .cmp2-group { padding: 12px 18px; }
-  .cmp2-foot { padding: 16px 18px; }
-  /* tighten the vertical rhythm between stacked cards */
-  .feat-grid, .tier-grid, .who-grid, .steps, .band-grid { gap: 14px; }
-  /* two-up grids get cramped below 560px — stack them */
-  .band-grid { grid-template-columns: 1fr; }
-  .lang-mirror { gap: 12px; }
-
-  /* ---- vertical rhythm ------------------------------------------------
-     Section padding drops 56->40px at 720px and the card gaps drop
-     20->14px above, but the spacing that separates a heading from its
-     content never scaled: .sec-head kept a 48px margin, so the gap above
-     a card grid ended up ~3.4x the gap between the cards. Same story for
-     the fixed margin-tops (.band-grid 30, .lang-mirror 32, .cmp2 34) and
-     the 64px hero/phead padding. Scale them all by roughly the same 0.65
-     the rest of the page already uses so the stack reads evenly. ------ */
-  .sec { padding-block: 34px; }
-  .sec-head { margin-bottom: 24px; }
-  .sec-head .h2 { margin: 12px 0 10px; }
-  .hero { padding-block: 36px 12px; }
-  .phead { padding-block: 36px 16px; }
-  .trust { padding-block: 8px 26px; }
-  .band-grid { margin-top: 20px; }
-  .lang-mirror { margin-top: 20px; }
-  .lang-chips { margin-top: 20px; }
-  .cmp2 { margin-top: 22px; }
-  .band .band-note { margin-top: 18px; }
-  .trust-line { margin-top: 20px; }
-  /* spacing utilities scale with everything else */
-  .mt-s { margin-top: 12px; }
-  .mt-m { margin-top: 20px; }
-  .mt-l { margin-top: 28px; }
-  /* hero internals */
-  .heroA .cta-row, .heroC .cta-row { margin-bottom: 20px; }
-  .heroB .cta-row { margin-bottom: 30px; }
-  .heroA .lead, .heroC .lead { margin: 16px 0 22px; }
-  .heroB .lead { margin: 18px auto 24px; }
-  /* footer */
-  .footer { padding-block: 36px 28px; }
-  .footer-grid { gap: 22px; margin-bottom: 28px; }
-  .footer-bot { padding-top: 20px; }
-
-  /* ---- nav fits narrow phones ----------------------------------------
-     "Join the Beta" is a longer label than the old one, so at 320px the
-     brand + button + burger overflow the bar. Trim the gaps and button
-     padding so the row fits without wrapping. ------------------------- */
-  .nav-in { gap: 10px; }
-  .nav-right { gap: 6px; }
-  .nav-right .btn-sm { padding: 9px 12px; font-size: 13.5px; white-space: nowrap; }
-  .brand .word { font-size: 20px; }
-  .brand img { width: 30px; height: 30px; }
 }

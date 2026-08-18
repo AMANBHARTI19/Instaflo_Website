@@ -25,7 +25,7 @@
 /* ---- two-column doc layout -------------------------------------------- */
 .doc-layout {
   display: grid; grid-template-columns: 232px 1fr; gap: 56px;
-  padding-block: 48px 80px; align-items: start;
+  padding: 48px 0 80px; align-items: start;
 }
 .doc-toc { position: sticky; top: 92px; }
 .doc-toc .toc-lab { font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
@@ -142,21 +142,4 @@
 }
 @media (max-width: 720px) {
   .doc-body h2 { font-size: 24px; }
-}
-
-/* ---- phone overflow guards --------------------------------------------
-   .doc-layout's grid items default to min-width:auto, so a flex row that
-   refuses to shrink (the TOC links) forces the single column wider than
-   the viewport and pushes the whole page into horizontal scroll. Allow
-   the tracks and the link text to shrink, and wrap long strings. ------- */
-@media (max-width: 960px) {
-  .doc-layout > * { min-width: 0; }
-  .doc-toc a { min-width: 0; }
-  .doc-toc a span, .doc-toc a { overflow-wrap: anywhere; }
-  .doc-body { max-width: 100%; min-width: 0; }
-  .doc-body p, .doc-body li, .doc-body h2, .doc-body h3 { overflow-wrap: anywhere; }
-  /* the 3-col table can't wrap below ~469px (nowrap header + first col),
-     so give it its own scroll container instead of blowing out the page */
-  .deftable { display: block; overflow-x: auto; white-space: nowrap; }
-  .deftable tbody, .deftable thead { display: table; width: 100%; }
 }

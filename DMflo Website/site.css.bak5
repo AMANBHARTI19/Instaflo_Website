@@ -688,19 +688,7 @@ html[data-stickers="off"] .demo-sticker { display: none; }
   .footer .blurb { max-width: 46ch; }
 }
 @media (max-width: 720px) {
-  /* the burger toggles .open on .nav-links; without a rule for the open
-     state the class flipped but the panel stayed display:none and nothing
-     appeared. Drop it below the bar as a panel instead. */
   .nav-links { display: none; }
-  .nav-links.open {
-    display: flex; flex-direction: column; align-items: stretch; gap: 2px;
-    position: absolute; left: 0; right: 0; top: 100%;
-    margin-left: 0; padding: 10px 22px 16px;
-    background: var(--surface);
-    border-bottom: var(--border-w) solid var(--line);
-    box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.28);
-  }
-  .nav-links.open a { padding: 12px 12px; border-radius: var(--radius-sm); font-size: 16px; }
   .nav-burger { display: inline-flex; }
   .sec { padding-block: 40px; }
   .feat-grid { grid-template-columns: 1fr; }
