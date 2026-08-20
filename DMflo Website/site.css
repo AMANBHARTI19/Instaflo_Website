@@ -582,7 +582,7 @@ html[data-hero="c"] .heroC { display: grid; }
 /* =======================================================================
    LAUNCH BADGES (Fazier, etc.)
    ======================================================================= */
-.launch-badges { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.launch-badges { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .launch-badges a {
   display: inline-flex;
   border-radius: 8px;
