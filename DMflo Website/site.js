@@ -114,3 +114,71 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind);
   else bind();
 })();
+
+/* hero mode toggle (self / agent) + MCP endpoint copy */
+(function () {
+  var hero = document.querySelector('.hero[data-mode]');
+  if (hero) {
+    var stored = null;
+    try { stored = localStorage.getItem('dmflo-hero-mode'); } catch (e) {}
+    if (stored === 'agent' || stored === 'self') setMode(stored);
+    hero.querySelectorAll('[data-mode-btn]').forEach(function (b) {
+      b.addEventListener('click', function () { setMode(b.getAttribute('data-mode-btn')); });
+    });
+    function setMode(m) {
+      hero.setAttribute('data-mode', m);
+      hero.querySelectorAll('[data-mode-btn]').forEach(function (b) {
+        var on = b.getAttribute('data-mode-btn') === m;
+        b.classList.toggle('is-on', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      try { localStorage.setItem('dmflo-hero-mode', m); } catch (e) {}
+    }
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      navigator.clipboard && navigator.clipboard.writeText(btn.getAttribute('data-copy'));
+      var s = btn.querySelector('span'); if (!s) return;
+      var t = s.textContent; s.textContent = 'Copied'; setTimeout(function () { s.textContent = t; }, 1400);
+    });
+  });
+})();
+
+/* MCP page: Claude / ChatGPT guide tabs */
+(function () {
+  var tabs = document.querySelector('.guide-tabs');
+  if (!tabs) return;
+  tabs.querySelectorAll('[data-guide-btn]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-guide-btn');
+      tabs.querySelectorAll('[data-guide-btn]').forEach(function (o) {
+        var on = o === b;
+        o.classList.toggle('is-on', on);
+        o.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-guide]').forEach(function (g) {
+        g.hidden = g.getAttribute('data-guide') !== k;
+      });
+    });
+  });
+})();
+
+/* Screenshot lightbox */
+(function(){
+  var shots = document.querySelectorAll('.gshot img');
+  if(!shots.length) return;
+  var box = document.createElement('div');
+  box.className = 'lb';
+  box.setAttribute('aria-hidden','true');
+  box.innerHTML = '<button class="lb-x" aria-label="Close">&times;</button><img class="lb-img" alt="">';
+  document.body.appendChild(box);
+  var img = box.querySelector('.lb-img');
+  function open(src){ img.src = src; box.classList.add('is-on'); box.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function close(){ box.classList.remove('is-on'); box.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  shots.forEach(function(s){
+    s.style.cursor='zoom-in';
+    s.addEventListener('click', function(){ open(s.currentSrc || s.src); });
+  });
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();

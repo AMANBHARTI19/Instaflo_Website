@@ -143,6 +143,13 @@
 </head>
 <body>
 
+<!-- ============================ ANNOUNCE ============================ -->
+<a class="announce" href="mcp.html">
+  <span class="announce-tag">New</span>
+  <span class="announce-txt">DMflo MCP is live: run your Instagram automations straight from Claude or ChatGPT</span>
+  <i class="ph-bold ph-arrow-right"></i>
+</a>
+
 <!-- ============================ NAV ============================ -->
 <header class="nav">
   <div class="wrap nav-in">
@@ -153,29 +160,57 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="features.html">Features</a>
       <a href="pricing.html">Pricing</a>
+      <a href="mcp.html">MCP</a>
       <a href="index.html#how">How it works</a>
       <a href="index.html#compare">Why DMflo</a>
     </nav>
     <div class="nav-right">
-      <a class="btn btn-primary btn-sm" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join the Beta</a>
+      <a class="btn btn-primary btn-sm" href="https://app.trydmflo.com"><i class="ph-bold ph-lightning"></i>Get started free</a>
       <button class="theme-btn nav-burger" data-burger aria-label="Menu"><i class="ph-bold ph-list"></i></button>
     </div>
   </div>
 </header>
 
 <!-- ============================ HERO ============================ -->
-<section class="hero" data-screen-label="Hero">
+<section class="hero" data-screen-label="Hero" data-mode="self">
   <div class="dotgrid"></div>
   <div class="wrap">
 
+    <div class="hero-mode" role="tablist" aria-label="How you use DMflo">
+      <button class="hm-btn is-on" data-mode-btn="self" role="tab" aria-selected="true"><i class="ph-bold ph-cursor-click"></i>I run it myself</button>
+      <button class="hm-btn" data-mode-btn="agent" role="tab" aria-selected="false"><i class="ph-bold ph-sparkle"></i>My agent runs it</button>
+    </div>
+
     <!-- ---- Variant B: agent-first, centered statement ---- -->
     <div class="heroB">
-      <span class="eyebrow"><span class="dot"></span>Keyword flows + agents, one platform</span>
       <h1 class="display">Every DM answered. Every comment <mark class="mk">followed up</mark>.</h1>
       <p class="lead">Keyword automations + Agents for every Instagram comment and DM, in your voice and your audience&rsquo;s language, 24/7</p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-lg btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join the Beta</a>
+        <a class="btn btn-primary btn-lg btn-sticker" href="https://app.trydmflo.com"><i class="ph-bold ph-lightning"></i>Get started free</a>
         <a class="btn btn-secondary btn-lg" href="pricing.html">See pricing</a>
+      </div>
+      <p class="sys lab hero-tag">Free to get started &middot; No card needed &middot; 2-min setup</p>
+    </div>
+
+    <!-- ---- Agent mode: MCP ---- -->
+    <div class="heroMCP">
+      <h1 class="display">Automate DM replies from <mark class="mk">Claude</mark> <span style="font-size: clamp(48px, 7vw, 100px); letter-spacing: -1.393px;">now</span>.</h1>
+      <p class="lead">Set up comment-to-DM, story reply and DM automations by asking, then pull analytics and see contacts and leads who engaged with your content.</p>
+      <div class="mcp-endpoint">
+        <span class="mcp-lbl">MCP URL</span>
+        <code>https://api.trydmflo.com/mcp</code>
+        <button class="mcp-copy" data-copy="https://api.trydmflo.com/mcp" aria-label="Copy endpoint"><i class="ph-bold ph-copy"></i><span>Copy</span></button>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg btn-sticker" href="mcp.html#connect"><i class="ph-bold ph-plugs-connected"></i>See how it connects</a>
+      </div>
+      <div class="mcp-clients">
+        <span class="mcp-clients-l">Works with</span>
+        <span class="mcp-client">Claude desktop</span>
+        <span class="mcp-client">Claude Code</span>
+        <span class="mcp-client">Claude in browser</span>
+        <span class="mcp-client">ChatGPT</span>
+        <span class="mcp-client">Any MCP client</span>
       </div>
     </div>
 
@@ -184,7 +219,6 @@
 
 <!-- ============================ TRUST MARQUEE ============================ -->
 <section class="trust wrap">
-  <p class="sys lab">One platform · a team of agents, each with a job</p>
   <div class="marquee">
     <div class="marquee-track">
       <span class="item"><i class="ph-bold ph-chat-circle-text"></i>Engagement agent</span>
@@ -236,7 +270,7 @@
 
           <div class="dv-title" id="dvT2">
             <div class="dotgrid"></div>
-            <span class="kick">Beta open</span>
+            <span class="kick">Live now</span>
             <span class="big">Your Instagram, on <mark>autopilot</mark>.</span>
             <span class="sub">Free to start &middot; No card needed &middot; 2-min setup</span>
           </div>
@@ -251,6 +285,7 @@
       <button class="dv-step" type="button"><span class="k">04</span>The receipts</button>
       <button class="dv-step" type="button"><span class="k">05</span>Comment moderator</button>
     </div>
+    <p class="sys lab dv-tag">One platform &middot; a team of agents, each with a job</p>
   </div>
 </section>
 
@@ -498,7 +533,7 @@
         <li><i class="ph-bold ph-check"></i> Any-language &amp; mixed-language replies</li>
         <li><i class="ph-bold ph-check"></i> Runs from the mobile app</li>
       </ul>
-      <a class="btn btn-secondary btn-block" href="waitlist.html">Start free</a>
+      <a class="btn btn-secondary btn-block" href="https://app.trydmflo.com">Get started free</a>
     </div>
     <div class="tier">
       <div class="name">Pro</div>
@@ -513,7 +548,7 @@
         <li><i class="ph-bold ph-check"></i> Full analytics + exports</li>
         <li><i class="ph-bold ph-check"></i> Priority support</li>
       </ul>
-      <a class="btn btn-secondary btn-block" href="waitlist.html">Join the Beta</a>
+      <a class="btn btn-secondary btn-block" href="https://app.trydmflo.com">Get started free</a>
     </div>
     <div class="tier feat">
       <span class="flag">Full autopilot</span>
@@ -529,7 +564,7 @@
         <li><i class="ph-bold ph-check"></i> Agents that work toward your goals autonomously</li>
         <li><i class="ph-bold ph-check"></i> Captures &amp; converts while you sleep</li>
       </ul>
-      <a class="btn btn-primary btn-block btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join the Beta</a>
+      <a class="btn btn-primary btn-block btn-sticker" href="https://app.trydmflo.com"><i class="ph-bold ph-lightning"></i>Get started free</a>
     </div>
   </div>
   <div class="trust-line mt-m">
@@ -599,13 +634,13 @@
   <div class="cta-card">
     <div class="dotgrid" style="opacity:.25;"></div>
     <div style="position:relative; z-index:1;">
-      <span class="sys" style="color:var(--on-lime); opacity:.7;">Beta opening soon</span>
+      <span class="sys" style="color:var(--on-lime); opacity:.7;">Live now</span>
       <h2 class="display">Your Instagram, on autopilot. Starting free.</h2>
-      <p class="lead">Join 2k+ creators on the waitlist. Early access plus founder pricing, locked in for life.</p>
+      <p class="lead">Create your account and put the agents to work in two minutes. The free plan is free forever.</p>
       <div class="cta-row">
-        <a class="btn btn-secondary btn-lg btn-sticker" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join the Beta</a>
+        <a class="btn btn-secondary btn-lg btn-sticker" href="https://app.trydmflo.com"><i class="ph-bold ph-lightning"></i>Get started free</a>
       </div>
-      <p class="cta-note" style="color:var(--on-lime); opacity:.7; margin-top:16px;">Free while in beta · No card needed · 2-min setup</p>
+      <p class="cta-note" style="color:var(--on-lime); opacity:.7; margin-top:16px;">Free forever plan · No card needed · 2-min setup</p>
     </div>
   </div>
 </section>
@@ -636,6 +671,7 @@
         <ul>
           <li><a href="features.html">Features</a></li>
           <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="mcp.html">MCP</a></li>
           <li><a href="index.html#how">How it works</a></li>
           <li><a href="index.html#compare">Why DMflo</a></li>
         </ul>
@@ -668,7 +704,7 @@
     </div>
     <div class="footer-bot">
       <span class="sys">© <span data-year>2026</span> DMFLO LABS (OPC) PRIVATE LIMITED · Not affiliated with Instagram or Meta</span>
-      <a class="btn btn-primary btn-sm" href="waitlist.html"><i class="ph-bold ph-lightning"></i>Join the Beta</a>
+      <a class="btn btn-primary btn-sm" href="https://app.trydmflo.com"><i class="ph-bold ph-lightning"></i>Get started free</a>
     </div>
   </div>
 </footer>
