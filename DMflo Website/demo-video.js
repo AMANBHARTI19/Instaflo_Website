@@ -96,7 +96,7 @@
     [16300, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.contacts[0], NAV.contacts[1]); }],
     // scene 3 · contacts
     [17400, function () { click(); nav("contacts"); setStep(2); }],
-    [17900, function () { say("Every lead, captured", "Everyone your automations reached — in one list."); camTo(760, 340, 1.25); curTo(600, 340); }],
+    [17900, function () { say("Every lead, captured", "Everyone your automations reached, in one list."); camTo(760, 340, 1.25); curTo(600, 340); }],
     [21100, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.analytics[0], NAV.analytics[1]); }],
     // scene 4 · analytics
     [22200, function () { click(); nav("analytics"); setStep(3); }],
@@ -104,7 +104,7 @@
     [25900, function () { hush(); camTo(AW / 2, AH / 2, 1); curTo(NAV.automations[0], NAV.automations[1]); }],
     // scene 5 · comment moderator agent
     [27000, function () { click(); demo("moderator"); setStep(4); }],
-    [27500, function () { say("Comment moderator", "Likes real comments, hides the spam — on autopilot."); camTo(760, 320, 1.2); curTo(720, 340); }],
+    [27500, function () { say("Comment moderator", "Likes real comments, hides the spam, on autopilot."); camTo(760, 320, 1.2); curTo(720, 340); }],
     [30700, function () { hush(); camTo(AW / 2, AH / 2, 1); }],
     // outro
     [31500, function () { title("dvT2", true); cursor.classList.remove("show"); }]

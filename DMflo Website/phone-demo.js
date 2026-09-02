@@ -9,9 +9,9 @@
     { t: "comment", delay: 500, html: '<span class="c-label"><i class="ph-fill ph-chat-circle"></i> Comment on your reel</span><b>@riya.jsx</b> Omggg this kurta 🔥 price?? Is COD available? 🙏' },
     { t: "detect", delay: 1100, html: 'Comment-to-DM · keyword <span class="k">PRICE</span> <i class="ph-fill ph-circle"></i> DM sent' },
     { t: "typing", delay: 800 },
-    { t: "us", who: "if", delay: 1400, html: "Heyy! 💚 Saw your comment — this kurta is <b>₹1,299</b> and COD is available. Tell me your size and I'll send the link 👇" },
+    { t: "us", who: "if", delay: 1400, html: "Heyy! 💚 Saw your comment, this kurta is <b>₹1,299</b> and COD is available. Tell me your size and I'll send the link 👇" },
     { t: "them", who: "R", delay: 1300, html: "M size!! send the link pls 🥺" },
-    { t: "us", who: "if", delay: 1300, html: "Done ✨ riya.style/kurta-m — tag us in your story when it arrives 😉" },
+    { t: "us", who: "if", delay: 1300, html: "Done ✨ riya.style/kurta-m, tag us in your story when it arrives 😉" },
     { t: "detect", delay: 1100, html: 'Lead captured <i class="ph-fill ph-check-circle"></i> · Moderation agent hid <span class="k">2 spam</span> comments' },
   ];
 
