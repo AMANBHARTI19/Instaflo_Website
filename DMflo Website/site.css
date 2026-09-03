@@ -583,14 +583,14 @@ html[data-hero="c"] .heroC { display: grid; }
 /* =======================================================================
    LAUNCH BADGES (Fazier, etc.)
    ======================================================================= */
-.launch-badges { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.launch-badges { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
 .launch-badges a {
   display: inline-flex;
   border-radius: 8px;
   transition: transform .12s ease, box-shadow .12s ease;
 }
 .launch-badges a:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
-.launch-badges img { display: block; height: auto; border-radius: 8px; }
+.launch-badges img { display: block; height: 24px !important; width: auto !important; border-radius: 8px; }
 .launch-badges-footer { margin-top: 18px; }
 
 /* the neutral Fazier badge art is light-on-light — give it a plate in dark theme */
@@ -1163,4 +1163,82 @@ code.inl { font: var(--text-mono); font-size: 12.5px; background: var(--sunken);
 .lb-img{max-width:min(1200px,94vw);max-height:90vh;width:auto;height:auto;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.5)}
 .lb-x{position:absolute;top:18px;right:22px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer}
 .lb-x:hover{background:rgba(255,255,255,.26)}
+
+/* =======================================================================
+   META VERIFIED CARD (homepage)
+   ======================================================================= */
+.meta-verified-card {
+  display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+  background: var(--feature); color: var(--on-dark); border: var(--border-w-bold) solid var(--ink);
+  border-radius: var(--radius-xl); padding: 48px 44px; position: relative; overflow: hidden;
+}
+.meta-verified-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 85% 50%, rgba(96,165,250,.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.mv-left { position: relative; z-index: 1; }
+.mv-right { position: relative; z-index: 1; }
+.mv-link {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  color: var(--lime); text-decoration: none; transition: gap .15s;
+}
+.mv-link:hover { gap: 12px; }
+.mv-badge {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--radius-lg); padding: 28px 32px; text-align: center;
+  backdrop-filter: blur(8px);
+}
+.mv-badge-icon { font-size: 44px; line-height: 1; color: #0668E1; }
+.mv-badge-text {
+  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  color: var(--on-dark); letter-spacing: -0.01em;
+}
+.mv-badge-sub {
+  font-size: 14px; color: var(--on-dark-dim); line-height: 1.4;
+}
+@media (max-width: 720px) {
+  .meta-verified-card { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; text-align: center; }
+  .mv-badge { padding: 22px 20px; }
+  .mv-link { justify-content: center; }
+}
+
+/* =======================================================================
+   META VERIFIED DETAIL PAGE
+   ======================================================================= */
+.mv-hero { padding: 56px 0 28px; border-bottom: var(--border-w) solid var(--line); }
+.mv-hero .wrap { position: relative; }
+.mv-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: var(--text-label); letter-spacing: var(--track-label); text-transform: uppercase;
+  color: #fff; background: #0668E1;
+  border: var(--border-w) solid var(--ink); padding: 6px 13px; border-radius: var(--radius-pill);
+}
+.mv-hero h1 { font: var(--text-h1); letter-spacing: var(--track-tight); margin: 18px 0 12px; }
+.mv-hero .sub { font: var(--text-body-lg); color: var(--ink-2); max-width: 62ch; }
+.mv-hero .cta-row { margin-top: 24px; }
+
+.mv-steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0; }
+.mv-step {
+  border: var(--border-w) solid var(--line-strong); border-radius: var(--radius-lg);
+  padding: 28px 26px; background: var(--surface); position: relative;
+}
+.mv-step .num {
+  font-family: var(--font-display); font-weight: 800; font-size: 14px;
+  width: 38px; height: 38px; border-radius: 50%; background: var(--lime);
+  color: var(--on-lime); border: var(--border-w) solid var(--ink);
+  display: grid; place-items: center; margin-bottom: 16px;
+}
+.mv-step h3 { font: var(--text-h3); letter-spacing: var(--track-tight); margin-bottom: 8px; }
+.mv-step p { font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+.mv-step .check {
+  position: absolute; top: 28px; right: 26px;
+  color: #16a34a; font-size: 20px;
+}
+
+@media (max-width: 720px) {
+  .mv-steps { grid-template-columns: 1fr; }
+}
 
