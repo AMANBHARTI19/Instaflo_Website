@@ -15,8 +15,7 @@ tools, DMflo uses AI agents that read intent rather than matching keywords.
 Four agents handle distinct jobs: engagement, sales, moderation, and lead
 capture. The mobile app is the complete product: you create automations and
 view real-time analytics from your phone, with a full web app for teams and
-agencies. Built in India, for creators everywhere. Currently in beta with a
-waitlist.
+agencies. Built in India, for creators everywhere.
 
 ## Who it's for
 
@@ -90,7 +89,6 @@ SMS or Facebook Messenger automation.
 - Homepage: https://trydmflo.com
 - Pricing: https://trydmflo.com/pricing.html
 - Features: https://trydmflo.com/features.html
-- Waitlist: https://trydmflo.com/waitlist.html
 - Support: https://trydmflo.com/support.html
 
 ## Disclosure
