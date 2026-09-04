@@ -12,6 +12,25 @@
     { "src": "/demo-app/(.*)", "dest": "/DMflo Website/demo-app/$1" },
     { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx|txt|xml))", "dest": "/DMflo Website/$1" },
     { "src": "/([a-z0-9-]*)\\.html", "dest": "/DMflo Website/$1.html" },
-    { "src": "/", "dest": "/DMflo Website/index.html" }
+    { "src": "/about", "dest": "/DMflo Website/about.html" },
+    { "src": "/contact", "dest": "/DMflo Website/contact.html" },
+    { "src": "/privacy", "dest": "/DMflo Website/privacy.html" },
+    { "src": "/support", "dest": "/DMflo Website/support.html" },
+    { "src": "/terms", "dest": "/DMflo Website/terms.html" },
+    { "src": "/features", "dest": "/DMflo Website/features.html" },
+    { "src": "/pricing", "dest": "/DMflo Website/pricing.html" },
+    { "src": "/mcp", "dest": "/DMflo Website/mcp.html" },
+    { "src": "/sitemap", "dest": "/DMflo Website/sitemap.xml" },
+    { "src": "/llms", "dest": "/DMflo Website/llms.txt" },
+    { "src": "/", "dest": "/DMflo Website/index.html" },
+    { "src": "/(.*)", "dest": "/DMflo Website/404.html", "status": 404 }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Vary", "value": "Accept, Accept-Encoding" }
+      ]
+    }
   ]
 }

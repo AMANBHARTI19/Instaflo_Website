@@ -1,0 +1,17 @@
+# DMflo Sitemap
+
+- [Home](https://trydmflo.com/)
+- [Features](https://trydmflo.com/features.html)
+- [Pricing](https://trydmflo.com/pricing.html)
+- [MCP](https://trydmflo.com/mcp.html)
+- [About](https://trydmflo.com/about.html)
+- [Support](https://trydmflo.com/support.html)
+- [Contact](https://trydmflo.com/contact.html)
+- [Privacy Policy](https://trydmflo.com/privacy.html)
+- [Terms & Conditions](https://trydmflo.com/terms.html)
+- [Copyright](https://trydmflo.com/copyright.html)
+- [ManyChat Alternative](https://trydmflo.com/manychat-alternative.html)
+- [ManyChat Alternative India](https://trydmflo.com/manychat-alternative-india.html)
+- [Instagram Comment Automation](https://trydmflo.com/instagram-comment-automation.html)
+- [Instagram Automation App](https://trydmflo.com/instagram-automation-app.html)
+- [Meta-Verified Partner](https://trydmflo.com/meta-verified.html)

@@ -84,12 +84,34 @@ DMflo does not post as you. The agents reply to comments and DMs on your
 behalf; they do not create posts or stories. DMflo does not support WhatsApp,
 SMS or Facebook Messenger automation.
 
+## When to use DMflo
+
+Use DMflo when:
+
+- You run an Instagram account for a business, brand, or creator presence and need to automate DMs and comments at scale.
+- Your audience communicates in non-English languages or code-switched mixes (Hinglish, Spanglish, Taglish, Arabizi, etc.) and you need an automation tool that understands them natively.
+- You want flat, predictable pricing instead of per-contact or per-message billing that scales with your audience size.
+- You manage Instagram from a phone and need the full automation creation flow to work on mobile.
+- You need agents that read intent rather than matching keywords, so you can set goals and brand voice and let the agents figure out the rest.
+- You are a D2C brand, agency, or creator who needs lead capture and export from Instagram conversations.
+- You want automatic comment moderation that enforces Meta's rules (24-hour window, one reply per comment, rate limits) without manual management.
+
+Do not use DMflo when:
+
+- You need multi-channel automation (WhatsApp, SMS, email) in one platform — consider ManyChat or similar tools.
+- You need to schedule or auto-post content — DMflo only automates replies to comments and DMs.
+- You need complex multi-branch flow builders with visual editors — DMflo uses AI agents, not flowcharts.
+
 ## Links
 
 - Homepage: https://trydmflo.com
 - Pricing: https://trydmflo.com/pricing.html
 - Features: https://trydmflo.com/features.html
 - Support: https://trydmflo.com/support.html
+- About: https://trydmflo.com/about.html
+- Contact: https://trydmflo.com/contact.html
+- Privacy: https://trydmflo.com/privacy.html
+- Sitemap: https://trydmflo.com/sitemap.xml
 
 ## Disclosure
 

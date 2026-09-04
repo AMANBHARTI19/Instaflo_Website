@@ -7,7 +7,6 @@
     "start": "node waitlist-server.js"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.15",
     "@vercel/analytics": "^2.0.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2"
