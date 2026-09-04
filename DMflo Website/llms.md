@@ -66,13 +66,23 @@ Do not use DMflo when:
 ## Links
 
 - Homepage: https://trydmflo.com
+- Developer Portal: https://trydmflo.com/developer.html
+- API Reference: https://trydmflo.com/api.html
+- Authentication: https://trydmflo.com/auth.html
+- MCP Server: https://trydmflo.com/mcp.html
 - Pricing: https://trydmflo.com/pricing.html
 - Features: https://trydmflo.com/features.html
 - Support: https://trydmflo.com/support.html
 - About: https://trydmflo.com/about.html
 - Contact: https://trydmflo.com/contact.html
 - Privacy: https://trydmflo.com/privacy.html
+- Terms: https://trydmflo.com/terms.html
 - Sitemap: https://trydmflo.com/sitemap.xml
+
+## Discovery
+
+- OpenAPI Spec: https://trydmflo.com/api/openapi.yaml
+- Protected-Resource Metadata: https://trydmflo.com/.well-known/protected-resource.json
 
 ## Disclosure
 
@@ -85,6 +95,3 @@ Machine-readable scope declarations for agent least-privilege access:
 - `geo:read` — Read geographic routing data for regional pricing
 - `waitlist:write` — Submit a new waitlist entry
 - `waitlist:read` — Read existing waitlist entries
-
-Protected-resource metadata: https://trydmflo.com/.well-known/protected-resource.json
-OpenAPI spec: https://trydmflo.com/api/openapi.yaml

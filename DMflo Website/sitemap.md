@@ -1,9 +1,12 @@
 # DMflo Sitemap
 
 - [Home](https://trydmflo.com/)
+- [Developer Portal](https://trydmflo.com/developer.html)
+- [API Reference](https://trydmflo.com/api.html)
+- [Authentication](https://trydmflo.com/auth.html)
+- [MCP Server](https://trydmflo.com/mcp.html)
 - [Features](https://trydmflo.com/features.html)
 - [Pricing](https://trydmflo.com/pricing.html)
-- [MCP](https://trydmflo.com/mcp.html)
 - [About](https://trydmflo.com/about.html)
 - [Support](https://trydmflo.com/support.html)
 - [Contact](https://trydmflo.com/contact.html)

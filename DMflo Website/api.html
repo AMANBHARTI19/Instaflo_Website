@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Reference: DMflo</title>
+<meta name="description" content="DMflo API reference. Two endpoints: GET /api/geo for regional pricing routing and POST /api/waitlist for waitlist signups. OAuth scopes: geo:read, waitlist:write, waitlist:read.">
+<link rel="canonical" href="https://trydmflo.com/api.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DMflo">
+<meta property="og:title" content="API Reference: DMflo">
+<meta property="og:description" content="DMflo API reference. Two endpoints with OAuth scopes.">
+<meta property="og:url" content="https://trydmflo.com/api.html">
+<meta property="og:image" content="https://trydmflo.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DMflo: put your Instagram on autopilot with agents.">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="API Reference: DMflo">
+<meta name="twitter:description" content="DMflo API reference. Two endpoints with OAuth scopes.">
+<meta name="twitter:image" content="https://trydmflo.com/assets/og-image.png">
+<meta name="twitter:image:alt" content="DMflo: put your Instagram on autopilot with agents.">
+<link rel="icon" href="assets/mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="site.css">
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="nav">
+<div class="wrap nav-in">
+<a class="brand" href="index.html">
+<img src="assets/mark.svg" alt="DMflo logo">
+</a>
+<nav>
+<a href="developer.html">Developer</a>
+<a href="api.html">API</a>
+<a href="auth.html">Auth</a>
+<a href="mcp.html">MCP</a>
+</nav>
+</div>
+</header>
+<main>
+<section>
+<h1>DMflo API Reference</h1>
+<p>Two endpoints. Machine-readable <a href="api/openapi.yaml">OpenAPI spec</a> available at <code>/api/openapi.yaml</code>.</p>
+<h2>Endpoints</h2>
+<table>
+<thead>
+<tr><th>Method</th><th>Path</th><th>Scope</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>GET</td><td><code>/api/geo</code></td><td><code>geo:read</code></td><td>Returns visitor country and region for pricing routing</td></tr>
+<tr><td>POST</td><td><code>/api/waitlist</code></td><td><code>waitlist:write</code></td><td>Submit a new waitlist entry to Notion</td></tr>
+</tbody>
+</table>
+<h2>Authentication</h2>
+<p>DMflo uses OAuth 2.0. Request only the scopes your agent needs. See <a href="auth.html">authentication docs</a> for details.</p>
+<h2>Scopes</h2>
+<ul>
+<li><code>geo:read</code> — Read geographic routing data</li>
+<li><code>waitlist:write</code> — Submit a waitlist entry</li>
+<li><code>waitlist:read</code> — Read existing waitlist entries</li>
+</ul>
+<p>Full scope declarations: <a href="/.well-known/protected-resource.json">/.well-known/protected-resource.json</a></p>
+</section>
+</main>
+</body>
+</html>

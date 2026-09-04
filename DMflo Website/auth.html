@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Authentication: DMflo</title>
+<meta name="description" content="DMflo authentication docs. OAuth 2.0 authorization code flow with named scopes: geo:read, waitlist:write, waitlist:read. Request least-privilege access.">
+<link rel="canonical" href="https://trydmflo.com/auth.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DMflo">
+<meta property="og:title" content="Authentication: DMflo">
+<meta property="og:description" content="DMflo OAuth 2.0 authentication with named scopes.">
+<meta property="og:url" content="https://trydmflo.com/auth.html">
+<meta property="og:image" content="https://trydmflo.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DMflo: put your Instagram on autopilot with agents.">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Authentication: DMflo">
+<meta name="twitter:description" content="DMflo OAuth 2.0 authentication with named scopes.">
+<meta name="twitter:image" content="https://trydmflo.com/assets/og-image.png">
+<meta name="twitter:image:alt" content="DMflo: put your Instagram on autopilot with agents.">
+<link rel="icon" href="assets/mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Schibsted+Grotesk:wght@400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="site.css">
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="nav">
+<div class="wrap nav-in">
+<a class="brand" href="index.html">
+<img src="assets/mark.svg" alt="DMflo logo">
+</a>
+<nav>
+<a href="developer.html">Developer</a>
+<a href="api.html">API</a>
+<a href="auth.html">Auth</a>
+<a href="mcp.html">MCP</a>
+</nav>
+</div>
+</header>
+<main>
+<section>
+<h1>DMflo Authentication</h1>
+<p>DMflo uses OAuth 2.0 authorization code flow. Request only the scopes your agent needs.</p>
+<h2>OAuth 2.0 Endpoints</h2>
+<ul>
+<li><strong>Authorization URL</strong> — <code>https://trydmflo.com/oauth/authorize</code></li>
+<li><strong>Token URL</strong> — <code>https://trydmflo.com/oauth/token</code></li>
+</ul>
+<h2>Scopes</h2>
+<ul>
+<li><code>geo:read</code> — Read geographic routing data for regional pricing</li>
+<li><code>waitlist:write</code> — Submit a new waitlist entry</li>
+<li><code>waitlist:read</code> — Read existing waitlist entries</li>
+</ul>
+<h2>Protected-Resource Metadata</h2>
+<p>Machine-readable scope declarations available at <a href="/.well-known/protected-resource.json">/.well-known/protected-resource.json</a> (RFC 9728).</p>
+<h2>Getting Started</h2>
+<p>1. Register your application at <a href="developer.html">DMflo Developer Portal</a>.</p>
+<p>2. Redirect users to the authorization URL with your requested scopes.</p>
+<p>3. Exchange the authorization code for an access token at the token URL.</p>
+<p>4. Include the access token in the <code>Authorization</code> header of API requests.</p>
+</section>
+</main>
+</body>
+</html>

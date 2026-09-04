@@ -91,6 +91,24 @@
   </url>
 
   <url>
+    <loc>https://trydmflo.com/developer.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://trydmflo.com/api.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://trydmflo.com/auth.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://trydmflo.com/meta-verified.html</loc>
     <lastmod>2026-09-03</lastmod>
     <priority>0.7</priority>
