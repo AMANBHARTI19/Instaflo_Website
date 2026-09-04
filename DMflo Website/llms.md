@@ -77,3 +77,14 @@ Do not use DMflo when:
 ## Disclosure
 
 DMflo is not affiliated with Instagram or Meta.
+
+## OAuth scopes
+
+Machine-readable scope declarations for agent least-privilege access:
+
+- `geo:read` — Read geographic routing data for regional pricing
+- `waitlist:write` — Submit a new waitlist entry
+- `waitlist:read` — Read existing waitlist entries
+
+Protected-resource metadata: https://trydmflo.com/.well-known/protected-resource.json
+OpenAPI spec: https://trydmflo.com/api/openapi.yaml

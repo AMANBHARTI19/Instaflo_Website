@@ -1,0 +1,19 @@
+{
+  "issuer": "https://trydmflo.com",
+  "authorization_server": "https://trydmflo.com",
+  "protected_resource": "https://trydmflo.com/api",
+  "scopes_supported": [
+    {
+      "value": "geo:read",
+      "description": "Read geographic routing data for regional pricing"
+    },
+    {
+      "value": "waitlist:write",
+      "description": "Submit a new waitlist entry"
+    },
+    {
+      "value": "waitlist:read",
+      "description": "Read existing waitlist entries"
+    }
+  ]
+}

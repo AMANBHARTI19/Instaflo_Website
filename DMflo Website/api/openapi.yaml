@@ -1,0 +1,95 @@
+openapi: "3.1.0"
+info:
+  title: DMflo API
+  description: >
+    Machine-readable API for DMflo. Scoped OAuth permissions are declared below
+    so agents can request least-privilege access.
+  version: "1.0"
+
+servers:
+  - url: https://trydmflo.com
+
+paths:
+  /api/geo:
+    get:
+      summary: Get geographic region
+      description: Returns the visitor's country and region for pricing routing.
+      operationId: getGeo
+      security: []
+      responses:
+        "200":
+          description: Geographic region data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  country:
+                    type: ["string", "null"]
+                  region:
+                    type: string
+                    enum: [in, us]
+
+  /api/waitlist:
+    post:
+      summary: Submit a waitlist entry
+      description: Creates a Notion record for a waitlist signup. Requires waitlist:write scope.
+      operationId: postWaitlist
+      security:
+        - oauth2:
+            - waitlist:write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                handle:
+                  type: string
+                tier:
+                  type: string
+                  enum: [Up to 50K, Up to 100K, Up to 500K, Up to 1M, 1M+]
+                accountType:
+                  type: string
+                  enum: [Creator, Brand, Agency]
+              required: [email]
+      responses:
+        "200":
+          description: Waitlist entry created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+        "400":
+          description: Missing email
+        "405":
+          description: Method not allowed
+        "500":
+          description: Notion error
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: >
+        OAuth 2.0 with named scopes. Request only the scopes your agent needs.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://trydmflo.com/oauth/authorize
+          tokenUrl: https://trydmflo.com/oauth/token
+          scopes:
+            geo:read: Read geographic routing data for regional pricing
+            waitlist:write: Submit a new waitlist entry
+            waitlist:read: Read existing waitlist entries
+
+security:
+  - oauth2: []

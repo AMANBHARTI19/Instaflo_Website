@@ -11,7 +11,7 @@
     { "src": "/api/geo", "dest": "/api/geo.js" },
     { "src": "/assets/(.*)", "dest": "/DMflo Website/assets/$1" },
     { "src": "/demo-app/(.*)", "dest": "/DMflo Website/demo-app/$1" },
-    { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx|txt|xml))", "dest": "/DMflo Website/$1" },
+    { "src": "/(.*\\.(css|js|svg|png|jpg|ico|jsx|txt|xml|json|yaml|yml))", "dest": "/DMflo Website/$1" },
     { "src": "/([a-z0-9-]*)\\.html", "dest": "/DMflo Website/$1.html" },
     { "src": "/about", "dest": "/DMflo Website/about.html" },
     { "src": "/contact", "dest": "/DMflo Website/contact.html" },
